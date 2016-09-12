@@ -1,0 +1,6 @@
+framework module Pods_SCI_AidTests {
+  umbrella header "Pods-SCI_AidTests-umbrella.h"
+
+  export *
+  module * { export * }
+}

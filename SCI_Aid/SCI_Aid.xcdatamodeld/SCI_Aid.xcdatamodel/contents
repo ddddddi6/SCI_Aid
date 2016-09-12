@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="10171" systemVersion="15E65" minimumToolsVersion="Automatic">
+    <entity name="Diary" representedClassName=".Diary" syncable="YES">
+        <attribute name="condition" optional="YES" attributeType="Boolean" syncable="YES"/>
+        <attribute name="diaryDate" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="hasCatheter" optional="YES" attributeType="Boolean" syncable="YES"/>
+        <attribute name="hasToilet" optional="YES" attributeType="Boolean" syncable="YES"/>
+        <attribute name="isBlocked" optional="YES" attributeType="Boolean" syncable="YES"/>
+        <attribute name="isDysreflexia" optional="YES" attributeType="Boolean" syncable="YES"/>
+        <attribute name="isLittle" optional="YES" attributeType="Boolean" syncable="YES"/>
+        <attribute name="isMuch" optional="YES" attributeType="Boolean" syncable="YES"/>
+        <attribute name="isPainful" optional="YES" attributeType="Boolean" syncable="YES"/>
+        <attribute name="isSmelly" optional="YES" attributeType="Boolean" syncable="YES"/>
+        <attribute name="status" optional="YES" attributeType="String" syncable="YES"/>
+    </entity>
+    <elements>
+        <element name="Diary" positionX="-63" positionY="-18" width="128" height="208"/>
+    </elements>
+</model>

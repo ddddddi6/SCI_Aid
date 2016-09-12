@@ -1,0 +1,6 @@
+framework module Pods_SCI_Aid {
+  umbrella header "Pods-SCI_Aid-umbrella.h"
+
+  export *
+  module * { export * }
+}

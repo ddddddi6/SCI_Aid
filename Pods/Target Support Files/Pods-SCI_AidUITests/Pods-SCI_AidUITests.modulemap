@@ -1,0 +1,6 @@
+framework module Pods_SCI_AidUITests {
+  umbrella header "Pods-SCI_AidUITests-umbrella.h"
+
+  export *
+  module * { export * }
+}

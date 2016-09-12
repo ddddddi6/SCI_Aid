@@ -1,0 +1,8 @@
+# SCI Aid
+This project is SCI Aid. Spinal Cord Injury (SCI) is a condition that leads people to physical disability (paraplegia and quadriplegia), caused by an injury to the spinal cord, and depending on the severity of the damage it can result on a temporary or permanent loss of function of body parts. Most of the injury occurrences are traffic accidents followed by falls.
+
+C-FIVE team performed a research on finding mobile phone applications related to spinal cord injuries. However, the purpose of these applications differs on the needs of the users, therefore and in the absence of an application that truly delivers useful information for the users, C-FIVE team decided to develop an application that facilitates their needs considered after performing interviews to specialists and injured individuals.
+
+Under the main goal of “helping spinal cord injured people”, C-FIVE team proposes and mobile application called “SCI Aid”, highlighting the opportunity to provide help to our targeted users. Some of the needs that the application will cover for facilitating user life are, the displaying and classifying of SCI resources such as assistance dog and some recommended exercise programs and physical activities. Additionally, it will facilitate in a more interactive manner the nearest general practice clinics and facilities, plus the displaying of transportation stop with accessible information.
+
+The application aims not only to deliver information for the users, but to create a reminder that help user to manage their bladder. Addtionally, it will record bladder condition for users. The recorded information could be used by therapists and specialists afterwards to control and provide more accurate and specialised treatment for the users.
