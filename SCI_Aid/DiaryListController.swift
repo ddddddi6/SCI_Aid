@@ -67,7 +67,7 @@ class DiaryListController: UITableViewController, DiaryDelegate {
         
         label.textColor = UIColor.whiteColor()
         
-        label.text = "Select a due date"
+        label.text = "Select a date"
         
         label.textAlignment = NSTextAlignment.Center
         
@@ -87,8 +87,8 @@ class DiaryListController: UITableViewController, DiaryDelegate {
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
-        startField.text = "Start time"
-        endField.text = "End time"
+        startField.text = "Start date"
+        endField.text = "End date"
         refreshTableView()
     }
     
@@ -277,7 +277,7 @@ class DiaryListController: UITableViewController, DiaryDelegate {
     }
     
     func checkDateValidation() -> Bool{
-        if (startField.text == "Start time" || startField.text!.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceCharacterSet()) == "" || endField.text == "End time" || endField.text!.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceCharacterSet()) == "") {
+        if (startField.text == "Start date" || startField.text!.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceCharacterSet()) == "" || endField.text == "End date" || endField.text!.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceCharacterSet()) == "") {
             let messageString: String = "Please select a valid date."
             // Setup an alert to warn user
             // UIAlertController manages an alert instance
@@ -335,6 +335,9 @@ class DiaryListController: UITableViewController, DiaryDelegate {
         
     }
     
+    @IBAction func viewAllEntries(sender: UIBarButtonItem) {
+        refreshTableView()
+    }
     /*
     // Override to support rearranging the table view.
     override func tableView(tableView: UITableView, moveRowAtIndexPath fromIndexPath: NSIndexPath, toIndexPath: NSIndexPath) {

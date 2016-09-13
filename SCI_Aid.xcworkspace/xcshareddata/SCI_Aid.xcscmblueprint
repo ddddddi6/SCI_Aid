@@ -1,15 +1,15 @@
 {
-  "DVTSourceControlWorkspaceBlueprintPrimaryRemoteRepositoryKey" : "B6172597F6C0E04BB67089766E8FD5431429E7C2",
+  "DVTSourceControlWorkspaceBlueprintPrimaryRemoteRepositoryKey" : "6C1D1566E1350C915E41274F6CEA327727B55F87",
   "DVTSourceControlWorkspaceBlueprintWorkingCopyRepositoryLocationsKey" : {
 
   },
   "DVTSourceControlWorkspaceBlueprintWorkingCopyStatesKey" : {
-    "B6172597F6C0E04BB67089766E8FD5431429E7C2" : 0,
+    "6C1D1566E1350C915E41274F6CEA327727B55F87" : 0,
     "BC8BEB47B1157C9455519557B5818FDBFA523F83" : 0
   },
   "DVTSourceControlWorkspaceBlueprintIdentifierKey" : "23801298-B512-478C-8E0B-D02526F7EB99",
   "DVTSourceControlWorkspaceBlueprintWorkingCopyPathsKey" : {
-    "B6172597F6C0E04BB67089766E8FD5431429E7C2" : "SCI_Aid\/",
+    "6C1D1566E1350C915E41274F6CEA327727B55F87" : "SCI_Aid\/",
     "BC8BEB47B1157C9455519557B5818FDBFA523F83" : "SCI_Aid\/SCI_Aid\/"
   },
   "DVTSourceControlWorkspaceBlueprintNameKey" : "SCI_Aid",
@@ -19,7 +19,7 @@
     {
       "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/ddddddi6\/SCI-Aid.git",
       "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
-      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "B6172597F6C0E04BB67089766E8FD5431429E7C2"
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "6C1D1566E1350C915E41274F6CEA327727B55F87"
     },
     {
       "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/ddddddi6\/SCI_Aid.git",

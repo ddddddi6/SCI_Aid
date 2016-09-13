@@ -549,49 +549,50 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="dateAndTime" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="whc-Qh-eeK">
-                                <rect key="frame" x="0.0" y="64" width="375" height="216"/>
-                                <date key="date" timeIntervalSinceReferenceDate="493969180.73245198">
-                                    <!--2016-08-27 05:39:40 +0000-->
-                                </date>
-                                <date key="minimumDate" timeIntervalSinceReferenceDate="-31586400">
-                                    <!--2000-01-01 10:00:00 +0000-->
-                                </date>
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="color" keyPath="textColor">
-                                        <color key="value" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                    </userDefinedRuntimeAttribute>
-                                    <userDefinedRuntimeAttribute type="boolean" keyPath="highlightsToday" value="NO"/>
-                                </userDefinedRuntimeAttributes>
-                            </datePicker>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="C3m-dK-T7Z">
-                                <rect key="frame" x="161" y="288" width="53" height="30"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="30" id="BAN-UQ-CPi"/>
-                                    <constraint firstAttribute="width" constant="53" id="KPN-AZ-j17"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" name="TrebuchetMS" family="Trebuchet MS" pointSize="22"/>
-                                <state key="normal" title="Save">
-                                    <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                </state>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Start time" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sp4-BV-Fw8">
+                                <rect key="frame" x="67" y="122" width="76" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Start time" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="AuT-be-r8e">
+                                <rect key="frame" x="169" y="118" width="140" height="30"/>
+                                <color key="textColor" red="0.60000002379999995" green="0.60000002379999995" blue="0.60000002379999995" alpha="1" colorSpace="calibratedRGB"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
                                 <connections>
-                                    <action selector="saveButton:" destination="ZVj-TO-2bW" eventType="touchUpInside" id="jDD-7J-0kl"/>
+                                    <action selector="setReminderStartTime:" destination="ZVj-TO-2bW" eventType="editingDidBegin" id="wk0-Po-gc1"/>
                                 </connections>
-                            </button>
+                            </textField>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="End time" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="s4r-Ah-Agc">
+                                <rect key="frame" x="67" y="186" width="68" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="End time" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="D1u-Fe-76L">
+                                <rect key="frame" x="168" y="182" width="140" height="30"/>
+                                <color key="textColor" red="0.60000002379999995" green="0.60000002379999995" blue="0.60000002379999995" alpha="1" colorSpace="calibratedRGB"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                                <connections>
+                                    <action selector="setReminderEndTime:" destination="ZVj-TO-2bW" eventType="editingDidBegin" id="4lc-nb-KI2"/>
+                                </connections>
+                            </textField>
                         </subviews>
                         <color key="backgroundColor" red="0.21568627450980393" green="0.396078431372549" blue="0.66666666666666663" alpha="1" colorSpace="calibratedRGB"/>
-                        <constraints>
-                            <constraint firstAttribute="trailing" secondItem="whc-Qh-eeK" secondAttribute="trailing" id="JD5-Px-3mm"/>
-                            <constraint firstItem="whc-Qh-eeK" firstAttribute="leading" secondItem="Jmr-ac-3wT" secondAttribute="leading" id="Yyr-oM-Mjs"/>
-                            <constraint firstItem="C3m-dK-T7Z" firstAttribute="top" secondItem="whc-Qh-eeK" secondAttribute="bottom" constant="8" symbolic="YES" id="hkC-eO-CaF"/>
-                            <constraint firstItem="whc-Qh-eeK" firstAttribute="top" secondItem="Dft-q3-dZR" secondAttribute="bottom" id="iS5-WE-D18"/>
-                            <constraint firstItem="whc-Qh-eeK" firstAttribute="centerX" secondItem="C3m-dK-T7Z" secondAttribute="centerX" id="xph-pQ-7QC"/>
-                        </constraints>
                     </view>
                     <toolbarItems/>
-                    <navigationItem key="navigationItem" title="Bladder time" id="eMm-wZ-K4y"/>
+                    <navigationItem key="navigationItem" title="Reminder" id="eMm-wZ-K4y">
+                        <barButtonItem key="rightBarButtonItem" systemItem="done" id="Wpb-2H-8gb">
+                            <connections>
+                                <action selector="saveReminder:" destination="ZVj-TO-2bW" id="x47-yo-YhW"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
-                        <outlet property="datePicker" destination="whc-Qh-eeK" id="gIm-Q7-TWp"/>
+                        <outlet property="endField" destination="D1u-Fe-76L" id="YFC-e7-f7e"/>
+                        <outlet property="startField" destination="AuT-be-r8e" id="URu-S6-aOl"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="j65-Ak-Sj8" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1524,7 +1525,7 @@
                                     <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                     <nil key="highlightedColor"/>
                                 </label>
-                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Start time" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="M1B-aD-cgN">
+                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Start date" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="M1B-aD-cgN">
                                     <rect key="frame" x="53" y="11" width="113" height="30"/>
                                     <color key="textColor" red="0.60000002379999995" green="0.60000002379999995" blue="0.60000002379999995" alpha="1" colorSpace="calibratedRGB"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -1539,7 +1540,7 @@
                                     <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                     <nil key="highlightedColor"/>
                                 </label>
-                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="End time" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="AL7-Ys-mcX">
+                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="End date" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="AL7-Ys-mcX">
                                     <rect key="frame" x="212" y="12" width="115" height="30"/>
                                     <color key="textColor" red="0.60000002379999995" green="0.60000002379999995" blue="0.60000002379999995" alpha="1" colorSpace="calibratedRGB"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -1550,6 +1551,7 @@
                                 </textField>
                                 <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZNb-IX-EhW">
                                     <rect key="frame" x="336" y="12" width="29" height="30"/>
+                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                     <state key="normal" image="search"/>
                                     <connections>
                                         <action selector="filterDiaryEntry:" destination="re9-zi-gqC" eventType="touchUpInside" id="7Hd-jQ-27b"/>
@@ -1638,6 +1640,11 @@
                     </tableView>
                     <toolbarItems/>
                     <navigationItem key="navigationItem" title="Diary Entry" id="Aq9-zb-FwC">
+                        <barButtonItem key="leftBarButtonItem" title="View All" id="arF-Ev-bHr">
+                            <connections>
+                                <action selector="viewAllEntries:" destination="re9-zi-gqC" id="MBD-Dm-dX6"/>
+                            </connections>
+                        </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="1gL-B0-gWs">
                             <connections>
                                 <segue destination="DSk-Sz-hGk" kind="show" identifier="AddDiaryEntry" id="Rkb-2Y-p8b"/>
