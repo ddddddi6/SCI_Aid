@@ -68,24 +68,14 @@ class DiaryDetailViewController: UIViewController {
         self.navigationController?.popViewControllerAnimated(true)
     }
     
-    // listen for save button action, save diary to NSUserDeafualt
+    // listen for save button action, save diary to core data
     @IBAction func saveDiary(sender: UIButton) {
         if (currentDiary == nil) {
             currentDiary = (NSEntityDescription.insertNewObjectForEntityForName("Diary",
                 inManagedObjectContext: DataManager.dataManager.managedObjectContext!) as? Diary)!
         }
-        let dateFormatter = NSDateFormatter()
-        dateFormatter.dateFormat = "dd-MM-YYYY HH:mm"
-        let date = dateFormatter.dateFromString(self.dateLabel.text!)
-        let diaryDate = NSCalendar.currentCalendar()
-            .dateByAddingUnit(
-                .Year,
-                value: 1,
-                toDate: date!,
-                options: []
-        )
 
-        currentDiary.diaryDate = diaryDate
+        currentDiary.diaryDate = currentDateofDiary
         currentDiary.condition = false
         currentDiary.hasCatheter = checkState(catheterSwitch)
         currentDiary.hasToilet = checkState(toiletSwitch)
@@ -118,6 +108,7 @@ class DiaryDetailViewController: UIViewController {
             let dateFormatter = NSDateFormatter()
             dateFormatter.dateFormat = "dd-MM-YYYY HH:mm"
             let date = dateFormatter.stringFromDate(NSDate())
+            currentDateofDiary = NSDate()
             self.dateLabel.text = date
             statusView.hidden = false
             problemView.hidden = true
@@ -127,6 +118,7 @@ class DiaryDetailViewController: UIViewController {
             let dateFormatter = NSDateFormatter()
             dateFormatter.dateFormat = "dd-MM-YYYY HH:mm"
             let date = dateFormatter.stringFromDate(self.currentDiary.diaryDate!)
+            currentDateofDiary = self.currentDiary.diaryDate!
             self.dateLabel.text = date
             statusView.hidden = true
             if currentDiary.condition == true {

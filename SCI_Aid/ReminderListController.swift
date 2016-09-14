@@ -68,11 +68,11 @@ class ReminderListController: UITableViewController {
             initialView.hidden = true
             self.infoLabel.hidden = false
         }
-
     }
     
     func refreshList() {
         reminders = Reminder().getAllReminders()
+        reminders = reminders.sort({ ($0.deadline)!.compare($1.deadline!) == .OrderedAscending })
         tableView.reloadData()
     }
     
@@ -111,10 +111,23 @@ class ReminderListController: UITableViewController {
         let date = dateFormatter.stringFromDate(r.deadline!)
         cell.dateLabel.text = date
         
+        if (r.deadline?.compare(NSDate()) == NSComparisonResult.OrderedAscending) {
+            cell.dateLabel.textColor = UIColor.redColor()
+            cell.completionLabel.textColor = UIColor.redColor()
+            cell.statusLabel.textColor = UIColor.redColor()
+        }
         if (r.complete == true) {
             cell.completionLabel.text = "Yes"
+            cell.dateLabel.textColor = UIColor.lightGrayColor()
+            cell.completionLabel.textColor = UIColor.lightGrayColor()
+            cell.statusLabel.textColor = UIColor.lightGrayColor()
+            cell.clockImage.image = UIImage(named: "clock_bw")
         } else {
             cell.completionLabel.text = "No"
+            cell.dateLabel.textColor = UIColor.whiteColor()
+            cell.completionLabel.textColor = UIColor.whiteColor()
+            cell.statusLabel.textColor = UIColor.whiteColor()
+            cell.clockImage.image = UIImage(named: "clock")
         }
         
         return cell
@@ -158,18 +171,6 @@ class ReminderListController: UITableViewController {
         }
         return [delete, complete]
     }
-    
-//    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-//        if (segue.identifier == "editReminderSegue")
-//        {
-//            let controller: ReminderDetailViewController = segue.destinationViewController as! ReminderDetailViewController
-//            let indexPath = tableView.indexPathForSelectedRow!
-//            
-//            let r: Reminder = self.reminders[indexPath.row] 
-//            controller.currentReminder = r
-//            // Display reminder details screen
-//        }
-//    }
     
     @IBAction func displayAboutView(sender: UIBarButtonItem) {
         self.performSegueWithIdentifier("showAboutSegue", sender: nil)

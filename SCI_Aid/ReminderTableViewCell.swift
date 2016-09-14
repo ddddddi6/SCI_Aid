@@ -9,9 +9,9 @@
 import UIKit
 
 class ReminderTableViewCell: UITableViewCell {
-
-
     
+    @IBOutlet var clockImage: UIImageView!
+    @IBOutlet var statusLabel: UILabel!
     @IBOutlet var completionLabel: UILabel!
     @IBOutlet var dateLabel: UILabel!
     

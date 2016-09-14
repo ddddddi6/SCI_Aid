@@ -187,7 +187,7 @@ class DiaryListController: UITableViewController, DiaryDelegate {
         greenCount.text = ": \(self.greenCounts!)"
         yellowCount.text = ": \(self.yellowCounts!)"
         redCount.text = ": \(self.redCounts!)"
-        tableView.reloadData()
+        sortDiaryList()
     }
     
     func countColors(diaries: NSMutableArray) {
@@ -258,7 +258,7 @@ class DiaryListController: UITableViewController, DiaryDelegate {
             greenCount.text = ": \(self.greenCounts!)"
             yellowCount.text = ": \(self.yellowCounts!)"
             redCount.text = ": \(self.redCounts!)"
-            tableView.reloadData()
+            sortDiaryList()
         }
     }
     
@@ -311,7 +311,6 @@ class DiaryListController: UITableViewController, DiaryDelegate {
         } else if endField.editing {
             endField.resignFirstResponder()
         }
-        
     }
     
     func tappedToolBarBtn(sender: UIBarButtonItem) {
@@ -338,6 +337,17 @@ class DiaryListController: UITableViewController, DiaryDelegate {
     @IBAction func viewAllEntries(sender: UIBarButtonItem) {
         refreshTableView()
     }
+    
+    // sort the diary entry list
+    func sortDiaryList() {
+        diaries.sortUsingComparator({ (o1: AnyObject!, o2: AnyObject!) -> NSComparisonResult in
+            let entry1 = o1 as! Diary
+            let entry2 = o2 as! Diary
+            return entry2.diaryDate!.compare(entry1.diaryDate!)
+        })
+        self.tableView.reloadData()
+    }
+
     /*
     // Override to support rearranging the table view.
     override func tableView(tableView: UITableView, moveRowAtIndexPath fromIndexPath: NSIndexPath, toIndexPath: NSIndexPath) {
