@@ -15,9 +15,9 @@ class PlaceViewController: UIViewController {
 
     @IBOutlet var activityIndicator: UIActivityIndicatorView!
     @IBOutlet var placeImage: UIImageView!
-    @IBOutlet var phoneNumber: UILabel!
-    @IBOutlet var placeAddress: UILabel!
-    @IBOutlet var homepage: UILabel!
+    @IBOutlet var phoneButton: UIButton!
+    @IBOutlet var websiteButton: UIButton!
+    @IBOutlet var addressButton: UIButton!
     
     var currentPlaceID: String?
     
@@ -34,40 +34,31 @@ class PlaceViewController: UIViewController {
         self.view.backgroundColor = UIColor(red: 63/255.0, green: 50/255.0, blue: 78/255.0, alpha: 1.0)
         
         downloadPlaceData()
-        
+    
         // add gesture to Labels
-        let tapGesture_c = UITapGestureRecognizer(target: self, action: #selector(PlaceViewController.callNumber(_:)))
-        phoneNumber.userInteractionEnabled=true
-        phoneNumber.addGestureRecognizer(tapGesture_c)
-        
-        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(PlaceViewController.navigatePlace(_:)))
-        placeAddress.userInteractionEnabled=true
-        placeAddress.addGestureRecognizer(tapGesture)
-        
-        let tapGesture_p = UITapGestureRecognizer(target: self, action: #selector(PlaceViewController.webView(_:)))
-        homepage.userInteractionEnabled=true
-        homepage.addGestureRecognizer(tapGesture_p)
-        
-        phoneNumber.backgroundColor = UIColor.clearColor()
+//        let tapGesture_c = UITapGestureRecognizer(target: self, action: #selector(PlaceViewController.callNumber(_:)))
+//        phoneNumber.userInteractionEnabled=true
+//        phoneNumber.addGestureRecognizer(tapGesture_c)
+//        
+//        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(PlaceViewController.navigatePlace(_:)))
+//        placeAddress.userInteractionEnabled=true
+//        placeAddress.addGestureRecognizer(tapGesture)
+//        
+//        let tapGesture_p = UITapGestureRecognizer(target: self, action: #selector(PlaceViewController.webView(_:)))
+//        homepage.userInteractionEnabled=true
+//        homepage.addGestureRecognizer(tapGesture_p)
+//        
+//        phoneNumber.backgroundColor = UIColor.clearColor()
         
         // Do any additional setup after loading the view.
     }
     
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
-        phoneNumber.backgroundColor = UIColor.clearColor()
     }
     
-    // jump to homepage
-    func webView(sender:UITapGestureRecognizer){
-        UIApplication.sharedApplication().openURL(NSURL(string: self.placeWeb!)!)
-    }
-    
-    // call place phone number
-    func callNumber(sender:UITapGestureRecognizer) {
-        
-        phoneNumber.backgroundColor = UIColor.lightGrayColor()
-        let number = self.phoneNumber.text!.stringByReplacingOccurrencesOfString(" ", withString: "", options: NSStringCompareOptions.LiteralSearch, range: nil)
+    @IBAction func callNumber(sender: UIButton) {
+        let number = self.phoneButton.titleLabel!.text!.stringByReplacingOccurrencesOfString(" ", withString: "", options: NSStringCompareOptions.LiteralSearch, range: nil)
         if let phoneCallURL:NSURL = NSURL(string:"tel://\(number)") {
             let application:UIApplication = UIApplication.sharedApplication()
             if (application.canOpenURL(phoneCallURL)) {
@@ -76,11 +67,10 @@ class PlaceViewController: UIViewController {
         }
     }
     
-    // open the map in map application
-    func navigatePlace(sender:UITapGestureRecognizer) -> Bool{
+    @IBAction func navigateAddress(sender: UIButton) {
         var flag = true as Bool
         let geocoder = CLGeocoder()
-        let str = placeAddress.text // A string of the address info you already have
+        let str = addressButton.titleLabel!.text // A string of the address info you already have
         geocoder.geocodeAddressString(str!) { (placemarksOptional, error) -> Void in
             if let placemarks = placemarksOptional {
                 print("placemark| \(placemarks.first)")
@@ -102,8 +92,28 @@ class PlaceViewController: UIViewController {
                 // Didn't get any placemarks. Handle error.
             }
         }
-        return flag
     }
+    
+    @IBAction func browseWebsite(sender: UIButton) {
+        UIApplication.sharedApplication().openURL(NSURL(string: self.placeWeb!)!)
+    }
+    
+    
+    
+//    // jump to homepage
+//    func webView(sender:UITapGestureRecognizer){
+//        
+//    }
+//    
+//    // call place phone number
+//    func callNumber(sender:UITapGestureRecognizer) {
+//       
+//    }
+//    
+//    // open the map in map application
+//    func navigatePlace() -> Bool{
+//                return flag
+//    }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -122,9 +132,12 @@ class PlaceViewController: UIViewController {
                 self.parsePlaceJSON(data)
                 dispatch_async(dispatch_get_main_queue()) {
                     self.title = self.placeTitle
-                    self.placeAddress.text = self.address
-                    self.homepage.text = self.placeWeb
-                    self.phoneNumber.text = self.placePhone
+                    self.addressButton.setTitle(self.address!, forState: .Normal)
+                    self.websiteButton.setTitle(self.placeWeb!, forState: .Normal)
+                    self.phoneButton.setTitle(self.placePhone!, forState: .Normal)
+                    self.phoneButton.contentHorizontalAlignment = .Left
+                    self.websiteButton.contentHorizontalAlignment = .Left
+                    self.addressButton.contentHorizontalAlignment = .Left
                     let poster = "https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference=" + self.photo! + "&key=AIzaSyBpHKu9KGpv-VacWvQOhrI7OVjGVdHQY9Y" as String
                     if let url  = NSURL(string: poster),
                         data = NSData(contentsOfURL: url)
