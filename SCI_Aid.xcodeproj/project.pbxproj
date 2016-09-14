@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		041C22711D86E35D00A77FB7 /* Toilet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 041C22701D86E35D00A77FB7 /* Toilet.swift */; };
 		041C22731D895D5E00A77FB7 /* GPTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 041C22721D895D5E00A77FB7 /* GPTableViewController.swift */; };
+		041C22751D8980C100A77FB7 /* ServiceDescViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 041C22741D8980C100A77FB7 /* ServiceDescViewController.swift */; };
 		0466EBD91D6194B400204BB2 /* HomePageController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0466EBD81D6194B400204BB2 /* HomePageController.swift */; };
 		0466EBDF1D61B35400204BB2 /* FoldingTabBar.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0466EBDE1D61B35400204BB2 /* FoldingTabBar.framework */; };
 		0466EBE11D61B35900204BB2 /* SwiftyJSON.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0466EBE01D61B35900204BB2 /* SwiftyJSON.framework */; };
@@ -76,6 +77,7 @@
 /* Begin PBXFileReference section */
 		041C22701D86E35D00A77FB7 /* Toilet.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Toilet.swift; sourceTree = "<group>"; };
 		041C22721D895D5E00A77FB7 /* GPTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GPTableViewController.swift; sourceTree = "<group>"; };
+		041C22741D8980C100A77FB7 /* ServiceDescViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ServiceDescViewController.swift; sourceTree = "<group>"; };
 		0466EBD81D6194B400204BB2 /* HomePageController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomePageController.swift; sourceTree = "<group>"; };
 		0466EBDE1D61B35400204BB2 /* FoldingTabBar.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FoldingTabBar.framework; path = "Pods/../build/Debug-iphoneos/FoldingTabBar.framework"; sourceTree = "<group>"; };
 		0466EBE01D61B35900204BB2 /* SwiftyJSON.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftyJSON.framework; path = "../../Library/Developer/Xcode/DerivedData/SCI_Aid-dsoxeiwmpqhiwkgvwafzzqfbjpol/Build/Products/Debug-iphonesimulator/SwiftyJSON.framework"; sourceTree = "<group>"; };
@@ -268,6 +270,7 @@
 		04EC8B4C1D818FC500006292 /* Facility */ = {
 			isa = PBXGroup;
 			children = (
+				041C22741D8980C100A77FB7 /* ServiceDescViewController.swift */,
 				041C22721D895D5E00A77FB7 /* GPTableViewController.swift */,
 				04E3794E1D63FBD7008EC849 /* PlaceViewController.swift */,
 				04E182871D839DED00750EB0 /* ServiceTableViewCell.swift */,
@@ -607,6 +610,7 @@
 				049E433D1D657F7D005E796B /* StationViewController.swift in Sources */,
 				0490C8801D7128A000F522F4 /* ReminderTableViewCell.swift in Sources */,
 				049E435C1D66B1D4005E796B /* ActivityViewController.swift in Sources */,
+				041C22751D8980C100A77FB7 /* ServiceDescViewController.swift in Sources */,
 				0490C87E1D71258B00F522F4 /* AddReminderController.swift in Sources */,
 				04E182881D839DED00750EB0 /* ServiceTableViewCell.swift in Sources */,
 				049E433F1D65AE1C005E796B /* Activity.swift in Sources */,

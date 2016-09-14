@@ -163,9 +163,11 @@ class DiaryDetailViewController: UIViewController {
         }
         
         if (self.currentDiary!.isLittle == true) {
-            volumeSegment.selectedSegmentIndex = 0
-        } else {
             volumeSegment.selectedSegmentIndex = 1
+        } else if (self.currentDiary!.isMuch == true) {
+            volumeSegment.selectedSegmentIndex = 2
+        } else {
+            volumeSegment.selectedSegmentIndex = 0
         }
         
         if (self.currentDiary!.isBlocked == true) {
@@ -201,16 +203,20 @@ class DiaryDetailViewController: UIViewController {
     @IBAction func checkVolume(sender: UISegmentedControl) {
         switch volumeSegment.selectedSegmentIndex
         {
-        case 0:
-            littleVolume = true
-            muchVolume = false
-            break
-        case 1:
-            muchVolume = true
-            littleVolume = false
-            break
-        default:
-            break;
+            case 1:
+                littleVolume = false
+                muchVolume = false
+                break
+            case 1:
+                littleVolume = true
+                muchVolume = false
+                break
+            case 1:
+                muchVolume = true
+                littleVolume = false
+                break
+            default:
+                break;
         }
     }
     

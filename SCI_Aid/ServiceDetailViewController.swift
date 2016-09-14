@@ -10,9 +10,9 @@ import UIKit
 
 class ServiceDetailViewController: UIViewController {
 
+    @IBOutlet var descButton: UIButton!
+    @IBOutlet var addressButton: UIButton!
     @IBOutlet var nameLabel: UILabel!
-    @IBOutlet var addressLabel: UILabel!
-    @IBOutlet var descLabel: UILabel!
     @IBOutlet var phoneLabel: UILabel!
     @IBOutlet var websiteLabel: UILabel!
     @IBOutlet var emailLabel: UILabel!
@@ -31,17 +31,17 @@ class ServiceDetailViewController: UIViewController {
         nameLabel.text = currentActivity.name
         nameLabel.layer.cornerRadius = 5
         nameLabel.layer.masksToBounds = true
-        addressLabel.text = currentActivity.address
-        descLabel.text = currentActivity.desc
+        addressButton.setTitle(currentActivity.address, forState: .Normal)
+        addressButton.contentHorizontalAlignment = .Left
+        descButton.setTitle(currentActivity.desc, forState: .Normal)
+        addressButton.contentHorizontalAlignment = .Left
         phoneLabel.text = currentActivity.phone
         websiteLabel.text = currentActivity.website
         emailLabel.text = currentActivity.email
         freecallLabel.text = currentActivity.freecall
         
-        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(ServiceDetailViewController.navigatePlace(_:)))
-        if addressLabel.text != "N.A." {
-            addressLabel.userInteractionEnabled=true
-            addressLabel.addGestureRecognizer(tapGesture)
+        if addressButton.titleLabel!.text == "N.A." {
+            addressButton.enabled = false
         }
     }
 
@@ -50,15 +50,23 @@ class ServiceDetailViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-    func navigatePlace(sender:UITapGestureRecognizer) {
+    @IBAction func navigateService(sender: UIButton) {
         self.performSegueWithIdentifier("showLocationSegue", sender: self)
+    }
+    
+    @IBAction func displayDescription(sender: UIButton) {
+        self.performSegueWithIdentifier("showDescription", sender: self)
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "showLocationSegue"
         {
-            let theDestination : ServiceLocationViewController = segue.destinationViewController as! ServiceLocationViewController
+            let theDestination: ServiceLocationViewController = segue.destinationViewController as! ServiceLocationViewController
             theDestination.currentActivity = self.currentActivity
+        } else if segue.identifier == "showDescription" {
+            let theDestination: ServiceDescViewController = (segue.destinationViewController as! UINavigationController).topViewController as! ServiceDescViewController
+            theDestination.name = currentActivity.name
+            theDestination.desc = currentActivity.desc
         }
     }
 
