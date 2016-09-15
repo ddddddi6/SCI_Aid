@@ -9,9 +9,12 @@
 import UIKit
 
 class Reminder: NSObject {
+    static let currentReminder = Reminder()
     var deadline: NSDate?
     var complete: Bool?
     var UUID: String!
+    
+    var delegate: ReminderDelegate!
     
     private let ITEMS_KEY = "p"
     
@@ -85,6 +88,12 @@ class Reminder: NSObject {
             notification.soundName = UILocalNotificationDefaultSoundName
             notification.userInfo = ["title": "bladder issue", "UUID": reminder.UUID]
             UIApplication.sharedApplication().scheduleLocalNotification(notification)
+            if UIApplication.sharedApplication().applicationState == .Active {
+                if (reminder.deadline?.timeIntervalSinceNow > 0) {
+                    NSTimer.scheduledTimerWithTimeInterval((reminder.deadline?.timeIntervalSinceNow)!, target: self, selector: #selector(pushNewAlert), userInfo: nil, repeats: false)
+                }
+            }
+           
         } else {
             let scheduledNotifications: [UILocalNotification]? = UIApplication.sharedApplication().scheduledLocalNotifications
             guard scheduledNotifications != nil else {return} // Nothing to remove, so return
@@ -97,4 +106,9 @@ class Reminder: NSObject {
             }
         }
     }
+    
+    func pushNewAlert() {
+        delegate!.pushAlert()
+    }
+    
 }

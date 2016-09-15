@@ -8,21 +8,22 @@
 
 import UIKit
 
-//protocol addReminderDelegate{
-//    func addReminder(reminder: Reminder)
-//}
-
 class AddReminderController: UIViewController {
 
     
+    @IBOutlet var intervalSegment: UISegmentedControl!
     @IBOutlet var startField: UITextField!
     @IBOutlet var endField: UITextField!
     
-    var startTime:NSDate!
-    var endTime:NSDate!
+    var startTime: NSDate!
+    var endTime: NSDate!
+    var interval: Double!
     
-        override func viewDidLoad() {
+    override func viewDidLoad() {
         super.viewDidLoad()
+        
+        self.intervalSegment.selectedSegmentIndex = 0
+        self.interval = 2
         
         self.view.backgroundColor = UIColor(red: 63/255.0, green: 50/255.0, blue: 78/255.0, alpha: 1.0)
             
@@ -51,7 +52,7 @@ class AddReminderController: UIViewController {
             
             label.textColor = UIColor.whiteColor()
             
-            label.text = "Select a date"
+            label.text = "Select a time"
             
             label.textAlignment = NSTextAlignment.Center
             
@@ -183,18 +184,14 @@ class AddReminderController: UIViewController {
             //let date = dateFormatter.dateFromString(dateTextField.text!)
             //let enddate = dateFormatter.dateFromString(endDateTextField.text!)
             let timesDifferent = daysBetweenDates(startTime, endDate: endTime)
-            let totalCircle = (timesDifferent)/4
+            let totalCircle = (timesDifferent)/Int(interval)
             for var n = 0; n <= totalCircle ; n += 1
             {
                 let addHours : Double = Double(n)
-                let newDate = startTime!.dateByAddingTimeInterval(addHours*60*60*4)
+                let newDate = startTime!.dateByAddingTimeInterval(addHours*60*60*interval)
                 let reminder = Reminder(deadline: newDate, complete: false, UUID: NSUUID().UUIDString)
-                Reminder().addReminder(reminder) // schedule a local notification to persist this item
+                Reminder.currentReminder.addReminder(reminder) // schedule a local notification to persist this item
                 self.navigationController?.popViewControllerAnimated(true)
-//                print(date!)
-//                print(enddate!)
-//                print(timesDifferent)
-//                print(totalCircle)
                 
             }
         }
@@ -203,6 +200,26 @@ class AddReminderController: UIViewController {
     override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
         self.view.endEditing(true)
     }
+    
+    @IBAction func setInterval(sender: UISegmentedControl) {
+        switch intervalSegment.selectedSegmentIndex {
+        case 0:
+            self.interval = 2
+            break
+        case 1:
+            self.interval = 3
+            break
+        case 2:
+            self.interval = 4
+            break
+        case 3:
+            self.interval = 5
+            break
+        default:
+            break
+        }
+    }
+    
     
     /*
      // MARK: - Navigation
