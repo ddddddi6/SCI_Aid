@@ -17,9 +17,9 @@ class DiaryListController: UITableViewController, DiaryDelegate {
 
     @IBOutlet var endField: UITextField!
     @IBOutlet var startField: UITextField!
-    @IBOutlet var greenCount: UILabel!
-    @IBOutlet var yellowCount: UILabel!
-    @IBOutlet var redCount: UILabel!
+    @IBOutlet var greenCount: UILabel?
+    @IBOutlet var yellowCount: UILabel?
+    @IBOutlet var redCount: UILabel?
     
     var greenCounts: Int?
     var yellowCounts: Int?
@@ -27,6 +27,12 @@ class DiaryListController: UITableViewController, DiaryDelegate {
     var startDate: NSDate!
     var endDate: NSDate!
     var diaries: NSMutableArray
+
+    
+    override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: NSBundle?) {
+        self.diaries = NSMutableArray()
+        super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
+    }
     
     required init?(coder aDecoder: NSCoder) {
         self.diaries = NSMutableArray()
@@ -184,10 +190,10 @@ class DiaryListController: UITableViewController, DiaryDelegate {
     func refreshTableView() {
         self.diaries = DataManager.dataManager.getDiaryEntries()
         countColors(self.diaries)
-        greenCount.text = ": \(self.greenCounts!)"
-        yellowCount.text = ": \(self.yellowCounts!)"
-        redCount.text = ": \(self.redCounts!)"
-        sortDiaryList()
+        self.greenCount!.text = ": \(self.greenCounts!)"
+        self.yellowCount!.text = ": \(self.yellowCounts!)"
+        self.redCount!.text = ": \(self.redCounts!)"
+        self.sortDiaryList()
     }
     
     func countColors(diaries: NSMutableArray) {
@@ -255,9 +261,10 @@ class DiaryListController: UITableViewController, DiaryDelegate {
             }
             diaries = newDiaries
             countColors(diaries)
-            greenCount.text = ": \(self.greenCounts!)"
-            yellowCount.text = ": \(self.yellowCounts!)"
-            redCount.text = ": \(self.redCounts!)"
+            
+            greenCount!.text = ": \(self.greenCounts!)"
+            yellowCount!.text = ": \(self.yellowCounts!)"
+            redCount!.text = ": \(self.redCounts!)"
             sortDiaryList()
         }
     }

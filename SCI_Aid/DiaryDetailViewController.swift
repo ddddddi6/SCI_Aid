@@ -20,6 +20,7 @@ class DiaryDetailViewController: UIViewController {
     @IBOutlet var statusView: UIView!
     @IBOutlet var problemView: UIView!
 
+    @IBOutlet var statusButton: UIButton!
     @IBOutlet var cancelButton: UIButton!
     @IBOutlet var saveButton: UIButton!
     @IBOutlet var goodImage: UIImageView!
@@ -27,11 +28,13 @@ class DiaryDetailViewController: UIViewController {
     @IBOutlet var volumeSegment: UISegmentedControl!
     @IBOutlet var dysreflexiaSwitch: UISwitch!
     @IBOutlet var painfulSwitch: UISwitch!
-    @IBOutlet var dateLabel: UILabel!
     @IBOutlet var blockedSwitch: UISwitch!
     @IBOutlet var toiletSwitch: UISwitch!
     @IBOutlet var smellySwitch: UISwitch!
     @IBOutlet var catheterSwitch: UISwitch!
+    
+    @IBOutlet var dateFiled: UITextField!
+    
     
     @IBAction func isOk(sender: UIButton) {
         if (currentDiary == nil) {
@@ -41,7 +44,7 @@ class DiaryDetailViewController: UIViewController {
         
         let dateFormatter = NSDateFormatter()
         dateFormatter.dateFormat = "dd-MM-yyyy HH:mm"
-        let date = dateFormatter.dateFromString(self.dateLabel.text!)
+        let date = dateFormatter.dateFromString(self.dateFiled.text!)
         currentDiary.diaryDate = date
         currentDiary.condition = true
         currentDiary.hasCatheter = false
@@ -55,7 +58,9 @@ class DiaryDetailViewController: UIViewController {
         currentDiary.status = "Green"
         
         DataManager.dataManager.saveData()
-        delegate.refreshTableView()
+        if currentDateofDiary == nil {
+            delegate.refreshTableView()
+        }
         self.navigationController?.popViewControllerAnimated(true)
     }
 
@@ -90,10 +95,12 @@ class DiaryDetailViewController: UIViewController {
         } else {
             currentDiary.status = "Red"
         }
-        
         DataManager.dataManager.saveData()
-        delegate.refreshTableView()
+        if currentDateofDiary == nil {
+            delegate.refreshTableView()
+        }
         self.navigationController?.popViewControllerAnimated(true)
+        
     }
     
     override func viewDidLoad() {
@@ -107,40 +114,89 @@ class DiaryDetailViewController: UIViewController {
         if currentDiary == nil {
             let dateFormatter = NSDateFormatter()
             dateFormatter.dateFormat = "dd-MM-YYYY HH:mm"
-            let date = dateFormatter.stringFromDate(NSDate())
-            currentDateofDiary = NSDate()
-            self.dateLabel.text = date
+            if currentDateofDiary == nil {
+                currentDateofDiary = NSDate()
+            }
+            let date = dateFormatter.stringFromDate(currentDateofDiary)
+            self.dateFiled.text = date
             statusView.hidden = false
             problemView.hidden = true
             goodLabel.hidden = true
             goodImage.hidden = true
+            statusButton.hidden = true
         } else {
             let dateFormatter = NSDateFormatter()
             dateFormatter.dateFormat = "dd-MM-YYYY HH:mm"
             let date = dateFormatter.stringFromDate(self.currentDiary.diaryDate!)
             currentDateofDiary = self.currentDiary.diaryDate!
-            self.dateLabel.text = date
+            self.dateFiled.text = date
             statusView.hidden = true
             if currentDiary.condition == true {
                 goodLabel.hidden = false
                 goodImage.hidden = false
+                statusButton.hidden = false
                 problemView.hidden = true
             } else {
                 goodLabel.hidden = true
                 goodImage.hidden = true
+                statusButton.hidden = true
                 problemView.hidden = false
                 showDiaryDetails()
             }
-            
+  
         }
         
         self.view.backgroundColor = UIColor(red: 63/255.0, green: 50/255.0, blue: 78/255.0, alpha: 1.0)
+        
+        
+        let toolBar = UIToolbar(frame: CGRectMake(0, self.view.frame.size.height/6, self.view.frame.size.width, 40.0))
+        
+        toolBar.layer.position = CGPoint(x: self.view.frame.size.width/2, y: self.view.frame.size.height-20.0)
+        
+        toolBar.barStyle = UIBarStyle.BlackTranslucent
+        
+        toolBar.tintColor = UIColor.whiteColor()
+        
+        toolBar.backgroundColor = UIColor.blackColor()
+        
+        
+        let todayBtn = UIBarButtonItem(title: "Now", style: UIBarButtonItemStyle.Plain, target: self, action: #selector(DiaryListController.tappedToolBarBtn))
+        
+        let okBarBtn = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Done, target: self, action: #selector(DiaryListController.donePressed))
+        
+        let flexSpace = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.FlexibleSpace, target: self, action: nil)
+        
+        let label = UILabel(frame: CGRect(x: 0, y: 0, width: self.view.frame.size.width / 3, height: self.view.frame.size.height))
+        
+        label.font = UIFont(name: "Helvetica", size: 12)
+        
+        label.backgroundColor = UIColor.clearColor()
+        
+        label.textColor = UIColor.whiteColor()
+        
+        label.text = "Select a time"
+        
+        label.textAlignment = NSTextAlignment.Center
+        
+        let textBtn = UIBarButtonItem(customView: label)
+        
+        toolBar.setItems([todayBtn,flexSpace,textBtn,flexSpace,okBarBtn], animated: true)
+        
+        dateFiled.inputAccessoryView = toolBar
+
         // Do any additional setup after loading the view.
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    @IBAction func changeStatus(sender: UIButton) {
+        goodImage.hidden = true
+        goodLabel.hidden = true
+        statusButton.hidden = true
+        statusView.hidden = false
     }
     
     func showDiaryDetails() {
@@ -187,7 +243,6 @@ class DiaryDetailViewController: UIViewController {
         } else {
             toiletSwitch.setOn(false, animated:true)
         }
-
     }
     
     func checkState(switchState: UISwitch) -> Bool{
@@ -203,7 +258,7 @@ class DiaryDetailViewController: UIViewController {
     @IBAction func checkVolume(sender: UISegmentedControl) {
         switch volumeSegment.selectedSegmentIndex
         {
-            case 1:
+            case 0:
                 littleVolume = false
                 muchVolume = false
                 break
@@ -211,7 +266,7 @@ class DiaryDetailViewController: UIViewController {
                 littleVolume = true
                 muchVolume = false
                 break
-            case 1:
+            case 2:
                 muchVolume = true
                 littleVolume = false
                 break
@@ -240,7 +295,45 @@ class DiaryDetailViewController: UIViewController {
         self.presentViewController(activityViewController, animated: true, completion: nil)
 
     }
+    
+    @IBAction func selectDate(sender: UITextField) {
+        dateFiled.text = ""
+        let datePickerView:UIDatePicker = UIDatePicker()
+        
+        datePickerView.datePickerMode = UIDatePickerMode.DateAndTime
+        
+        sender.inputView = datePickerView
+        
+        datePickerView.addTarget(self, action: #selector(DiaryDetailViewController.datePickerValueChanged), forControlEvents: UIControlEvents.ValueChanged)
+    }
+    
+    func datePickerValueChanged(sender:UIDatePicker) {
+        
+        let dateformatter = NSDateFormatter()
+        
+        dateformatter.dateFormat = "dd-MM-YYYY HH:mm"
+        
+        currentDateofDiary = sender.date
+        dateFiled.text = dateformatter.stringFromDate(currentDateofDiary)
 
+    }
+    
+    func donePressed(sender: UIBarButtonItem) {
+        dateFiled.resignFirstResponder()
+    }
+    
+    func tappedToolBarBtn(sender: UIBarButtonItem) {
+        
+        let dateformatter = NSDateFormatter()
+        
+        dateformatter.dateFormat = "dd-MM-YYYY HH:mm"
+        
+        currentDateofDiary = NSDate()
+        dateFiled.text = dateformatter.stringFromDate(currentDateofDiary)
+        dateFiled.resignFirstResponder()
+    }
+
+    
     /*
     // MARK: - Navigation
 
