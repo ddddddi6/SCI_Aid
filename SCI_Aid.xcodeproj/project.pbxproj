@@ -13,7 +13,6 @@
 		0466EBD91D6194B400204BB2 /* HomePageController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0466EBD81D6194B400204BB2 /* HomePageController.swift */; };
 		0466EBDF1D61B35400204BB2 /* FoldingTabBar.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0466EBDE1D61B35400204BB2 /* FoldingTabBar.framework */; };
 		0466EBE11D61B35900204BB2 /* SwiftyJSON.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0466EBE01D61B35900204BB2 /* SwiftyJSON.framework */; };
-		0466EBE51D61C91C00204BB2 /* CarersController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0466EBE41D61C91C00204BB2 /* CarersController.swift */; };
 		048FC35F1D73D946003CEC28 /* DiaryDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 048FC35E1D73D946003CEC28 /* DiaryDetailViewController.swift */; };
 		048FC3611D73D95D003CEC28 /* DiaryListController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 048FC3601D73D95D003CEC28 /* DiaryListController.swift */; };
 		048FC3631D73D972003CEC28 /* DiaryTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 048FC3621D73D972003CEC28 /* DiaryTableViewCell.swift */; };
@@ -81,7 +80,6 @@
 		0466EBD81D6194B400204BB2 /* HomePageController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomePageController.swift; sourceTree = "<group>"; };
 		0466EBDE1D61B35400204BB2 /* FoldingTabBar.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FoldingTabBar.framework; path = "Pods/../build/Debug-iphoneos/FoldingTabBar.framework"; sourceTree = "<group>"; };
 		0466EBE01D61B35900204BB2 /* SwiftyJSON.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftyJSON.framework; path = "../../Library/Developer/Xcode/DerivedData/SCI_Aid-dsoxeiwmpqhiwkgvwafzzqfbjpol/Build/Products/Debug-iphonesimulator/SwiftyJSON.framework"; sourceTree = "<group>"; };
-		0466EBE41D61C91C00204BB2 /* CarersController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CarersController.swift; sourceTree = "<group>"; };
 		048FC35E1D73D946003CEC28 /* DiaryDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DiaryDetailViewController.swift; sourceTree = "<group>"; };
 		048FC3601D73D95D003CEC28 /* DiaryListController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DiaryListController.swift; sourceTree = "<group>"; };
 		048FC3621D73D972003CEC28 /* DiaryTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DiaryTableViewCell.swift; sourceTree = "<group>"; };
@@ -210,7 +208,6 @@
 				04B3BA2E1D5AD12D0086C290 /* AppDelegate.swift */,
 				048FC3761D79B209003CEC28 /* TabBarViewController.swift */,
 				04B3BA321D5AD12D0086C290 /* Main.storyboard */,
-				0466EBE41D61C91C00204BB2 /* CarersController.swift */,
 				048FC3661D770F51003CEC28 /* AboutViewController.swift */,
 				04B3BA381D5AD12D0086C290 /* Assets.xcassets */,
 				04B3BA3A1D5AD12D0086C290 /* LaunchScreen.storyboard */,
@@ -622,7 +619,6 @@
 				04E3795A1D646468008EC849 /* TransportViewController.swift in Sources */,
 				04E3795C1D6488CB008EC849 /* Stop.swift in Sources */,
 				04B3BA2F1D5AD12D0086C290 /* AppDelegate.swift in Sources */,
-				0466EBE51D61C91C00204BB2 /* CarersController.swift in Sources */,
 				048FC3771D79B209003CEC28 /* TabBarViewController.swift in Sources */,
 				049E43621D681A57005E796B /* ServiceLocationViewController.swift in Sources */,
 				041C22711D86E35D00A77FB7 /* Toilet.swift in Sources */,
@@ -794,6 +790,7 @@
 				PRODUCT_NAME = "SCI Aid";
 				SWIFT_OBJC_BRIDGING_HEADER = "SCI_Aid/SCI_Aid-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
 		};
@@ -815,6 +812,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "com.diliu.SCI-Aid";
 				PRODUCT_NAME = "SCI Aid";
 				SWIFT_OBJC_BRIDGING_HEADER = "SCI_Aid/SCI_Aid-Bridging-Header.h";
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
 		};

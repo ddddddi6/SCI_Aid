@@ -86,6 +86,8 @@ class StationViewController: UIViewController {
                 self.parseFacilityJSON(data)
                 dispatch_async(dispatch_get_main_queue()) {
                     self.title = self.currentStopName
+                    self.rampImage.frame.size.height = 45
+                    self.phoneImage.frame.size.height = 45
                     if self.hasRamp == true {
                         self.rampImage.image = UIImage(named: "yes")
                     } else {

@@ -17,6 +17,7 @@ class ServiceLocationViewController: UIViewController, MKMapViewDelegate, CLLoca
     
     var latitude: String!
     var longitude: String!
+    var coordinate: CLLocationCoordinate2D!
     var locationManager: CLLocationManager!
     
     var annotation:MKAnnotation!
@@ -102,17 +103,59 @@ class ServiceLocationViewController: UIViewController, MKMapViewDelegate, CLLoca
             
             self.pointAnnotation = MKPointAnnotation()
             self.pointAnnotation.title = self.currentActivity.name
-            self.pointAnnotation.coordinate = CLLocationCoordinate2D(latitude: localSearchResponse!.boundingRegion.center.latitude, longitude:     localSearchResponse!.boundingRegion.center.longitude)
-            
+            self.pointAnnotation.coordinate = CLLocationCoordinate2D(latitude: localSearchResponse!.boundingRegion.center.latitude, longitude: localSearchResponse!.boundingRegion.center.longitude)
+            self.coordinate = self.pointAnnotation.coordinate
             
             self.pinAnnotationView = MKPinAnnotationView(annotation: self.pointAnnotation, reuseIdentifier: nil)
             self.mapView.centerCoordinate = self.pointAnnotation.coordinate
             self.mapView.addAnnotation(self.pinAnnotationView.annotation!)
-            let region = MKCoordinateRegion(center: self.mapView.centerCoordinate, span: MKCoordinateSpan(latitudeDelta: 0.3, longitudeDelta: 0.3))
+            let region = MKCoordinateRegion(center: self.mapView.centerCoordinate, span: MKCoordinateSpan(latitudeDelta: 0.1, longitudeDelta: 0.1))
             self.mapView.setRegion(region, animated: true)
         }
     }
     
+    func mapView(mapView: MKMapView, viewForAnnotation annotation: MKAnnotation) -> MKAnnotationView? {
+        
+        if annotation is MKUserLocation {
+            //return nil
+            return nil
+        }
+        
+        let reuseId = "pin"
+        var pinView = mapView.dequeueReusableAnnotationViewWithIdentifier(reuseId) as? MKPinAnnotationView
+        
+        if pinView == nil {
+            pinView = MKPinAnnotationView(annotation: annotation, reuseIdentifier: reuseId)
+            pinView!.canShowCallout = true
+            pinView!.animatesDrop = true
+        } else {
+            pinView?.annotation = annotation
+        }
+        
+        let button = UIButton(type: .Custom) as UIButton // button with info sign in it
+        let image = UIImage(named: "navigation")
+        button.frame = CGRectMake(0, 0, 25, 25)
+        button.setImage(image, forState: .Normal)
+        pinView?.rightCalloutAccessoryView = button
+        pinView?.rightCalloutAccessoryView?.tintColor = UIColor.blueColor()
+        
+        return pinView
+    }
+    
+    func mapView(mapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {
+        if control == view.rightCalloutAccessoryView {
+            let mapItem = MKMapItem(placemark: MKPlacemark(coordinate: self.mapView.selectedAnnotations[0].coordinate, addressDictionary:nil))
+            mapItem.name = self.mapView.selectedAnnotations[0].title!
+            mapItem.openInMapsWithLaunchOptions([MKLaunchOptionsDirectionsModeKey : MKLaunchOptionsDirectionsModeDriving])
+        }
+    }
+    
+    @IBAction func backToCurrentLocation(sender: UIButton) {
+        let center = CLLocationCoordinate2D(latitude:  (self.latitude as NSString).doubleValue, longitude: (self.longitude as NSString).doubleValue)
+        let region = MKCoordinateRegion(center: center, span: MKCoordinateSpan(latitudeDelta: 0.1, longitudeDelta: 0.1))
+        
+        self.mapView.setRegion(region, animated: true)
+    }
 
     /*
     // MARK: - Navigation

@@ -36,6 +36,8 @@ class ToiletViewController: UIViewController, MKMapViewDelegate, CLLocationManag
     var clusteringManager : FBClusteringManager!
     
     var toilets = [Toilet]()
+    var currentToilet: Toilet!
+    var destination: CLLocationCoordinate2D!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -163,7 +165,23 @@ class ToiletViewController: UIViewController, MKMapViewDelegate, CLLocationManag
             }
             pinView?.annotation = annotation
             pinView!.pinTintColor = UIColor(red: 19/255.0, green: 170/255.0, blue: 65/255.0, alpha: 1.0)
+            
+            let button = UIButton(type: .Custom) as UIButton // button with info sign in it
+            let image = UIImage(named: "navigation")
+            button.frame = CGRectMake(0, 0, 25, 25)
+            button.setImage(image, forState: .Normal)
+            pinView?.rightCalloutAccessoryView = button
+            pinView?.rightCalloutAccessoryView?.tintColor = UIColor.blueColor()
+            
             return pinView
+        }
+    }
+    
+    func mapView(mapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {
+        if control == view.rightCalloutAccessoryView {
+            let mapItem = MKMapItem(placemark: MKPlacemark(coordinate: self.mapView.selectedAnnotations[0].coordinate, addressDictionary:nil))
+            mapItem.name = self.mapView.selectedAnnotations[0].title!
+            mapItem.openInMapsWithLaunchOptions([MKLaunchOptionsDirectionsModeKey : MKLaunchOptionsDirectionsModeWalking])
         }
     }
     

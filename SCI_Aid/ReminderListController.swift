@@ -37,7 +37,6 @@ class ReminderListController: UITableViewController, ReminderDelegate {
         
         Reminder.currentReminder.delegate = self
         print(Reminder.currentReminder.delegate!)
-        print("5555555555555")
         
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
@@ -75,6 +74,7 @@ class ReminderListController: UITableViewController, ReminderDelegate {
             cell.hidden = false
             initialView.hidden = true
             self.infoLabel.hidden = false
+            self.tableView.contentSize.height = self.tableView.contentSize.height - 400
         }
     }
     
@@ -88,9 +88,9 @@ class ReminderListController: UITableViewController, ReminderDelegate {
         if (reminders.count == 0) {
             self.infoLabel.text = "  There is no reminder"
         } else if (reminders.count == 1) {
-            self.infoLabel.text = "  Here is " + String(reminders.count) + " Reminder"
+            self.infoLabel.text = "  There is " + String(reminders.count) + " Reminder"
         } else {
-            self.infoLabel.text = "  Here Are " + String(reminders.count) + " Reminders"
+            self.infoLabel.text = "  There Are " + String(reminders.count) + " Reminders"
         }
     }
 

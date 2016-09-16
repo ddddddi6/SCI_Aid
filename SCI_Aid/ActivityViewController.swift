@@ -27,6 +27,7 @@ class ActivityViewController: UIViewController, MKMapViewDelegate, CLLocationMan
     var latitude: String!
     var longitude: String!
     var gpID: String!
+    var coordinate: CLLocationCoordinate2D!
     var cellColors = [UIColor.clearColor(), UIColor(red: 106/255.0, green: 84/255.0, blue: 113/255.0, alpha: 1.0)]
     
     var ref: FIRDatabaseReference!
@@ -192,6 +193,7 @@ class ActivityViewController: UIViewController, MKMapViewDelegate, CLLocationMan
     func mapView(mapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {
         if control == view.rightCalloutAccessoryView {
             self.gpID = self.mapView.selectedAnnotations[0].subtitle!
+            self.coordinate = self.mapView.selectedAnnotations[0].coordinate
             self.performSegueWithIdentifier("showGPDetails", sender: self)
         }
     }
@@ -318,6 +320,7 @@ class ActivityViewController: UIViewController, MKMapViewDelegate, CLLocationMan
         {
             let theDestination : PlaceViewController = segue.destinationViewController as! PlaceViewController
             theDestination.currentPlaceID = self.gpID
+            theDestination.coordinate = self.coordinate
         } else if segue.identifier == "showCategoryDetail"
         {
             let controller: ServiceTableViewController = segue.destinationViewController as! ServiceTableViewController

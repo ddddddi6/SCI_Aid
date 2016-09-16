@@ -110,6 +110,8 @@ class DiaryDetailViewController: UIViewController {
         saveButton.layer.masksToBounds = true
         cancelButton.layer.cornerRadius = 5
         cancelButton.layer.masksToBounds = true
+        statusButton.layer.cornerRadius = 5
+        statusButton.layer.masksToBounds = true
         
         if currentDiary == nil {
             let dateFormatter = NSDateFormatter()

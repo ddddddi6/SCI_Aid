@@ -20,6 +20,7 @@ class PlaceViewController: UIViewController {
     @IBOutlet var addressButton: UIButton!
     
     var currentPlaceID: String?
+    var coordinate: CLLocationCoordinate2D?
     
     var placeTitle: String?
     var placePhone: String?
@@ -34,21 +35,6 @@ class PlaceViewController: UIViewController {
         self.view.backgroundColor = UIColor(red: 63/255.0, green: 50/255.0, blue: 78/255.0, alpha: 1.0)
         
         downloadPlaceData()
-    
-        // add gesture to Labels
-//        let tapGesture_c = UITapGestureRecognizer(target: self, action: #selector(PlaceViewController.callNumber(_:)))
-//        phoneNumber.userInteractionEnabled=true
-//        phoneNumber.addGestureRecognizer(tapGesture_c)
-//        
-//        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(PlaceViewController.navigatePlace(_:)))
-//        placeAddress.userInteractionEnabled=true
-//        placeAddress.addGestureRecognizer(tapGesture)
-//        
-//        let tapGesture_p = UITapGestureRecognizer(target: self, action: #selector(PlaceViewController.webView(_:)))
-//        homepage.userInteractionEnabled=true
-//        homepage.addGestureRecognizer(tapGesture_p)
-//        
-//        phoneNumber.backgroundColor = UIColor.clearColor()
         
         // Do any additional setup after loading the view.
     }
@@ -68,53 +54,15 @@ class PlaceViewController: UIViewController {
     }
     
     @IBAction func navigateAddress(sender: UIButton) {
-        var flag = true as Bool
-        let geocoder = CLGeocoder()
-        let str = addressButton.titleLabel!.text // A string of the address info you already have
-        geocoder.geocodeAddressString(str!) { (placemarksOptional, error) -> Void in
-            if let placemarks = placemarksOptional {
-                print("placemark| \(placemarks.first)")
-                if let location = placemarks.first?.location {
-                    let query = "?ll=\(location.coordinate.latitude),\(location.coordinate.longitude)"
-                    let path = "http://maps.apple.com/" + query
-                    if let url = NSURL(string: path) {
-                        UIApplication.sharedApplication().openURL(url)
-                    } else {
-                        flag = false
-                        // Could not construct url. Handle error.
-                    }
-                } else {
-                    flag = false
-                    // Could not get a location from the geocode request. Handle error.
-                }
-            } else {
-                flag = false
-                // Didn't get any placemarks. Handle error.
-            }
-        }
+        let mapItem = MKMapItem(placemark: MKPlacemark(coordinate: self.coordinate!, addressDictionary:nil))
+        mapItem.name = self.placeTitle
+        mapItem.openInMapsWithLaunchOptions([MKLaunchOptionsDirectionsModeKey : MKLaunchOptionsDirectionsModeDriving])
     }
     
     @IBAction func browseWebsite(sender: UIButton) {
         UIApplication.sharedApplication().openURL(NSURL(string: self.placeWeb!)!)
     }
-    
-    
-    
-//    // jump to homepage
-//    func webView(sender:UITapGestureRecognizer){
-//        
-//    }
-//    
-//    // call place phone number
-//    func callNumber(sender:UITapGestureRecognizer) {
-//       
-//    }
-//    
-//    // open the map in map application
-//    func navigatePlace() -> Bool{
-//                return flag
-//    }
-    
+        
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
