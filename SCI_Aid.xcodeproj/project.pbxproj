@@ -203,7 +203,6 @@
 				04EC8B4B1D818FA200006292 /* Toilet */,
 				04EC8B4A1D818F8D00006292 /* Diary */,
 				04EC8B491D818F7000006292 /* Reminder */,
-				0466EBD81D6194B400204BB2 /* HomePageController.swift */,
 				049E435D1D66F5E6005E796B /* GoogleService-Info.plist */,
 				04B3BA2E1D5AD12D0086C290 /* AppDelegate.swift */,
 				048FC3761D79B209003CEC28 /* TabBarViewController.swift */,
@@ -238,6 +237,7 @@
 		04EC8B491D818F7000006292 /* Reminder */ = {
 			isa = PBXGroup;
 			children = (
+				0466EBD81D6194B400204BB2 /* HomePageController.swift */,
 				0490C87B1D71234300F522F4 /* ReminderListController.swift */,
 				0490C87D1D71258B00F522F4 /* AddReminderController.swift */,
 				0490C87F1D7128A000F522F4 /* ReminderTableViewCell.swift */,

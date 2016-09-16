@@ -8,11 +8,11 @@
 
 import UIKit
 
-protocol ReminderDelegate {
-    func pushAlert()
-}
+//protocol ReminderDelegate {
+//    func pushAlert()
+//}
 
-class ReminderListController: UITableViewController, ReminderDelegate {
+class ReminderListController: UITableViewController {
 
     @IBOutlet var initialView: UIView!
     @IBOutlet var infoLabel: UILabel!
@@ -35,8 +35,8 @@ class ReminderListController: UITableViewController, ReminderDelegate {
         self.view.backgroundColor = UIColor(red: 63/255.0, green: 50/255.0, blue: 78/255.0, alpha: 1.0)        
         displayNoReminderMessage()
         
-        Reminder.currentReminder.delegate = self
-        print(Reminder.currentReminder.delegate!)
+        //Reminder.currentReminder.delegate = self
+        //print(Reminder.currentReminder.delegate!)
         
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
