@@ -45,6 +45,7 @@ class DiaryListController: UITableViewController, DiaryDelegate {
         refreshTableView()
         tableView.delegate = self
         tableView.dataSource = self
+        tableView.tableFooterView = UIView()
         
         self.view.backgroundColor = UIColor(red: 63/255.0, green: 50/255.0, blue: 78/255.0, alpha: 1.0)
         
