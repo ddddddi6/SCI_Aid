@@ -18,9 +18,6 @@ class HomePageController: UIViewController, UITableViewDelegate, UITableViewData
     @IBOutlet var tableView: UITableView!
     @IBOutlet var initialView: UIView!
     
-    @IBOutlet var filterButton: UIButton!
-    
-    
     var deadline: NSDate!
     var reminders: [Reminder] = []
     var createdDiary: Diary!
@@ -29,14 +26,35 @@ class HomePageController: UIViewController, UITableViewDelegate, UITableViewData
         super.init(coder: aDecoder)!
     }
     
+    @IBAction func deleteAllReminders(sender: UIBarButtonItem) {
+        let messageString: String = "Delete all reminders?"
+        // Setup an alert to warn user
+        // UIAlertController manages an alert instance
+        let alertController = UIAlertController(title: "Alert", message: messageString, preferredStyle:
+            UIAlertControllerStyle.Alert)
+        
+        alertController.addAction(UIAlertAction(title: "Yes", style: UIAlertActionStyle.Default,handler: { (action: UIAlertAction!) in
+            for reminder in self.reminders {
+                let index = self.reminders.indexOf(reminder)
+                let reminder = self.reminders.removeAtIndex(index!)
+                self.tableView.reloadData()
+                Reminder().removeReminder(reminder)
+            }
+            self.refreshList()
+            self.refreshTitle()
+            self.displayNoReminderMessage()
+        }))
+        print(reminders.count)
+        alertController.addAction(UIAlertAction(title: "No", style: .Cancel, handler: nil))
+        
+        self.presentViewController(alertController, animated: true, completion: nil)
+        
+    }
+    
     @IBAction func setReminder(sender: UIButton) {
         self.performSegueWithIdentifier("addReminderSegue", sender: self)
     }
     
-    @IBAction func displayAbourScreen(sender: UIBarButtonItem) {
-        self.performSegueWithIdentifier("showAboutSegue", sender: nil)
-    }
-
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -103,11 +121,18 @@ class HomePageController: UIViewController, UITableViewDelegate, UITableViewData
     
     func refreshList() {
         reminders = Reminder().getAllReminders()
-        reminders = reminders.sort({ ($0.deadline)!.compare($1.deadline!) == .OrderedAscending })
+        if reminders.count == 0 {
+            self.navigationItem.leftBarButtonItem?.enabled = false
+        } else {
+            self.navigationItem.leftBarButtonItem?.enabled = true
+        }
+        reminders.sortInPlace({ ($0.deadline)!.compare($1.deadline!) == .OrderedAscending })
+        reminders.sortInPlace({ !$0.complete! && $1.complete! })
         tableView.reloadData()
     }
     
     func refreshTitle() {
+        reminders = Reminder().getAllReminders()
         if (reminders.count == 0) {
             self.infoLabel.text = "  There is no reminder"
         } else if (reminders.count == 1) {
@@ -116,17 +141,6 @@ class HomePageController: UIViewController, UITableViewDelegate, UITableViewData
             self.infoLabel.text = "  There Are " + String(reminders.count) + " Reminders"
         }
     }
-    
-    @IBAction func filterReminderList(sender: UIButton) {
-        for reminder in reminders {
-            if reminder.completion == true {
-                let reminder = self.reminders.removeAtIndex(indexPath.row)
-                tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
-                Reminder().removeReminder(reminder)
-            }
-        }
-    }
-    
     
     // MARK: - Table view data source
     
@@ -229,7 +243,7 @@ class HomePageController: UIViewController, UITableViewDelegate, UITableViewData
             let reminder = self.reminders.removeAtIndex(indexPath.row)
             tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
             Reminder().removeReminder(reminder)
-            //self.refreshTitle()
+            self.refreshTitle()
             self.navigationItem.rightBarButtonItem!.enabled = true
         }
         return [delete, complete]
