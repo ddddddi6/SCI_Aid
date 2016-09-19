@@ -11,6 +11,7 @@ import UIKit
 class AddReminderController: UIViewController {
 
     
+    @IBOutlet var periodSegment: UISegmentedControl!
     @IBOutlet var intervalSegment: UISegmentedControl!
     @IBOutlet var startField: UITextField!
     @IBOutlet var endField: UITextField!
@@ -18,12 +19,14 @@ class AddReminderController: UIViewController {
     var startTime: NSDate!
     var endTime: NSDate!
     var interval: Double!
+    var period: Int!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         self.intervalSegment.selectedSegmentIndex = 0
         self.interval = 2
+        self.period = 0
         
         self.view.backgroundColor = UIColor(red: 63/255.0, green: 50/255.0, blue: 78/255.0, alpha: 1.0)
             
@@ -80,6 +83,34 @@ class AddReminderController: UIViewController {
 
         let datePickerView:UIDatePicker = UIDatePicker()
         
+        if (period == 0) {
+            datePickerView.minimumDate = NSDate()
+            
+            let today = NSDate()
+            let date = NSCalendar.currentCalendar()
+                .dateByAddingUnit(
+                    .Day,
+                    value: 1,
+                    toDate: today,
+                    options: []
+            )
+            
+            datePickerView.maximumDate = date
+        } else {
+            datePickerView.minimumDate = NSDate()
+            
+            let today = NSDate()
+            let date = NSCalendar.currentCalendar()
+                .dateByAddingUnit(
+                    .Day,
+                    value: 7,
+                    toDate: today,
+                    options: []
+            )
+            
+            datePickerView.maximumDate = date
+        }
+        
         datePickerView.datePickerMode = UIDatePickerMode.DateAndTime
         
         sender.inputView = datePickerView
@@ -95,6 +126,34 @@ class AddReminderController: UIViewController {
         endField.text = dateFormatter.stringFromDate(endTime)
 
         let datePickerView:UIDatePicker = UIDatePicker()
+        
+        if (period == 0) {
+            datePickerView.minimumDate = NSDate()
+            
+            let today = NSDate()
+            let date = NSCalendar.currentCalendar()
+                .dateByAddingUnit(
+                    .Day,
+                    value: 1,
+                    toDate: today,
+                    options: []
+            )
+            
+            datePickerView.maximumDate = date
+        } else {
+            datePickerView.minimumDate = NSDate()
+            
+            let today = NSDate()
+            let date = NSCalendar.currentCalendar()
+                .dateByAddingUnit(
+                    .Day,
+                    value: 7,
+                    toDate: today,
+                    options: []
+            )
+            
+            datePickerView.maximumDate = date
+        }
         
         datePickerView.datePickerMode = UIDatePickerMode.DateAndTime
         
@@ -230,6 +289,18 @@ class AddReminderController: UIViewController {
         }
     }
     
+    @IBAction func setPeriod(sender: UISegmentedControl) {
+        switch periodSegment.selectedSegmentIndex {
+        case 0:
+            self.period = 0
+            break
+        case 1:
+            self.period = 1
+            break
+        default:
+            break
+        }
+    }
     
     /*
      // MARK: - Navigation
