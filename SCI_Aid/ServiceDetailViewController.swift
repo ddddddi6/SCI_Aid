@@ -10,13 +10,14 @@ import UIKit
 
 class ServiceDetailViewController: UIViewController {
 
-    @IBOutlet var descButton: UIButton!
+    @IBOutlet var descLabel: UILabel!
+    
     @IBOutlet var addressButton: UIButton!
     @IBOutlet var nameLabel: UILabel!
-    @IBOutlet var phoneLabel: UILabel!
-    @IBOutlet var websiteLabel: UILabel!
+    @IBOutlet var phoneButton: UIButton!
+    @IBOutlet var websiteButton: UIButton!
     @IBOutlet var emailLabel: UILabel!
-    @IBOutlet var freecallLabel: UILabel!
+    @IBOutlet var freecallButton: UIButton!
     
     var currentActivity: Activity!
     
@@ -26,22 +27,47 @@ class ServiceDetailViewController: UIViewController {
         
         self.title = "Disability Service"
         
+//        descLabel.numberOfLines = 0
+//        descLabel.lineBreakMode = NSLineBreakMode.ByWordWrapping
+
+        self.automaticallyAdjustsScrollViewInsets = false
         self.view.backgroundColor = UIColor(red: 63/255.0, green: 50/255.0, blue: 78/255.0, alpha: 1.0)
         
         nameLabel.text = currentActivity.name
         nameLabel.layer.cornerRadius = 5
         nameLabel.layer.masksToBounds = true
+        
         addressButton.setTitle(currentActivity.address, forState: .Normal)
+        addressButton.titleLabel?.numberOfLines = 0
         addressButton.contentHorizontalAlignment = .Left
-        descButton.setTitle(currentActivity.desc, forState: .Normal)
-        addressButton.contentHorizontalAlignment = .Left
-        phoneLabel.text = currentActivity.phone
-        websiteLabel.text = currentActivity.website
+        
+        descLabel.text = currentActivity.desc
+        
+        phoneButton.contentHorizontalAlignment = .Left
+        phoneButton.setTitle(currentActivity.phone, forState: .Normal)
+        
+        websiteButton.titleLabel?.numberOfLines = 0
+        websiteButton.titleLabel?.lineBreakMode = .ByWordWrapping
+        websiteButton.contentHorizontalAlignment = .Left
+        websiteButton.contentVerticalAlignment = .Top
+        websiteButton.setTitle(currentActivity.website, forState: .Normal)
+        
         emailLabel.text = currentActivity.email
-        freecallLabel.text = currentActivity.freecall
+        
+        freecallButton.contentHorizontalAlignment = .Left
+        freecallButton.setTitle(currentActivity.freecall, forState: .Normal)
         
         if addressButton.titleLabel!.text == "N.A." {
             addressButton.enabled = false
+        }
+        if phoneButton.titleLabel!.text == "N.A." {
+            phoneButton.enabled = false
+        }
+        if websiteButton.titleLabel!.text == "N.A." {
+            websiteButton.enabled = false
+        }
+        if freecallButton.titleLabel!.text == "N.A." {
+            freecallButton.enabled = false
         }
     }
 
@@ -54,8 +80,28 @@ class ServiceDetailViewController: UIViewController {
         self.performSegueWithIdentifier("showLocationSegue", sender: self)
     }
     
-    @IBAction func displayDescription(sender: UIButton) {
-        self.performSegueWithIdentifier("showDescription", sender: self)
+    @IBAction func callPhoneNumber(sender: UIButton) {
+        let number = self.phoneButton.titleLabel!.text!.stringByReplacingOccurrencesOfString(" ", withString: "", options: NSStringCompareOptions.LiteralSearch, range: nil)
+        if let phoneCallURL:NSURL = NSURL(string:"tel://\(number)") {
+            let application:UIApplication = UIApplication.sharedApplication()
+            if (application.canOpenURL(phoneCallURL)) {
+                application.openURL(phoneCallURL);
+            }
+        }
+    }
+    
+    @IBAction func openWebsite(sender: UIButton) {
+        UIApplication.sharedApplication().openURL(NSURL(string: self.websiteButton.titleLabel!.text!)!)
+    }
+    
+    @IBAction func callFreecall(sender: UIButton) {
+        let number = self.freecallButton.titleLabel!.text!.stringByReplacingOccurrencesOfString(" ", withString: "", options: NSStringCompareOptions.LiteralSearch, range: nil)
+        if let phoneCallURL:NSURL = NSURL(string:"tel://\(number)") {
+            let application:UIApplication = UIApplication.sharedApplication()
+            if (application.canOpenURL(phoneCallURL)) {
+                application.openURL(phoneCallURL);
+            }
+        }
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
