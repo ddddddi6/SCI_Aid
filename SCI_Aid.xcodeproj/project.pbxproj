@@ -10,6 +10,8 @@
 		041C22711D86E35D00A77FB7 /* Toilet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 041C22701D86E35D00A77FB7 /* Toilet.swift */; };
 		041C22731D895D5E00A77FB7 /* GPTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 041C22721D895D5E00A77FB7 /* GPTableViewController.swift */; };
 		041C22751D8980C100A77FB7 /* ServiceDescViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 041C22741D8980C100A77FB7 /* ServiceDescViewController.swift */; };
+		041C22771D8F64C300A77FB7 /* WalkthroughContentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 041C22761D8F64C300A77FB7 /* WalkthroughContentViewController.swift */; };
+		041C22791D8F64EE00A77FB7 /* WalkthroughPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 041C22781D8F64EE00A77FB7 /* WalkthroughPageViewController.swift */; };
 		0466EBD91D6194B400204BB2 /* HomePageController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0466EBD81D6194B400204BB2 /* HomePageController.swift */; };
 		0466EBDF1D61B35400204BB2 /* FoldingTabBar.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0466EBDE1D61B35400204BB2 /* FoldingTabBar.framework */; };
 		0466EBE11D61B35900204BB2 /* SwiftyJSON.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0466EBE01D61B35900204BB2 /* SwiftyJSON.framework */; };
@@ -20,7 +22,6 @@
 		048FC3691D7712F0003CEC28 /* ToiletViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 048FC3681D7712F0003CEC28 /* ToiletViewController.swift */; };
 		048FC36D1D782FE0003CEC28 /* FoldingTabBar in Frameworks */ = {isa = PBXBuildFile; fileRef = 048FC36C1D782FE0003CEC28 /* FoldingTabBar */; };
 		048FC3771D79B209003CEC28 /* TabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 048FC3761D79B209003CEC28 /* TabBarViewController.swift */; };
-		0490C87C1D71234300F522F4 /* ReminderListController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0490C87B1D71234300F522F4 /* ReminderListController.swift */; };
 		0490C87E1D71258B00F522F4 /* AddReminderController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0490C87D1D71258B00F522F4 /* AddReminderController.swift */; };
 		0490C8801D7128A000F522F4 /* ReminderTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0490C87F1D7128A000F522F4 /* ReminderTableViewCell.swift */; };
 		0490C8821D717B5200F522F4 /* Reminder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0490C8811D717B5200F522F4 /* Reminder.swift */; };
@@ -77,6 +78,8 @@
 		041C22701D86E35D00A77FB7 /* Toilet.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Toilet.swift; sourceTree = "<group>"; };
 		041C22721D895D5E00A77FB7 /* GPTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GPTableViewController.swift; sourceTree = "<group>"; };
 		041C22741D8980C100A77FB7 /* ServiceDescViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ServiceDescViewController.swift; sourceTree = "<group>"; };
+		041C22761D8F64C300A77FB7 /* WalkthroughContentViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WalkthroughContentViewController.swift; sourceTree = "<group>"; };
+		041C22781D8F64EE00A77FB7 /* WalkthroughPageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WalkthroughPageViewController.swift; sourceTree = "<group>"; };
 		0466EBD81D6194B400204BB2 /* HomePageController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomePageController.swift; sourceTree = "<group>"; };
 		0466EBDE1D61B35400204BB2 /* FoldingTabBar.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FoldingTabBar.framework; path = "Pods/../build/Debug-iphoneos/FoldingTabBar.framework"; sourceTree = "<group>"; };
 		0466EBE01D61B35900204BB2 /* SwiftyJSON.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftyJSON.framework; path = "../../Library/Developer/Xcode/DerivedData/SCI_Aid-dsoxeiwmpqhiwkgvwafzzqfbjpol/Build/Products/Debug-iphonesimulator/SwiftyJSON.framework"; sourceTree = "<group>"; };
@@ -87,7 +90,6 @@
 		048FC3681D7712F0003CEC28 /* ToiletViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ToiletViewController.swift; sourceTree = "<group>"; };
 		048FC36C1D782FE0003CEC28 /* FoldingTabBar */ = {isa = PBXFileReference; lastKnownFileType = folder; name = FoldingTabBar; path = Pods/FoldingTabBar; sourceTree = "<group>"; };
 		048FC3761D79B209003CEC28 /* TabBarViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TabBarViewController.swift; sourceTree = "<group>"; };
-		0490C87B1D71234300F522F4 /* ReminderListController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReminderListController.swift; sourceTree = "<group>"; };
 		0490C87D1D71258B00F522F4 /* AddReminderController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddReminderController.swift; sourceTree = "<group>"; };
 		0490C87F1D7128A000F522F4 /* ReminderTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReminderTableViewCell.swift; sourceTree = "<group>"; };
 		0490C8811D717B5200F522F4 /* Reminder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Reminder.swift; sourceTree = "<group>"; };
@@ -207,6 +209,8 @@
 				04B3BA2E1D5AD12D0086C290 /* AppDelegate.swift */,
 				048FC3761D79B209003CEC28 /* TabBarViewController.swift */,
 				04B3BA321D5AD12D0086C290 /* Main.storyboard */,
+				041C22761D8F64C300A77FB7 /* WalkthroughContentViewController.swift */,
+				041C22781D8F64EE00A77FB7 /* WalkthroughPageViewController.swift */,
 				048FC3661D770F51003CEC28 /* AboutViewController.swift */,
 				04B3BA381D5AD12D0086C290 /* Assets.xcassets */,
 				04B3BA3A1D5AD12D0086C290 /* LaunchScreen.storyboard */,
@@ -238,7 +242,6 @@
 			isa = PBXGroup;
 			children = (
 				0466EBD81D6194B400204BB2 /* HomePageController.swift */,
-				0490C87B1D71234300F522F4 /* ReminderListController.swift */,
 				0490C87D1D71258B00F522F4 /* AddReminderController.swift */,
 				0490C87F1D7128A000F522F4 /* ReminderTableViewCell.swift */,
 			);
@@ -615,7 +618,6 @@
 				048FC35F1D73D946003CEC28 /* DiaryDetailViewController.swift in Sources */,
 				0466EBD91D6194B400204BB2 /* HomePageController.swift in Sources */,
 				04E3794D1D63F59E008EC849 /* Place.swift in Sources */,
-				0490C87C1D71234300F522F4 /* ReminderListController.swift in Sources */,
 				04E3795A1D646468008EC849 /* TransportViewController.swift in Sources */,
 				04E3795C1D6488CB008EC849 /* Stop.swift in Sources */,
 				04B3BA2F1D5AD12D0086C290 /* AppDelegate.swift in Sources */,
@@ -626,9 +628,11 @@
 				049E43601D673072005E796B /* ServiceDetailViewController.swift in Sources */,
 				04E1828A1D839E0600750EB0 /* ServiceTableViewController.swift in Sources */,
 				04E379601D64A6A6008EC849 /* CustomPointAnnotation.swift in Sources */,
+				041C22791D8F64EE00A77FB7 /* WalkthroughPageViewController.swift in Sources */,
 				048FC3611D73D95D003CEC28 /* DiaryListController.swift in Sources */,
 				04E182991D852E0200750EB0 /* Diary+CoreDataProperties.swift in Sources */,
 				04B3BA371D5AD12D0086C290 /* SCI_Aid.xcdatamodeld in Sources */,
+				041C22771D8F64C300A77FB7 /* WalkthroughContentViewController.swift in Sources */,
 				048FC3691D7712F0003CEC28 /* ToiletViewController.swift in Sources */,
 				0490C8821D717B5200F522F4 /* Reminder.swift in Sources */,
 				048FC3671D770F51003CEC28 /* AboutViewController.swift in Sources */,

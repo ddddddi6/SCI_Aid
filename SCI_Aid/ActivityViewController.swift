@@ -28,9 +28,17 @@ class ActivityViewController: UIViewController, MKMapViewDelegate, CLLocationMan
     var longitude: String!
     var gpID: String!
     var coordinate: CLLocationCoordinate2D!
-    var cellColors = [UIColor.clearColor(), UIColor(red: 106/255.0, green: 84/255.0, blue: 113/255.0, alpha: 1.0)]
     
     var ref: FIRDatabaseReference!
+    
+    
+    var services : [String : [String]]!
+    var serviceSection = [String]()
+    var rev = [String]()
+    
+    var arrIndexSection : NSMutableArray = ["A","C","E","H","L","P","R","S","T","W"]
+    
+    //["A","A","C","E","E", "H","H","L","L","P","R","R","S","S","S","T","T","W"]
     
     var currentCategory: String!
     var categories = [String]()
@@ -66,6 +74,8 @@ class ActivityViewController: UIViewController, MKMapViewDelegate, CLLocationMan
         
         mapView.hidden = false
         activityTable.hidden = true
+        activityTable.sectionIndexTrackingBackgroundColor = UIColor.clearColor()
+        activityTable.sectionIndexBackgroundColor = UIColor.clearColor()
         
         self.locationManager = CLLocationManager()
         
@@ -87,7 +97,6 @@ class ActivityViewController: UIViewController, MKMapViewDelegate, CLLocationMan
         self.activityTable.dataSource = self
         self.activityTable.registerClass(UITableViewCell.self, forCellReuseIdentifier: "cell")
         self.activityTable.rowHeight = 80
-        self.activityTable.separatorStyle = UITableViewCellSeparatorStyle.None
         
         self.navigationItem.hidesBackButton = true
         
@@ -116,6 +125,20 @@ class ActivityViewController: UIViewController, MKMapViewDelegate, CLLocationMan
                 }
             }
             self.categories = newCategories
+            print(self.categories)
+            self.services =
+                ["A" : [newCategories[0], newCategories[1]],
+                    "C" : [newCategories[2]],
+                    "E" : [newCategories[3], newCategories[4]],
+                    "H" : [newCategories[5], newCategories[6]],
+                    "L" : [newCategories[7], newCategories[8]],
+                    "P" : [newCategories[9]],
+                    "R" : [newCategories[10], newCategories[11]],
+                    "S" : [newCategories[12], newCategories[13], newCategories[14]],
+                    "T" : [newCategories[15], newCategories[16]],
+                    "W" : [newCategories[17]]]
+            self.serviceSection = Array(self.services.keys) as [String]
+            self.rev = self.serviceSection.sort()
             self.activityTable.reloadData()
         }) { (error: NSError) in
             print(error.description)
@@ -272,34 +295,33 @@ class ActivityViewController: UIViewController, MKMapViewDelegate, CLLocationMan
     // MARK: - Table view data source
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
-        return 1
+        return serviceSection.count
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        switch(section)
-        {
-        case 0: return self.categories.count
-        case 1: return 1
-        default: return 0
-        }
+        let sectionTitle = rev[section]   // String
+        let sectionServices : [String] = services[sectionTitle]! // String Array
+        return sectionServices.count
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell:UITableViewCell = self.activityTable.dequeueReusableCellWithIdentifier("cell")! as UITableViewCell
-        //cell.backgroundColor = UIColor(red: 63/255.0, green: 50/255.0, blue: 78/255.0, alpha: 1.0)
         // Configure the cell...
-        let c: String = self.categories[indexPath.row]
+        
+        cell.preservesSuperviewLayoutMargins = false
+        cell.separatorInset = UIEdgeInsetsZero
+        cell.layoutMargins = UIEdgeInsetsZero
+        let sectionTitle = rev[indexPath.section]
+        var sectionServices : [String] = services[sectionTitle]!
+        let c: String = sectionServices[indexPath.row]
         cell.textLabel!.text = c
         cell.textLabel?.backgroundColor = UIColor.clearColor()
         cell.textLabel?.font = UIFont.systemFontOfSize(17)
         cell.textLabel?.textColor = UIColor.whiteColor()
         cell.textLabel?.lineBreakMode = .ByWordWrapping // or NSLineBreakMode.ByWordWrapping
         cell.textLabel?.numberOfLines = 0
-        if(indexPath.row % 2 == 0){
-            cell.backgroundColor = cellColors[0]
-        } else{
-            cell.backgroundColor = cellColors[1]
-        }
+        
+        cell.backgroundColor = UIColor.clearColor()
 
         return cell
     }
@@ -307,12 +329,35 @@ class ActivityViewController: UIViewController, MKMapViewDelegate, CLLocationMan
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         tableView.deselectRowAtIndexPath(indexPath, animated: true)
         if categories.count != 0 {
-            let c = self.categories[indexPath.row] as String
+            let sectionTitle = rev[indexPath.section]
+            var sectionServices : [String] = services[sectionTitle]!
+            let c: String = sectionServices[indexPath.row]
             
             currentCategory = c
             
             self.performSegueWithIdentifier("showCategoryDetail", sender: nil)
         }
+    }
+    
+    func sectionIndexTitlesForTableView(tableView: UITableView) -> [String]? {
+        return self.arrIndexSection as? [String]
+    }
+    
+    func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        return arrIndexSection.objectAtIndex(section) as? String
+    }
+    
+    func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView?
+    {
+        let headerView = UIView(frame: CGRectMake(0, 0, tableView.bounds.size.width, 20))
+        
+        headerView.backgroundColor = UIColor(red: 106/255.0, green: 84/255.0, blue: 113/255.0, alpha: 1.0)
+
+        let label = UILabel(frame: CGRectMake(5, 2, tableView.bounds.size.width, 20))
+        label.text = arrIndexSection.objectAtIndex(section) as? String
+        label.textColor = UIColor.whiteColor()
+        headerView.addSubview(label)
+        return headerView
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
