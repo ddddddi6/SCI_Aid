@@ -18,8 +18,12 @@ class HomePageController: UIViewController, UITableViewDelegate, UITableViewData
     @IBOutlet var tableView: UITableView!
     @IBOutlet var initialView: UIView!
     
+    @IBOutlet var filterButton: UIButton!
+    
+    
     var deadline: NSDate!
     var reminders: [Reminder] = []
+    var createdDiary: Diary!
     
     required init(coder aDecoder: NSCoder){
         super.init(coder: aDecoder)!
@@ -35,6 +39,20 @@ class HomePageController: UIViewController, UITableViewDelegate, UITableViewData
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        let launchedBefore = NSUserDefaults.standardUserDefaults().boolForKey("launchedBefore")
+        if launchedBefore  {
+            print("Not first launch.")
+        }
+        else {
+            NSUserDefaults.standardUserDefaults().setBool(true, forKey: "launchedBefore")
+            print("first launch.")
+            if let pageViewController =
+                storyboard?.instantiateViewControllerWithIdentifier("WalkthroughController")
+                    as? WalkthroughPageViewController {
+                presentViewController(pageViewController, animated: true, completion:nil)
+            }
+        }
         
         refreshTitle()
         refreshList()
@@ -99,6 +117,17 @@ class HomePageController: UIViewController, UITableViewDelegate, UITableViewData
         }
     }
     
+    @IBAction func filterReminderList(sender: UIButton) {
+        for reminder in reminders {
+            if reminder.completion == true {
+                let reminder = self.reminders.removeAtIndex(indexPath.row)
+                tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
+                Reminder().removeReminder(reminder)
+            }
+        }
+    }
+    
+    
     // MARK: - Table view data source
     
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
@@ -115,6 +144,7 @@ class HomePageController: UIViewController, UITableViewDelegate, UITableViewData
         let cellIdentifier = "ReminderTableViewCell"
         let cell = tableView.dequeueReusableCellWithIdentifier(cellIdentifier, forIndexPath: indexPath) as! ReminderTableViewCell
         
+        cell.selectionStyle = .None
         // Configure the cell...
         //print(reminders[0].valueForKey("UUID"))
         let r = self.reminders[indexPath.row] as Reminder
@@ -146,16 +176,6 @@ class HomePageController: UIViewController, UITableViewDelegate, UITableViewData
         return cell
     }
     
-    // Override to support conditional editing of the table view.
-    func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
-        if indexPath.section == 0{
-            return true
-        }
-        else{
-            return false
-        }
-    }
-    
     // Override to support editing the table view.
     func tableView(tableView: UITableView, editActionsForRowAtIndexPath indexPath: NSIndexPath) -> [UITableViewRowAction]?
     {
@@ -174,7 +194,7 @@ class HomePageController: UIViewController, UITableViewDelegate, UITableViewData
                     let messageString: String = "Do you want to create a diary?"
                     // Setup an alert to warn user
                     // UIAlertController manages an alert instance
-                    let alertController = UIAlertController(title: "Alert", message: messageString, preferredStyle:
+                    let alertController = UIAlertController(title: "Message", message: messageString, preferredStyle:
                         UIAlertControllerStyle.Alert)
                     
                     alertController.addAction(UIAlertAction(title: "Yes", style: UIAlertActionStyle.Default,handler: { (action: UIAlertAction!) in
@@ -184,16 +204,20 @@ class HomePageController: UIViewController, UITableViewDelegate, UITableViewData
                     
                     self.presentViewController(alertController, animated: true, completion: nil)
                 } else {
-                    let messageString: String = "You have already created a diary."
+                    let messageString: String = "You have already created a diary entry."
                     // Setup an alert to warn user
                     // UIAlertController manages an alert instance
                     let alertController = UIAlertController(title: "Alert", message: messageString, preferredStyle:
                         UIAlertControllerStyle.Alert)
                     
-                    alertController.addAction(UIAlertAction(title: "Dismiss", style: .Default, handler: nil))
-                    
+                    alertController.addAction(UIAlertAction(title: "View Entry", style: UIAlertActionStyle.Default,handler: { (action: UIAlertAction!) in
+                        self.performSegueWithIdentifier("reminderToDiary", sender: self)
+                    }))
+                    alertController.addAction(UIAlertAction(title: "Dismiss", style: .Cancel, handler: { (action: UIAlertAction!) in
+                        self.navigationController?.popViewControllerAnimated(true)
+                    }))
+
                     self.presentViewController(alertController, animated: true, completion: nil)
-                    self.navigationController?.popViewControllerAnimated(true)
                 }
             } else {
                 reminder.complete = false
@@ -218,6 +242,7 @@ class HomePageController: UIViewController, UITableViewDelegate, UITableViewData
             print(dateWithOutTime(reminder.deadline))
             print(dateWithOutTime(d.diaryDate))
             if dateWithOutTime(reminder.deadline) == dateWithOutTime(d.diaryDate) {
+                self.createdDiary = diary as! Diary
                 return false
             }
         }
@@ -234,9 +259,11 @@ class HomePageController: UIViewController, UITableViewDelegate, UITableViewData
         // Get the new view controller using segue.destinationViewController.
         if (segue.identifier == "reminderToDiary") {
             let controller: DiaryDetailViewController = segue.destinationViewController as! DiaryDetailViewController
-            controller.currentDateofDiary = deadline
-            //            let myCustomViewController: DiaryListController = DiaryListController(nibName: nil, bundle: nil)
-            //            controller.delegate = myCustomViewController
+            if createdDiary == nil {
+                controller.currentDateofDiary = deadline
+            } else {
+                controller.currentDiary = createdDiary
+            }
         }
     }
 

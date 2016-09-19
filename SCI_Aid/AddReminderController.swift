@@ -72,7 +72,12 @@ class AddReminderController: UIViewController {
     }
     
     @IBAction func setReminderStartTime(sender: UITextField) {
-        startField.text = ""
+        let dateFormatter = NSDateFormatter()
+        
+        dateFormatter.dateFormat = "dd-MM-YYYY HH:mm"
+        startTime = NSDate()
+        startField.text = dateFormatter.stringFromDate(startTime)
+
         let datePickerView:UIDatePicker = UIDatePicker()
         
         datePickerView.datePickerMode = UIDatePickerMode.DateAndTime
@@ -83,7 +88,12 @@ class AddReminderController: UIViewController {
     }
 
     @IBAction func setReminderEndTime(sender: UITextField) {
-        endField.text = ""
+        let dateFormatter = NSDateFormatter()
+        
+        dateFormatter.dateFormat = "dd-MM-YYYY HH:mm"
+        endTime = NSDate()
+        endField.text = dateFormatter.stringFromDate(endTime)
+
         let datePickerView:UIDatePicker = UIDatePicker()
         
         datePickerView.datePickerMode = UIDatePickerMode.DateAndTime

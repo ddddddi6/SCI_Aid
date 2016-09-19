@@ -76,7 +76,7 @@ class Reminder: NSObject {
     }
     
     func pushNotification(reminder: Reminder) {
-        if (!reminder.complete!) {
+        if (!reminder.complete! && reminder.deadline?.timeIntervalSinceNow > 0) {
             // Notify the user when they need to empty bladder
             let message = "It's time to empty bladder"
             
@@ -89,9 +89,7 @@ class Reminder: NSObject {
             notification.userInfo = ["title": "bladder issue", "UUID": reminder.UUID]
             UIApplication.sharedApplication().scheduleLocalNotification(notification)
             if UIApplication.sharedApplication().applicationState == .Active {
-                if (reminder.deadline?.timeIntervalSinceNow > 0) {
-                    NSTimer.scheduledTimerWithTimeInterval((reminder.deadline?.timeIntervalSinceNow)!, target: self, selector: #selector(pushNewAlert), userInfo: nil, repeats: false)
-                }
+                NSTimer.scheduledTimerWithTimeInterval((reminder.deadline?.timeIntervalSinceNow)!, target: self, selector: #selector(pushNewAlert), userInfo: nil, repeats: false)
             }
            
         } else {
