@@ -33,9 +33,9 @@ class ServiceDetailViewController: UIViewController {
         self.automaticallyAdjustsScrollViewInsets = false
         self.view.backgroundColor = UIColor(red: 63/255.0, green: 50/255.0, blue: 78/255.0, alpha: 1.0)
         
-        nameLabel.text = currentActivity.name
-        nameLabel.layer.cornerRadius = 5
-        nameLabel.layer.masksToBounds = true
+        nameLabel.text = " " + currentActivity.name!
+//        nameLabel.layer.cornerRadius = 5
+//        nameLabel.layer.masksToBounds = true
         
         addressButton.setTitle(currentActivity.address, forState: .Normal)
         addressButton.titleLabel?.numberOfLines = 0

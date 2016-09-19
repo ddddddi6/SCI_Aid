@@ -38,7 +38,7 @@ class HomePageController: UIViewController, UITableViewDelegate, UITableViewData
                 let index = self.reminders.indexOf(reminder)
                 let reminder = self.reminders.removeAtIndex(index!)
                 self.tableView.reloadData()
-                Reminder().removeReminder(reminder)
+                Reminder.currentReminder.removeReminder(reminder)
             }
             self.refreshList()
             self.refreshTitle()
@@ -72,8 +72,8 @@ class HomePageController: UIViewController, UITableViewDelegate, UITableViewData
             }
         }
         
-        refreshTitle()
         refreshList()
+        refreshTitle()
         tableView.delegate = self
         tableView.dataSource = self
         tableView.tableFooterView = UIView()
@@ -120,19 +120,19 @@ class HomePageController: UIViewController, UITableViewDelegate, UITableViewData
     }
     
     func refreshList() {
-        reminders = Reminder().getAllReminders()
+        reminders = Reminder.currentReminder.getAllReminders()
         if reminders.count == 0 {
             self.navigationItem.leftBarButtonItem?.enabled = false
         } else {
             self.navigationItem.leftBarButtonItem?.enabled = true
         }
-        reminders.sortInPlace({ ($0.deadline)!.compare($1.deadline!) == .OrderedAscending })
-        reminders.sortInPlace({ !$0.complete! && $1.complete! })
+        reminders = reminders.sort({ ($0.deadline)!.compare($1.deadline!) == .OrderedAscending })
+        reminders = reminders.sort({ !$0.complete! && $1.complete! })
+
         tableView.reloadData()
     }
     
     func refreshTitle() {
-        reminders = Reminder().getAllReminders()
         if (reminders.count == 0) {
             self.infoLabel.text = "  There is no reminder"
         } else if (reminders.count == 1) {
@@ -237,12 +237,12 @@ class HomePageController: UIViewController, UITableViewDelegate, UITableViewData
                 reminder.complete = false
             }
             tableView.reloadData()
-            Reminder().editReminder(reminder)
+            Reminder.currentReminder.editReminder(reminder)
         }
         let delete = UITableViewRowAction(style: .Default, title: "Delete") { action, index in
             let reminder = self.reminders.removeAtIndex(indexPath.row)
             tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
-            Reminder().removeReminder(reminder)
+            Reminder.currentReminder.removeReminder(reminder)
             self.refreshTitle()
             self.navigationItem.rightBarButtonItem!.enabled = true
         }
