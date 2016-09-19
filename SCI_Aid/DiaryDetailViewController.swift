@@ -37,6 +37,17 @@ class DiaryDetailViewController: UIViewController {
     
     
     @IBAction func isOk(sender: UIButton) {
+        if (currentDateofDiary.timeIntervalSinceNow > 0) {
+            let messageString: String = "The date cannot be later than current time."
+            // Setup an alert to warn user
+            // UIAlertController manages an alert instance
+            let alertController = UIAlertController(title: "Message", message: messageString, preferredStyle:
+                UIAlertControllerStyle.Alert)
+            
+            alertController.addAction(UIAlertAction(title: "Dismiss", style: .Cancel, handler: nil))
+            
+            self.presentViewController(alertController, animated: true, completion: nil)
+        } else {
         if (currentDiary == nil) {
             currentDiary = (NSEntityDescription.insertNewObjectForEntityForName("Diary",
                 inManagedObjectContext: DataManager.dataManager.managedObjectContext!) as? Diary)!
@@ -62,6 +73,7 @@ class DiaryDetailViewController: UIViewController {
             delegate.refreshTableView()
         }
         self.navigationController?.popViewControllerAnimated(true)
+        }
     }
 
     @IBAction func notOk(sender: UIButton) {
@@ -75,6 +87,17 @@ class DiaryDetailViewController: UIViewController {
     
     // listen for save button action, save diary to core data
     @IBAction func saveDiary(sender: UIButton) {
+        if (currentDateofDiary.timeIntervalSinceNow > 0) {
+            let messageString: String = "The date cannot be later than current time."
+            // Setup an alert to warn user
+            // UIAlertController manages an alert instance
+            let alertController = UIAlertController(title: "Message", message: messageString, preferredStyle:
+                UIAlertControllerStyle.Alert)
+            
+            alertController.addAction(UIAlertAction(title: "Dismiss", style: .Cancel, handler: nil))
+            
+            self.presentViewController(alertController, animated: true, completion: nil)
+        } else {
         if (currentDiary == nil) {
             currentDiary = (NSEntityDescription.insertNewObjectForEntityForName("Diary",
                 inManagedObjectContext: DataManager.dataManager.managedObjectContext!) as? Diary)!
@@ -90,17 +113,20 @@ class DiaryDetailViewController: UIViewController {
         currentDiary.isMuch = muchVolume
         currentDiary.isPainful = checkState(painfulSwitch)
         currentDiary.isSmelly = checkState(smellySwitch)
-        if (checkState(dysreflexiaSwitch) == false && checkState(painfulSwitch) == false && checkState(smellySwitch) == false) {
-            currentDiary.status = "Yellow"
-        } else {
+        
+        if (volumeSegment.selectedSegmentIndex == 0 && !(checkState(dysreflexiaSwitch)) && !(checkState(painfulSwitch)) && !(checkState(smellySwitch)) && !(checkState(toiletSwitch)) && !(checkState(blockedSwitch)) && !(checkState(catheterSwitch))) {
+            currentDiary.status = "Green"
+        } else if (checkState(dysreflexiaSwitch) || checkState(painfulSwitch) || checkState(smellySwitch)) {
             currentDiary.status = "Red"
+        } else {
+            currentDiary.status = "Yellow"
         }
         DataManager.dataManager.saveData()
         if currentDateofDiary == nil {
             delegate.refreshTableView()
         }
         self.navigationController?.popViewControllerAnimated(true)
-        
+        }
     }
     
     override func viewDidLoad() {
@@ -299,7 +325,6 @@ class DiaryDetailViewController: UIViewController {
     }
     
     @IBAction func selectDate(sender: UITextField) {
-        dateFiled.text = ""
         let datePickerView:UIDatePicker = UIDatePicker()
         
         datePickerView.datePickerMode = UIDatePickerMode.DateAndTime
@@ -335,6 +360,9 @@ class DiaryDetailViewController: UIViewController {
         dateFiled.resignFirstResponder()
     }
 
+    override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
+        self.view.endEditing(true)
+    }
     
     /*
     // MARK: - Navigation

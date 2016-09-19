@@ -27,7 +27,7 @@ class DiaryListController: UITableViewController, DiaryDelegate {
     var startDate: NSDate!
     var endDate: NSDate!
     var diaries: NSMutableArray
-
+    let newDiaries = NSMutableArray()
     
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: NSBundle?) {
         self.diaries = NSMutableArray()
@@ -94,9 +94,26 @@ class DiaryListController: UITableViewController, DiaryDelegate {
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
-        startField.text = "Start date"
-        endField.text = "End date"
-        refreshTableView()
+        if (newDiaries.count != 0) {
+            let dateFormatter = NSDateFormatter()
+            dateFormatter.dateStyle = NSDateFormatterStyle.MediumStyle
+            dateFormatter.timeStyle = NSDateFormatterStyle.NoStyle
+            let sDate = dateFormatter.stringFromDate(startDate)
+            let eDate = dateFormatter.stringFromDate(endDate)
+            
+            startField.text = sDate
+            endField.text = eDate
+            countColors(diaries)
+            
+            greenCount!.text = ": \(self.greenCounts!)"
+            yellowCount!.text = ": \(self.yellowCounts!)"
+            redCount!.text = ": \(self.redCounts!)"
+            sortDiaryList()
+        } else {
+            startField.text = "Start date"
+            endField.text = "End date"
+            refreshTableView()
+        }
     }
     
     override func didReceiveMemoryWarning() {
@@ -213,7 +230,12 @@ class DiaryListController: UITableViewController, DiaryDelegate {
     }
 
     @IBAction func setStartTime(sender: UITextField) {
-        startField.text = ""
+        let dateFormatter = NSDateFormatter()
+        dateFormatter.dateStyle = NSDateFormatterStyle.MediumStyle
+        dateFormatter.timeStyle = NSDateFormatterStyle.NoStyle
+        startDate = NSDate()
+        startField.text = dateFormatter.stringFromDate(startDate)
+        
         let datePickerView:UIDatePicker = UIDatePicker()
         
         datePickerView.datePickerMode = UIDatePickerMode.Date
@@ -224,7 +246,12 @@ class DiaryListController: UITableViewController, DiaryDelegate {
     }
     
     @IBAction func setEndTime(sender: UITextField) {
-        endField.text = ""
+        let dateFormatter = NSDateFormatter()
+        dateFormatter.dateStyle = NSDateFormatterStyle.MediumStyle
+        dateFormatter.timeStyle = NSDateFormatterStyle.NoStyle
+        endDate = NSDate()
+        endField.text = dateFormatter.stringFromDate(startDate)
+        
         let datePickerView:UIDatePicker = UIDatePicker()
         
         datePickerView.datePickerMode = UIDatePickerMode.Date
@@ -254,7 +281,6 @@ class DiaryListController: UITableViewController, DiaryDelegate {
     @IBAction func filterDiaryEntry(sender: UIButton) {
         if (checkDateValidation()) {
             diaries = DataManager.dataManager.getDiaryEntries()
-            let newDiaries = NSMutableArray()
             for diary in diaries {
                 if (self.isBetweenDates(diary.diaryDate!!, beginDate: startDate, endDate: endDate)) {
                     newDiaries.addObject(diary)
@@ -344,6 +370,9 @@ class DiaryListController: UITableViewController, DiaryDelegate {
     
     @IBAction func viewAllEntries(sender: UIBarButtonItem) {
         refreshTableView()
+        startField.text = "Start date"
+        endField.text = "End date"
+        newDiaries.removeAllObjects()
     }
     
     // sort the diary entry list
