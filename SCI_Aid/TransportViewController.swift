@@ -64,6 +64,10 @@ class TransportViewController: UIViewController, MKMapViewDelegate, CLLocationMa
         // Dispose of any resources that can be recreated.
     }
     
+    @IBAction func showAboutPage(sender: UIBarButtonItem) {
+        self.performSegueWithIdentifier("showAboutSegue", sender: self)
+    }
+    
     // get current location and then search nearby stops
     // solution from: https://www.youtube.com/watch?v=qrdIL44T6FQ
     func locationManager(manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
