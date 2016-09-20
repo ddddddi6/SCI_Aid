@@ -116,6 +116,7 @@ class DiaryDetailViewController: UIViewController {
         
         if (volumeSegment.selectedSegmentIndex == 0 && !(checkState(dysreflexiaSwitch)) && !(checkState(painfulSwitch)) && !(checkState(smellySwitch)) && !(checkState(toiletSwitch)) && !(checkState(blockedSwitch)) && !(checkState(catheterSwitch))) {
             currentDiary.status = "Green"
+            currentDiary.condition = true
         } else if (checkState(dysreflexiaSwitch) || checkState(painfulSwitch) || checkState(smellySwitch)) {
             currentDiary.status = "Red"
         } else {
@@ -328,6 +329,7 @@ class DiaryDetailViewController: UIViewController {
         let datePickerView:UIDatePicker = UIDatePicker()
         
         datePickerView.datePickerMode = UIDatePickerMode.DateAndTime
+        datePickerView.maximumDate = NSDate()
         
         sender.inputView = datePickerView
         
