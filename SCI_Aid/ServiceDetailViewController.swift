@@ -26,16 +26,11 @@ class ServiceDetailViewController: UIViewController {
         // Do any additional setup after loading the view.
         
         self.title = "Disability Service"
-        
-//        descLabel.numberOfLines = 0
-//        descLabel.lineBreakMode = NSLineBreakMode.ByWordWrapping
 
         self.automaticallyAdjustsScrollViewInsets = false
         self.view.backgroundColor = UIColor(red: 63/255.0, green: 50/255.0, blue: 78/255.0, alpha: 1.0)
         
         nameLabel.text = " " + currentActivity.name!
-//        nameLabel.layer.cornerRadius = 5
-//        nameLabel.layer.masksToBounds = true
         
         addressButton.setTitle(currentActivity.address, forState: .Normal)
         addressButton.titleLabel?.numberOfLines = 0
@@ -76,10 +71,12 @@ class ServiceDetailViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
+    // display service location on map
     @IBAction func navigateService(sender: UIButton) {
         self.performSegueWithIdentifier("showLocationSegue", sender: self)
     }
     
+    // call the service phone number
     @IBAction func callPhoneNumber(sender: UIButton) {
         let number = self.phoneButton.titleLabel!.text!.stringByReplacingOccurrencesOfString(" ", withString: "", options: NSStringCompareOptions.LiteralSearch, range: nil)
         if let phoneCallURL:NSURL = NSURL(string:"tel://\(number)") {
@@ -90,10 +87,12 @@ class ServiceDetailViewController: UIViewController {
         }
     }
     
+    // open the service website in safari
     @IBAction func openWebsite(sender: UIButton) {
         UIApplication.sharedApplication().openURL(NSURL(string: self.websiteButton.titleLabel!.text!)!)
     }
     
+    // call service freecall number
     @IBAction func callFreecall(sender: UIButton) {
         let number = self.freecallButton.titleLabel!.text!.stringByReplacingOccurrencesOfString(" ", withString: "", options: NSStringCompareOptions.LiteralSearch, range: nil)
         if let phoneCallURL:NSURL = NSURL(string:"tel://\(number)") {

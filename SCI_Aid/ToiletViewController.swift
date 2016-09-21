@@ -177,6 +177,7 @@ class ToiletViewController: UIViewController, MKMapViewDelegate, CLLocationManag
         }
     }
     
+    // navigate to destination in iOS Maps application
     func mapView(mapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {
         if control == view.rightCalloutAccessoryView {
             let mapItem = MKMapItem(placemark: MKPlacemark(coordinate: self.mapView.selectedAnnotations[0].coordinate, addressDictionary:nil))
@@ -236,6 +237,7 @@ class ToiletViewController: UIViewController, MKMapViewDelegate, CLLocationManag
         super.touchesBegan(touches, withEvent: event)
     }
 
+    // go back to current location
     @IBAction func backToCurrentLocation(sender: UIButton) {
         let center = CLLocationCoordinate2D(latitude:  (self.latitude as NSString).doubleValue, longitude: (self.longitude as NSString).doubleValue)
         let region = MKCoordinateRegion(center: center, span: MKCoordinateSpan(latitudeDelta: 0.05, longitudeDelta: 0.05))

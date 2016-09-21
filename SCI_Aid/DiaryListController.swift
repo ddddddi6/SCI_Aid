@@ -49,6 +49,7 @@ class DiaryListController: UITableViewController, DiaryDelegate {
         
         self.view.backgroundColor = UIColor(red: 63/255.0, green: 50/255.0, blue: 78/255.0, alpha: 1.0)
         
+        // define datepicker view
         let toolBar = UIToolbar(frame: CGRectMake(0, self.view.frame.size.height/6, self.view.frame.size.width, 40.0))
         
         toolBar.layer.position = CGPoint(x: self.view.frame.size.width/2, y: self.view.frame.size.height-20.0)
@@ -214,6 +215,7 @@ class DiaryListController: UITableViewController, DiaryDelegate {
         self.sortDiaryList()
     }
     
+    // counting the bladder condition
     func countColors(diaries: NSMutableArray) {
         greenCounts = 0
         yellowCounts = 0
@@ -229,6 +231,7 @@ class DiaryListController: UITableViewController, DiaryDelegate {
         }
     }
 
+    // set the start time for filter period
     @IBAction func setStartTime(sender: UITextField) {
         let dateFormatter = NSDateFormatter()
         dateFormatter.dateStyle = NSDateFormatterStyle.MediumStyle
@@ -245,6 +248,7 @@ class DiaryListController: UITableViewController, DiaryDelegate {
         datePickerView.addTarget(self, action: #selector(DiaryListController.datePickerValueChanged), forControlEvents: UIControlEvents.ValueChanged)
     }
     
+    // set the end time for filter period
     @IBAction func setEndTime(sender: UITextField) {
         let dateFormatter = NSDateFormatter()
         dateFormatter.dateStyle = NSDateFormatterStyle.MediumStyle
@@ -278,6 +282,7 @@ class DiaryListController: UITableViewController, DiaryDelegate {
         }
     }
     
+    // display the records between defined time period
     @IBAction func filterDiaryEntry(sender: UIButton) {
         if (checkDateValidation()) {
             diaries = DataManager.dataManager.getDiaryEntries()
@@ -296,6 +301,7 @@ class DiaryListController: UITableViewController, DiaryDelegate {
         }
     }
     
+    // check whether the date is between defined time period
     func isBetweenDates(selectedDate: NSDate, beginDate: NSDate, endDate: NSDate) -> Bool
     {
         if selectedDate.compare(beginDate) == .OrderedAscending
@@ -310,6 +316,7 @@ class DiaryListController: UITableViewController, DiaryDelegate {
         return true
     }
     
+    // check user seleted time validation
     func checkDateValidation() -> Bool{
         if (startField.text == "Start date" || startField.text!.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceCharacterSet()) == "" || endField.text == "End date" || endField.text!.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceCharacterSet()) == "") {
             let messageString: String = "Please select a valid date."

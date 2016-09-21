@@ -35,7 +35,7 @@ class DiaryDetailViewController: UIViewController {
     
     @IBOutlet var dateFiled: UITextField!
     
-    
+    // When user choose that the bladder condition is ok
     @IBAction func isOk(sender: UIButton) {
         if (currentDateofDiary.timeIntervalSinceNow > 0) {
             let messageString: String = "The date cannot be later than current time."
@@ -76,6 +76,7 @@ class DiaryDetailViewController: UIViewController {
         }
     }
 
+    // When user choose that the bladder condition is not ok, display the questionnaire
     @IBAction func notOk(sender: UIButton) {
         statusView.hidden = true
         problemView.hidden = false
@@ -114,6 +115,7 @@ class DiaryDetailViewController: UIViewController {
         currentDiary.isPainful = checkState(painfulSwitch)
         currentDiary.isSmelly = checkState(smellySwitch)
         
+        // check the users choice to assess bladder condition
         if (volumeSegment.selectedSegmentIndex == 0 && !(checkState(dysreflexiaSwitch)) && !(checkState(painfulSwitch)) && !(checkState(smellySwitch)) && !(checkState(toiletSwitch)) && !(checkState(blockedSwitch)) && !(checkState(catheterSwitch))) {
             currentDiary.status = "Green"
             currentDiary.condition = true
@@ -177,7 +179,7 @@ class DiaryDetailViewController: UIViewController {
         
         self.view.backgroundColor = UIColor(red: 63/255.0, green: 50/255.0, blue: 78/255.0, alpha: 1.0)
         
-        
+        // Define datepicker view
         let toolBar = UIToolbar(frame: CGRectMake(0, self.view.frame.size.height/6, self.view.frame.size.width, 40.0))
         
         toolBar.layer.position = CGPoint(x: self.view.frame.size.width/2, y: self.view.frame.size.height-20.0)
@@ -228,6 +230,7 @@ class DiaryDetailViewController: UIViewController {
         statusView.hidden = false
     }
     
+    // show diary entry details
     func showDiaryDetails() {
         if (self.currentDiary!.isDysreflexia == true) {
             dysreflexiaSwitch.setOn(true, animated:true)
@@ -274,6 +277,7 @@ class DiaryDetailViewController: UIViewController {
         }
     }
     
+    // check UISwtich state
     func checkState(switchState: UISwitch) -> Bool{
         var flag: Bool
         if switchState.on {
@@ -284,6 +288,7 @@ class DiaryDetailViewController: UIViewController {
         return flag
     }
     
+    // listen to volume segment change
     @IBAction func checkVolume(sender: UISegmentedControl) {
         switch volumeSegment.selectedSegmentIndex
         {
@@ -325,6 +330,7 @@ class DiaryDetailViewController: UIViewController {
 
     }
     
+    // set diary entry time
     @IBAction func selectDate(sender: UITextField) {
         let datePickerView:UIDatePicker = UIDatePicker()
         

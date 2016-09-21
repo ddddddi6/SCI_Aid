@@ -142,6 +142,7 @@ class ServiceLocationViewController: UIViewController, MKMapViewDelegate, CLLoca
         return pinView
     }
     
+    // navigate to destination in iOS Maps application
     func mapView(mapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {
         if control == view.rightCalloutAccessoryView {
             let mapItem = MKMapItem(placemark: MKPlacemark(coordinate: self.mapView.selectedAnnotations[0].coordinate, addressDictionary:nil))
@@ -150,6 +151,7 @@ class ServiceLocationViewController: UIViewController, MKMapViewDelegate, CLLoca
         }
     }
     
+    // go back to current location
     @IBAction func backToCurrentLocation(sender: UIButton) {
         let center = CLLocationCoordinate2D(latitude:  (self.latitude as NSString).doubleValue, longitude: (self.longitude as NSString).doubleValue)
         let region = MKCoordinateRegion(center: center, span: MKCoordinateSpan(latitudeDelta: 0.1, longitudeDelta: 0.1))

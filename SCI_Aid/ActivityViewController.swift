@@ -30,15 +30,12 @@ class ActivityViewController: UIViewController, MKMapViewDelegate, CLLocationMan
     var coordinate: CLLocationCoordinate2D!
     
     var ref: FIRDatabaseReference!
-    
-    
+
     var services : [String : [String]]!
     var serviceSection = [String]()
     var rev = [String]()
     
     var arrIndexSection : NSMutableArray = ["A","C","E","H","L","P","R","S","T","W"]
-    
-    //["A","A","C","E","E", "H","H","L","L","P","R","R","S","S","S","T","T","W"]
     
     var currentCategory: String!
     var categories = [String]()
@@ -126,6 +123,7 @@ class ActivityViewController: UIViewController, MKMapViewDelegate, CLLocationMan
             }
             self.categories = newCategories
             print(self.categories)
+            // map services to index
             self.services =
                 ["A" : [newCategories[0], newCategories[1]],
                     "C" : [newCategories[2]],
@@ -168,6 +166,7 @@ class ActivityViewController: UIViewController, MKMapViewDelegate, CLLocationMan
         }
     }
     
+    // go back to current location
     @IBAction func backToCurrenLocation(sender: AnyObject) {
         let center = CLLocationCoordinate2D(latitude:  (self.latitude as NSString).doubleValue, longitude: (self.longitude as NSString).doubleValue)
         let region = MKCoordinateRegion(center: center, span: MKCoordinateSpan(latitudeDelta: 0.1, longitudeDelta: 0.1))
@@ -373,10 +372,6 @@ class ActivityViewController: UIViewController, MKMapViewDelegate, CLLocationMan
             // Display movie details screen
         }
     }
-    
-//    func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
-//            }
-    
 
     /*
     // MARK: - Navigation
