@@ -10,11 +10,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "SCI_Aid/Reminder.swift"
-            timestampString = "495936810.811105"
+            timestampString = "496069577.690794"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "92"
-            endingLineNumber = "92"
+            startingLineNumber = "95"
+            endingLineNumber = "95"
             landmarkName = "pushNotification(_:)"
             landmarkType = "5">
          </BreakpointContent>
@@ -26,11 +26,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "SCI_Aid/AddReminderController.swift"
-            timestampString = "496037621.554423"
+            timestampString = "496128052.249968"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "241"
-            endingLineNumber = "241"
+            startingLineNumber = "208"
+            endingLineNumber = "208"
             landmarkName = "setInterval(_:)"
             landmarkType = "5">
          </BreakpointContent>
@@ -42,61 +42,13 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "SCI_Aid/HomePageController.swift"
-            timestampString = "495987917.585146"
+            timestampString = "496128052.249968"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "157"
-            endingLineNumber = "157"
-            landmarkName = "tableView(_:cellForRowAtIndexPath:)"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "SCI_Aid/HomePageController.swift"
-            timestampString = "495981318.065433"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "129"
-            endingLineNumber = "129"
-            landmarkName = "refreshList()"
-            landmarkType = "5">
-            <Locations>
-               <Location
-                  shouldBeEnabled = "No"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "SCI_Aid.HomePageController.refreshList () -&gt; ()"
-                  moduleName = "SCI Aid"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/mac/Xcode/SCI_Aid/SCI_Aid/HomePageController.swift"
-                  timestampString = "495978370.927377"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "104"
-                  endingLineNumber = "104"
-                  offsetFromSymbolStart = "136">
-               </Location>
-               <Location
-                  shouldBeEnabled = "No"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "SCI_Aid.HomePageController.(refreshList () -&gt; ()).(closure #1)"
-                  moduleName = "SCI Aid"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/mac/Xcode/SCI_Aid/SCI_Aid/HomePageController.swift"
-                  timestampString = "495978370.928418"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "104"
-                  endingLineNumber = "104"
-                  offsetFromSymbolStart = "28">
-               </Location>
-            </Locations>
+            startingLineNumber = "164"
+            endingLineNumber = "164"
+            landmarkName = "HomePageController"
+            landmarkType = "3">
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

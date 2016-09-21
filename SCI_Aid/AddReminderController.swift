@@ -10,8 +10,6 @@ import UIKit
 
 class AddReminderController: UIViewController {
 
-    
-    @IBOutlet var periodSegment: UISegmentedControl!
     @IBOutlet var intervalSegment: UISegmentedControl!
     @IBOutlet var startField: UITextField!
     @IBOutlet var endField: UITextField!
@@ -19,17 +17,26 @@ class AddReminderController: UIViewController {
     var startTime: NSDate!
     var endTime: NSDate!
     var interval: Double!
-    var period: Int!
+    
+    var reminder: Reminder?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.intervalSegment.selectedSegmentIndex = 0
-        self.interval = 2
-        self.period = 0
+        if reminder == nil {
+            // new a reminder entry
+            self.intervalSegment.selectedSegmentIndex = 0
+            self.interval = 2
+            self.title = "New Reminder Entry"
+        } else {
+            // edit a reminder entry
+            showReminderDetails()
+            self.title = "Edit Reminder Entry"
+        }
         
         self.view.backgroundColor = UIColor(red: 63/255.0, green: 50/255.0, blue: 78/255.0, alpha: 1.0)
-            
+        
+        // define datepicker view
             let toolBar = UIToolbar(frame: CGRectMake(0, self.view.frame.size.height/6, self.view.frame.size.width, 40.0))
             
             toolBar.layer.position = CGPoint(x: self.view.frame.size.width/2, y: self.view.frame.size.height-20.0)
@@ -64,7 +71,7 @@ class AddReminderController: UIViewController {
             toolBar.setItems([todayBtn,flexSpace,textBtn,flexSpace,okBarBtn], animated: true)
             
             startField.inputAccessoryView = toolBar
-            endField.inputAccessoryView = toolBar
+            //endField.inputAccessoryView = toolBar
 
         // Do any additional setup after loading the view.
     }
@@ -74,88 +81,48 @@ class AddReminderController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-    @IBAction func setReminderStartTime(sender: UITextField) {
+    // display reminder entry detail for users to view and edit
+    func showReminderDetails() {
+        let dateFormatter = NSDateFormatter()
+        
+        dateFormatter.dateFormat = "dd-MM-YYYY HH:mm"
+        
+        startField.text = dateFormatter.stringFromDate(reminder!.deadline!)
+        
+        startTime = reminder?.deadline
+        
+        switch Int((reminder?.interval)!)
+        {
+            case 2:
+                intervalSegment.selectedSegmentIndex = 0
+                break
+            case 3:
+                intervalSegment.selectedSegmentIndex = 1
+                break
+            case 4:
+                intervalSegment.selectedSegmentIndex = 2
+                break
+            case 5:
+                intervalSegment.selectedSegmentIndex = 3
+                break
+            default:
+                break
+        }
+    }
+    
+    // set reminder start time
+    @IBAction func setReminderTime(sender: UITextField) {
         let dateFormatter = NSDateFormatter()
         
         dateFormatter.dateFormat = "dd-MM-YYYY HH:mm"
         startTime = NSDate()
         startField.text = dateFormatter.stringFromDate(startTime)
-
-        let datePickerView:UIDatePicker = UIDatePicker()
         
-        if (period == 0) {
-            datePickerView.minimumDate = NSDate()
-            
-            let today = NSDate()
-            let date = NSCalendar.currentCalendar()
-                .dateByAddingUnit(
-                    .Day,
-                    value: 1,
-                    toDate: today,
-                    options: []
-            )
-            
-            datePickerView.maximumDate = date
-        } else {
-            datePickerView.minimumDate = NSDate()
-            
-            let today = NSDate()
-            let date = NSCalendar.currentCalendar()
-                .dateByAddingUnit(
-                    .Day,
-                    value: 7,
-                    toDate: today,
-                    options: []
-            )
-            
-            datePickerView.maximumDate = date
-        }
+        let datePickerView:UIDatePicker = UIDatePicker()
         
         datePickerView.datePickerMode = UIDatePickerMode.DateAndTime
         
-        sender.inputView = datePickerView
-        
-        datePickerView.addTarget(self, action: #selector(DiaryListController.datePickerValueChanged), forControlEvents: UIControlEvents.ValueChanged)
-    }
-
-    @IBAction func setReminderEndTime(sender: UITextField) {
-        let dateFormatter = NSDateFormatter()
-        
-        dateFormatter.dateFormat = "dd-MM-YYYY HH:mm"
-        endTime = NSDate()
-        endField.text = dateFormatter.stringFromDate(endTime)
-
-        let datePickerView:UIDatePicker = UIDatePicker()
-        
-        if (period == 0) {
-            datePickerView.minimumDate = NSDate()
-            
-            let today = NSDate()
-            let date = NSCalendar.currentCalendar()
-                .dateByAddingUnit(
-                    .Day,
-                    value: 1,
-                    toDate: today,
-                    options: []
-            )
-            
-            datePickerView.maximumDate = date
-        } else {
-            datePickerView.minimumDate = NSDate()
-            
-            let today = NSDate()
-            let date = NSCalendar.currentCalendar()
-                .dateByAddingUnit(
-                    .Day,
-                    value: 7,
-                    toDate: today,
-                    options: []
-            )
-            
-            datePickerView.maximumDate = date
-        }
-        
-        datePickerView.datePickerMode = UIDatePickerMode.DateAndTime
+        datePickerView.minimumDate = NSDate()
         
         sender.inputView = datePickerView
         
@@ -171,19 +138,13 @@ class AddReminderController: UIViewController {
         if startField.editing {
             startTime = sender.date
             startField.text = dateFormatter.stringFromDate(startTime)
-        } else if endField.editing {
-            endTime = sender.date
-            endField.text = dateFormatter.stringFromDate(endTime)
         }
     }
     
     func donePressed(sender: UIBarButtonItem) {
         if startField.editing {
             startField.resignFirstResponder()
-        } else if endField.editing {
-            endField.resignFirstResponder()
         }
-        
     }
     
     func tappedToolBarBtn(sender: UIBarButtonItem) {
@@ -197,72 +158,44 @@ class AddReminderController: UIViewController {
             startField.text = dateformatter.stringFromDate(startTime)
             startField.resignFirstResponder()
             
-        } else if endField.editing {
-            endTime = NSDate()
-            endField.text = dateformatter.stringFromDate(endTime)
-            endField.resignFirstResponder()
         }
-        
     }
     
+    // check seleted time validation
     func checkDateValidation() -> Bool{
-        if (startField.text == "Start time" || startField.text!.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceCharacterSet()) == "" || endField.text == "End time" || endField.text!.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceCharacterSet()) == "") {
+        if (startField.text == "Start time" || startField.text!.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceCharacterSet()) == "") {
             let messageString: String = "Please select a valid time."
-            // Setup an alert to warn user
-            // UIAlertController manages an alert instance
-            let alertController = UIAlertController(title: "Alert", message: messageString, preferredStyle:
-                UIAlertControllerStyle.Alert)
+                // Setup an alert to warn user
+                // UIAlertController manages an alert instance
+                let alertController = UIAlertController(title: "Alert", message: messageString, preferredStyle:
+                            UIAlertControllerStyle.Alert)
             
-            alertController.addAction(UIAlertAction(title: "Dismiss", style: UIAlertActionStyle.Default,handler: nil))
+                alertController.addAction(UIAlertAction(title: "Dismiss", style: UIAlertActionStyle.Default,handler: nil))
             
-            self.presentViewController(alertController, animated: true, completion: nil)
-            return false
-        }
-        if (startTime.compare(endTime) == .OrderedDescending) {
-            let messageString: String = "End time should be later than start time."
-            // Setup an alert to warn user
-            // UIAlertController manages an alert instance
-            let alertController = UIAlertController(title: "Alert", message: messageString, preferredStyle:
-                UIAlertControllerStyle.Alert)
-            
-            alertController.addAction(UIAlertAction(title: "Dismiss", style: UIAlertActionStyle.Default,handler: nil))
-            
-            self.presentViewController(alertController, animated: true, completion: nil)
-            return false
+                self.presentViewController(alertController, animated: true, completion: nil)
+                return false
+
         } else {
             return true
         }
+
     }
     
-    func daysBetweenDates(startDate: NSDate, endDate: NSDate) -> Int
-    {
-        let calendar = NSCalendar.currentCalendar()
-        
-        let components = calendar.components([.Hour], fromDate: startDate, toDate: endDate, options: [])
-        
-        return components.hour
-    }
-    
+    // save reminder entry
      @IBAction func saveReminder(sender: UIBarButtonItem) {
         if (checkDateValidation()) {
             let dateFormatter = NSDateFormatter()
-            //dateFormatter.locale = NSLocale.currentLocale()
-            //dateFormatter.timeZone = NSTimeZone(abbreviation: "GMT+10:00")
             dateFormatter.dateFormat =  "dd-MM-yyyy HH:mm"
-            //print(dateTextField.text)
-            //let date = dateFormatter.dateFromString(dateTextField.text!)
-            //let enddate = dateFormatter.dateFromString(endDateTextField.text!)
-            let timesDifferent = daysBetweenDates(startTime, endDate: endTime)
-            let totalCircle = (timesDifferent)/Int(interval)
-            for var n = 0; n <= totalCircle ; n += 1
-            {
-                let addHours : Double = Double(n)
-                let newDate = startTime!.dateByAddingTimeInterval(addHours*60*60*interval)
-                let reminder = Reminder(deadline: newDate, complete: false, UUID: NSUUID().UUIDString)
-                Reminder.currentReminder.addReminder(reminder) // schedule a local notification to persist this item
-                self.navigationController?.popViewControllerAnimated(true)
-                
-            }
+        
+        if reminder == nil {
+            let reminder = Reminder(deadline: startTime, complete: false, UUID: NSUUID().UUIDString, interval: interval)
+            Reminder.currentReminder.addReminder(reminder) // schedule a local notification to persist this item
+        } else {
+            reminder?.deadline = startTime
+            reminder?.interval = interval
+            Reminder.currentReminder.editReminder(reminder!)
+        }
+            self.navigationController?.popViewControllerAnimated(true)
         }
      }
     
@@ -270,6 +203,7 @@ class AddReminderController: UIViewController {
         self.view.endEditing(true)
     }
     
+    // listen to interval segment value change
     @IBAction func setInterval(sender: UISegmentedControl) {
         switch intervalSegment.selectedSegmentIndex {
         case 0:
@@ -283,19 +217,6 @@ class AddReminderController: UIViewController {
             break
         case 3:
             self.interval = 5
-            break
-        default:
-            break
-        }
-    }
-    
-    @IBAction func setPeriod(sender: UISegmentedControl) {
-        switch periodSegment.selectedSegmentIndex {
-        case 0:
-            self.period = 0
-            break
-        case 1:
-            self.period = 1
             break
         default:
             break

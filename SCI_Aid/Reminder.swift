@@ -13,37 +13,40 @@ class Reminder: NSObject {
     var deadline: NSDate?
     var complete: Bool?
     var UUID: String!
+    var interval: Double?
     
     var delegate: ReminderDelegate!
     
-    private let ITEMS_KEY = "p"
+    private let ITEMS_KEY = "po"
     
     override init()
     {
         self.deadline = nil
         self.complete = false
         self.UUID = "Unknown"
+        self.interval = 0
         // Default intialization of each variables
     }
     
-    init(deadline: NSDate, complete: Bool, UUID: String)
+    init(deadline: NSDate, complete: Bool, UUID: String, interval: Double)
     {
         self.deadline = deadline
         self.complete = complete
         self.UUID = UUID
+        self.interval = interval
         // Custome initialization of each variables
     }
     
     func getAllReminders() -> [Reminder] {
         let todoDictionary = NSUserDefaults.standardUserDefaults().dictionaryForKey(ITEMS_KEY) ?? [:]
         let reminders = Array(todoDictionary.values)
-        return reminders.map({Reminder(deadline: $0["deadline"] as! NSDate, complete: $0["complete"] as! Bool,  UUID: $0["UUID"] as! String)})
+        return reminders.map({Reminder(deadline: $0["deadline"] as! NSDate, complete: $0["complete"] as! Bool,  UUID: $0["UUID"] as! String, interval: $0["interval"] as! Double)})
     }
     
     func addReminder(reminder: Reminder) {
         
         var reminders = NSUserDefaults.standardUserDefaults().dictionaryForKey(ITEMS_KEY) ?? Dictionary()
-        reminders[reminder.UUID] = ["deadline": reminder.deadline!, "complete": reminder.complete!, "UUID": reminder.UUID]
+        reminders[reminder.UUID] = ["deadline": reminder.deadline!, "complete": reminder.complete!, "UUID": reminder.UUID, "interval": reminder.interval!]
         NSUserDefaults.standardUserDefaults().setObject(reminders, forKey: ITEMS_KEY)
         
         pushNotification(reminder)
@@ -69,7 +72,7 @@ class Reminder: NSObject {
     func editReminder(reminder: Reminder) {
         if var reminders = NSUserDefaults.standardUserDefaults().dictionaryForKey(ITEMS_KEY)  {
             //reminders.removeValueForKey(reminder.UUID)
-            reminders[reminder.UUID] = ["deadline": reminder.deadline!, "complete": reminder.complete!, "UUID": reminder.UUID]
+            reminders[reminder.UUID] = ["deadline": reminder.deadline!, "complete": reminder.complete!, "UUID": reminder.UUID, "interval": reminder.interval!]
             NSUserDefaults.standardUserDefaults().setObject(reminders, forKey: ITEMS_KEY) // save/overwrite todo item list
         }
         pushNotification(reminder)
@@ -91,7 +94,6 @@ class Reminder: NSObject {
             if UIApplication.sharedApplication().applicationState == .Active {
                 NSTimer.scheduledTimerWithTimeInterval((reminder.deadline?.timeIntervalSinceNow)!, target: self, selector: #selector(pushNewAlert), userInfo: nil, repeats: false)
             }
-           
         } else {
             let scheduledNotifications: [UILocalNotification]? = UIApplication.sharedApplication().scheduledLocalNotifications
             guard scheduledNotifications != nil else {return} // Nothing to remove, so return
@@ -108,5 +110,4 @@ class Reminder: NSObject {
     func pushNewAlert() {
         delegate!.pushAlert()
     }
-    
 }
