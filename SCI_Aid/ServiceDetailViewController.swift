@@ -34,6 +34,7 @@ class ServiceDetailViewController: UIViewController {
         
         addressButton.setTitle(currentActivity.address, forState: .Normal)
         addressButton.titleLabel?.numberOfLines = 0
+        addressButton.titleLabel?.lineBreakMode = .ByWordWrapping
         addressButton.contentHorizontalAlignment = .Left
         
         descLabel.text = currentActivity.desc
@@ -108,10 +109,6 @@ class ServiceDetailViewController: UIViewController {
         {
             let theDestination: ServiceLocationViewController = segue.destinationViewController as! ServiceLocationViewController
             theDestination.currentActivity = self.currentActivity
-        } else if segue.identifier == "showDescription" {
-            let theDestination: ServiceDescViewController = (segue.destinationViewController as! UINavigationController).topViewController as! ServiceDescViewController
-            theDestination.name = currentActivity.name
-            theDestination.desc = currentActivity.desc
         }
     }
 

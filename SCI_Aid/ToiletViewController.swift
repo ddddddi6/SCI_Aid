@@ -31,6 +31,8 @@ class ToiletViewController: UIViewController, MKMapViewDelegate, CLLocationManag
     var localSearch:MKLocalSearch!
     var localSearchResponse:MKLocalSearchResponse!
     var error:NSError!
+    var pointAnnotation:MKPointAnnotation!
+    var pinAnnotationView:MKPinAnnotationView!
 
     var ref: FIRDatabaseReference!
     var clusteringManager : FBClusteringManager!
@@ -224,10 +226,21 @@ class ToiletViewController: UIViewController, MKMapViewDelegate, CLLocationManag
             let latitude = localSearchResponse!.boundingRegion.center.latitude
             let longitude = localSearchResponse!.boundingRegion.center.longitude
             
-            let coordinate = CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
-            self.mapView.centerCoordinate = coordinate
+            
+            
+            self.pointAnnotation = MKPointAnnotation()
+            self.pointAnnotation.title = self.address
+            
+            self.pointAnnotation.coordinate = CLLocationCoordinate2D(latitude: latitude, longitude:     longitude)
+            
+            
+            self.pinAnnotationView = MKPinAnnotationView(annotation: self.pointAnnotation, reuseIdentifier: nil)
+            self.pinAnnotationView.tintColor = UIColor.redColor()
+            self.mapView.centerCoordinate = self.pointAnnotation.coordinate
+            self.mapView.addAnnotation(self.pinAnnotationView.annotation!)
             let region = MKCoordinateRegion(center: self.mapView.centerCoordinate, span: MKCoordinateSpan(latitudeDelta: 0.05, longitudeDelta: 0.05))
             self.mapView.setRegion(region, animated: true)
+            
         }
     }
 

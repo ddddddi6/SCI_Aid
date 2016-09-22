@@ -95,15 +95,19 @@ class AddReminderController: UIViewController {
         {
             case 2:
                 intervalSegment.selectedSegmentIndex = 0
+                interval = 2
                 break
             case 3:
                 intervalSegment.selectedSegmentIndex = 1
+                interval = 3
                 break
             case 4:
                 intervalSegment.selectedSegmentIndex = 2
+                interval = 4
                 break
             case 5:
                 intervalSegment.selectedSegmentIndex = 3
+                interval = 5
                 break
             default:
                 break

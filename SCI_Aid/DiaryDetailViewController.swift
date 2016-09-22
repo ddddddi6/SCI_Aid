@@ -135,6 +135,8 @@ class DiaryDetailViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        self.automaticallyAdjustsScrollViewInsets = false
+        
         saveButton.layer.cornerRadius = 5
         saveButton.layer.masksToBounds = true
         cancelButton.layer.cornerRadius = 5

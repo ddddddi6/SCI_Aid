@@ -22,6 +22,8 @@ class HomePageController: UIViewController, UITableViewDelegate, UITableViewData
     var reminders: [Reminder] = []
     var createdDiary: Diary!
     var interval: Double?
+    var newDate: NSDate?
+    var date: String?
     
     required init(coder aDecoder: NSCoder){
         super.init(coder: aDecoder)!
@@ -145,8 +147,9 @@ class HomePageController: UIViewController, UITableViewDelegate, UITableViewData
                 self.interval = reminder.interval
             }
         }
+        
         if interval != nil {
-            self.infoLabel.text = " Next reminder will be " + String(Int(self.interval!)) + " hours later"
+            self.infoLabel.text = " Next reminder will be in " + String(Int(self.interval!)) + " hours"
         }
     }
     
@@ -166,10 +169,17 @@ class HomePageController: UIViewController, UITableViewDelegate, UITableViewData
         let cellIdentifier = "ReminderTableViewCell"
         let cell = tableView.dequeueReusableCellWithIdentifier(cellIdentifier, forIndexPath: indexPath) as! ReminderTableViewCell
         
+        
         cell.selectionStyle = .None
         // Configure the cell...
         //print(reminders[0].valueForKey("UUID"))
         let r = self.reminders[indexPath.row] as Reminder
+        
+        if (r.complete!) {
+            cell.selectionStyle = .None
+        } else {
+            cell.selectionStyle = .Default
+        }
         
         let dateFormatter = NSDateFormatter()
         dateFormatter.dateFormat = "dd-MM-YYYY, HH:mm"
@@ -198,6 +208,14 @@ class HomePageController: UIViewController, UITableViewDelegate, UITableViewData
         return cell
     }
     
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        let r = self.reminders[indexPath.row] as Reminder
+        // add to self.selectedItems
+        if (!r.complete!) {
+            self.performSegueWithIdentifier("editReminderSegue", sender: nil)
+        }
+    }
+    
     // Override to support editing the table view.
     func tableView(tableView: UITableView, editActionsForRowAtIndexPath indexPath: NSIndexPath) -> [UITableViewRowAction]?
     {
@@ -212,17 +230,6 @@ class HomePageController: UIViewController, UITableViewDelegate, UITableViewData
             if (titleLabel == "Completed") {
                 reminder.complete = true
                 self.deadline = reminder.deadline
-                if (reminder.deadline?.timeIntervalSinceNow > 0) {
-                    let messageString: String = "Sorry, the diary entry time cannot be late than current time"
-                    // Setup an alert to warn user
-                    // UIAlertController manages an alert instance
-                    let alertController = UIAlertController(title: "Message", message: messageString, preferredStyle:
-                        UIAlertControllerStyle.Alert)
-                    
-                    alertController.addAction(UIAlertAction(title: "Dismiss", style: .Cancel, handler: nil))
-                    
-                    self.presentViewController(alertController, animated: true, completion: nil)
-                } else {
                 if (self.checkDiaryTime(reminder)) {
                     let messageString: String = "Do you want to create a diary entry?"
                     // Setup an alert to warn user
@@ -231,7 +238,19 @@ class HomePageController: UIViewController, UITableViewDelegate, UITableViewData
                         UIAlertControllerStyle.Alert)
                     
                     alertController.addAction(UIAlertAction(title: "Yes", style: UIAlertActionStyle.Default,handler: { (action: UIAlertAction!) in
-                        self.performSegueWithIdentifier("reminderToDiary", sender: self)
+                        if (reminder.deadline?.timeIntervalSinceNow > 0) {
+                            let messageString: String = "Sorry, the diary entry time cannot be late than current time"
+                            // Setup an alert to warn user
+                            // UIAlertController manages an alert instance
+                            let alertController = UIAlertController(title: "Message", message: messageString, preferredStyle:
+                                UIAlertControllerStyle.Alert)
+                            
+                            alertController.addAction(UIAlertAction(title: "Dismiss", style: .Cancel, handler: nil))
+                            
+                            self.presentViewController(alertController, animated: true, completion: nil)
+                        } else {
+                            self.performSegueWithIdentifier("reminderToDiary", sender: self)
+                        }
                     }))
                     alertController.addAction(UIAlertAction(title: "No", style: .Cancel, handler: nil))
                     
@@ -251,7 +270,6 @@ class HomePageController: UIViewController, UITableViewDelegate, UITableViewData
                     }))
 
                     self.presentViewController(alertController, animated: true, completion: nil)
-                }
                 }
                 // once the reminder entry is marked as completed, then add a new reminder entry
                 self.addNewReminder(reminder)
@@ -277,7 +295,14 @@ class HomePageController: UIViewController, UITableViewDelegate, UITableViewData
             self.refreshList()
             //self.navigationItem.rightBarButtonItem!.enabled = true
         }
-        return [delete, complete]
+        if (self.reminders[indexPath.row].deadline?.timeIntervalSinceNow > 0 && self.reminders[indexPath.row].complete == false) {
+            return [delete]
+        } else if (self.reminders[indexPath.row].deadline?.timeIntervalSinceNow < 0 && self.reminders[indexPath.row].complete == true) {
+             return [delete]
+        }
+        else {
+            return [delete, complete]
+        }
     }
     
     // check whether the user has already generated a diary entry for this reminder entry
@@ -334,8 +359,8 @@ class HomePageController: UIViewController, UITableViewDelegate, UITableViewData
     
     // add a new reminder
     func addNewReminder(previousReminder: Reminder) {
-        let newDate = NSDate().dateByAddingTimeInterval(60*60*previousReminder.interval!)
-        let reminder = Reminder(deadline: newDate, complete: false, UUID: NSUUID().UUIDString, interval: previousReminder.interval!)
+        newDate = NSDate().dateByAddingTimeInterval(60*60*previousReminder.interval!)
+        let reminder = Reminder(deadline: newDate!, complete: false, UUID: NSUUID().UUIDString, interval: previousReminder.interval!)
         Reminder.currentReminder.addReminder(reminder) // schedule a local notification to persist this item
         refreshList()
         refreshTitle()

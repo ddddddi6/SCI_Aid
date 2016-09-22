@@ -21,6 +21,10 @@ class DiaryListController: UITableViewController, DiaryDelegate {
     @IBOutlet var yellowCount: UILabel?
     @IBOutlet var redCount: UILabel?
     
+    @IBOutlet var greenIcon: UIImageView!
+    @IBOutlet var yellowIcon: UIImageView!
+    @IBOutlet var redIcon: UIImageView!
+    
     var greenCounts: Int?
     var yellowCounts: Int?
     var redCounts: Int?
@@ -86,6 +90,21 @@ class DiaryListController: UITableViewController, DiaryDelegate {
         startField.inputAccessoryView = toolBar
         endField.inputAccessoryView = toolBar
         
+        
+        // create tap gesture recognizer
+        let greeenTapGesture = UITapGestureRecognizer(target: self, action: #selector(DiaryListController.showGreenRecords(_:)))
+        let yellowTapGesture = UITapGestureRecognizer(target: self, action: #selector(DiaryListController.showYellowRecords(_:)))
+        let redTapGesture = UITapGestureRecognizer(target: self, action: #selector(DiaryListController.showRedRecords(_:)))
+        
+        // add it to the image view;
+        greenIcon.addGestureRecognizer(greeenTapGesture)
+        yellowIcon.addGestureRecognizer(yellowTapGesture)
+        redIcon.addGestureRecognizer(redTapGesture)
+        // make sure imageView can be interacted with by user
+        greenIcon.userInteractionEnabled = true
+        yellowIcon.userInteractionEnabled = true
+        redIcon.userInteractionEnabled = true
+        
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
         
@@ -120,6 +139,66 @@ class DiaryListController: UITableViewController, DiaryDelegate {
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    func showGreenRecords(gesture: UIGestureRecognizer) {
+        newDiaries.removeAllObjects()
+        if (newDiaries.count == 0) {
+            diaries = DataManager.dataManager.getDiaryEntries()
+            for diary in diaries {
+                let d = diary as! Diary
+                if (d.status == "Green") {
+                    newDiaries.addObject(diary)
+                }
+            }
+            diaries = newDiaries
+            countColors(diaries)
+            
+            greenCount!.text = ": \(self.greenCounts!)"
+            yellowCount!.text = ": \(self.yellowCounts!)"
+            redCount!.text = ": \(self.redCounts!)"
+            sortDiaryList()
+        }
+    }
+    
+    func showYellowRecords(gesture: UIGestureRecognizer) {
+        newDiaries.removeAllObjects()
+        if (newDiaries.count == 0) {
+            diaries = DataManager.dataManager.getDiaryEntries()
+            for diary in diaries {
+                let d = diary as! Diary
+                if (d.status == "Yellow") {
+                    newDiaries.addObject(diary)
+                }
+            }
+            diaries = newDiaries
+            countColors(diaries)
+            
+            greenCount!.text = ": \(self.greenCounts!)"
+            yellowCount!.text = ": \(self.yellowCounts!)"
+            redCount!.text = ": \(self.redCounts!)"
+            sortDiaryList()
+        }
+    }
+    
+    func showRedRecords(gesture: UIGestureRecognizer) {
+        newDiaries.removeAllObjects()
+        if (newDiaries.count == 0) {
+            diaries = DataManager.dataManager.getDiaryEntries()
+            for diary in diaries {
+                let d = diary as! Diary
+                if (d.status == "Red") {
+                    newDiaries.addObject(diary)
+                }
+            }
+            diaries = newDiaries
+            countColors(diaries)
+            
+            greenCount!.text = ": \(self.greenCounts!)"
+            yellowCount!.text = ": \(self.yellowCounts!)"
+            redCount!.text = ": \(self.redCounts!)"
+            sortDiaryList()
+        }
     }
     
     // MARK: - Table view data source
@@ -284,7 +363,8 @@ class DiaryListController: UITableViewController, DiaryDelegate {
     
     // display the records between defined time period
     @IBAction func filterDiaryEntry(sender: UIButton) {
-        if (checkDateValidation()) {
+        newDiaries.removeAllObjects()
+        if (checkDateValidation() && newDiaries.count == 0) {
             diaries = DataManager.dataManager.getDiaryEntries()
             for diary in diaries {
                 if (self.isBetweenDates(diary.diaryDate!!, beginDate: startDate, endDate: endDate)) {
