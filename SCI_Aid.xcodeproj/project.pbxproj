@@ -13,14 +13,12 @@
 		041C22771D8F64C300A77FB7 /* WalkthroughContentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 041C22761D8F64C300A77FB7 /* WalkthroughContentViewController.swift */; };
 		041C22791D8F64EE00A77FB7 /* WalkthroughPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 041C22781D8F64EE00A77FB7 /* WalkthroughPageViewController.swift */; };
 		0466EBD91D6194B400204BB2 /* HomePageController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0466EBD81D6194B400204BB2 /* HomePageController.swift */; };
-		0466EBDF1D61B35400204BB2 /* FoldingTabBar.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0466EBDE1D61B35400204BB2 /* FoldingTabBar.framework */; };
 		0466EBE11D61B35900204BB2 /* SwiftyJSON.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0466EBE01D61B35900204BB2 /* SwiftyJSON.framework */; };
 		048FC35F1D73D946003CEC28 /* DiaryDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 048FC35E1D73D946003CEC28 /* DiaryDetailViewController.swift */; };
 		048FC3611D73D95D003CEC28 /* DiaryListController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 048FC3601D73D95D003CEC28 /* DiaryListController.swift */; };
 		048FC3631D73D972003CEC28 /* DiaryTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 048FC3621D73D972003CEC28 /* DiaryTableViewCell.swift */; };
 		048FC3671D770F51003CEC28 /* AboutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 048FC3661D770F51003CEC28 /* AboutViewController.swift */; };
 		048FC3691D7712F0003CEC28 /* ToiletViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 048FC3681D7712F0003CEC28 /* ToiletViewController.swift */; };
-		048FC36D1D782FE0003CEC28 /* FoldingTabBar in Frameworks */ = {isa = PBXBuildFile; fileRef = 048FC36C1D782FE0003CEC28 /* FoldingTabBar */; };
 		048FC3771D79B209003CEC28 /* TabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 048FC3761D79B209003CEC28 /* TabBarViewController.swift */; };
 		0490C87E1D71258B00F522F4 /* AddReminderController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0490C87D1D71258B00F522F4 /* AddReminderController.swift */; };
 		0490C8801D7128A000F522F4 /* ReminderTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0490C87F1D7128A000F522F4 /* ReminderTableViewCell.swift */; };
@@ -81,14 +79,12 @@
 		041C22761D8F64C300A77FB7 /* WalkthroughContentViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WalkthroughContentViewController.swift; sourceTree = "<group>"; };
 		041C22781D8F64EE00A77FB7 /* WalkthroughPageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WalkthroughPageViewController.swift; sourceTree = "<group>"; };
 		0466EBD81D6194B400204BB2 /* HomePageController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomePageController.swift; sourceTree = "<group>"; };
-		0466EBDE1D61B35400204BB2 /* FoldingTabBar.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FoldingTabBar.framework; path = "Pods/../build/Debug-iphoneos/FoldingTabBar.framework"; sourceTree = "<group>"; };
 		0466EBE01D61B35900204BB2 /* SwiftyJSON.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftyJSON.framework; path = "../../Library/Developer/Xcode/DerivedData/SCI_Aid-dsoxeiwmpqhiwkgvwafzzqfbjpol/Build/Products/Debug-iphonesimulator/SwiftyJSON.framework"; sourceTree = "<group>"; };
 		048FC35E1D73D946003CEC28 /* DiaryDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DiaryDetailViewController.swift; sourceTree = "<group>"; };
 		048FC3601D73D95D003CEC28 /* DiaryListController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DiaryListController.swift; sourceTree = "<group>"; };
 		048FC3621D73D972003CEC28 /* DiaryTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DiaryTableViewCell.swift; sourceTree = "<group>"; };
 		048FC3661D770F51003CEC28 /* AboutViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AboutViewController.swift; sourceTree = "<group>"; };
 		048FC3681D7712F0003CEC28 /* ToiletViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ToiletViewController.swift; sourceTree = "<group>"; };
-		048FC36C1D782FE0003CEC28 /* FoldingTabBar */ = {isa = PBXFileReference; lastKnownFileType = folder; name = FoldingTabBar; path = Pods/FoldingTabBar; sourceTree = "<group>"; };
 		048FC3761D79B209003CEC28 /* TabBarViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TabBarViewController.swift; sourceTree = "<group>"; };
 		0490C87D1D71258B00F522F4 /* AddReminderController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddReminderController.swift; sourceTree = "<group>"; };
 		0490C87F1D7128A000F522F4 /* ReminderTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReminderTableViewCell.swift; sourceTree = "<group>"; };
@@ -145,12 +141,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				048FC36D1D782FE0003CEC28 /* FoldingTabBar in Frameworks */,
 				049E43561D65E836005E796B /* FirebaseInstanceID.framework in Frameworks */,
 				049E43541D65E824005E796B /* FirebaseDatabase.framework in Frameworks */,
 				049E43531D65E817005E796B /* FirebaseAnalytics.framework in Frameworks */,
 				0466EBE11D61B35900204BB2 /* SwiftyJSON.framework in Frameworks */,
-				0466EBDF1D61B35400204BB2 /* FoldingTabBar.framework in Frameworks */,
 				3E93D60B9ECF8F43D6C25621 /* Pods_SCI_Aid.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -320,13 +314,11 @@
 		1127CB919C7A0C41171187CE /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				048FC36C1D782FE0003CEC28 /* FoldingTabBar */,
 				049E43551D65E836005E796B /* FirebaseInstanceID.framework */,
 				049E43511D65E5A8005E796B /* FirebaseAnalytics.framework */,
 				049E434F1D65D76A005E796B /* FirebaseDatabase.framework */,
 				049E43461D65BBD1005E796B /* Firebase */,
 				0466EBE01D61B35900204BB2 /* SwiftyJSON.framework */,
-				0466EBDE1D61B35400204BB2 /* FoldingTabBar.framework */,
 				24DFE40B754D853EA5A1B1C1 /* Pods_SCI_Aid.framework */,
 				4887228FD7D0AA22EEBA2821 /* Pods_SCI_AidTests.framework */,
 				E06C1B4FD74F0F7B0235D2ED /* Pods_SCI_AidUITests.framework */,
@@ -423,7 +415,7 @@
 				TargetAttributes = {
 					04B3BA2A1D5AD12D0086C290 = {
 						CreatedOnToolsVersion = 7.3;
-						DevelopmentTeam = 87BXM8YT8Q;
+						DevelopmentTeam = V9RJNM34U4;
 					};
 					04B3BA411D5AD12D0086C290 = {
 						CreatedOnToolsVersion = 7.3;
@@ -789,6 +781,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/build/Debug-iphoneos",
@@ -798,11 +791,12 @@
 				);
 				INFOPLIST_FILE = SCI_Aid/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.diliu.SCI-Aid";
+				PRODUCT_BUNDLE_IDENTIFIER = com.diliu.SCIAid;
 				PRODUCT_NAME = "SCI Aid";
+				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "SCI_Aid/SCI_Aid-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -812,6 +806,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/build/Debug-iphoneos",
@@ -821,10 +816,11 @@
 				);
 				INFOPLIST_FILE = SCI_Aid/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.diliu.SCI-Aid";
+				PRODUCT_BUNDLE_IDENTIFIER = com.diliu.SCIAid;
 				PRODUCT_NAME = "SCI Aid";
+				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "SCI_Aid/SCI_Aid-Bridging-Header.h";
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};

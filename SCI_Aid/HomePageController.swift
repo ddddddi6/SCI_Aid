@@ -212,6 +212,17 @@ class HomePageController: UIViewController, UITableViewDelegate, UITableViewData
             if (titleLabel == "Completed") {
                 reminder.complete = true
                 self.deadline = reminder.deadline
+                if (reminder.deadline?.timeIntervalSinceNow > 0) {
+                    let messageString: String = "Sorry, the diary entry time cannot be late than current time"
+                    // Setup an alert to warn user
+                    // UIAlertController manages an alert instance
+                    let alertController = UIAlertController(title: "Message", message: messageString, preferredStyle:
+                        UIAlertControllerStyle.Alert)
+                    
+                    alertController.addAction(UIAlertAction(title: "Dismiss", style: .Cancel, handler: nil))
+                    
+                    self.presentViewController(alertController, animated: true, completion: nil)
+                } else {
                 if (self.checkDiaryTime(reminder)) {
                     let messageString: String = "Do you want to create a diary entry?"
                     // Setup an alert to warn user
@@ -240,6 +251,7 @@ class HomePageController: UIViewController, UITableViewDelegate, UITableViewData
                     }))
 
                     self.presentViewController(alertController, animated: true, completion: nil)
+                }
                 }
                 // once the reminder entry is marked as completed, then add a new reminder entry
                 self.addNewReminder(reminder)
@@ -283,6 +295,7 @@ class HomePageController: UIViewController, UITableViewDelegate, UITableViewData
         return true
     }
     
+    // get rid of seconds from time
     func dateWithOutTime(datDate: NSDate?) -> NSDate {
         let calendar = NSCalendar.currentCalendar()
         let components = calendar.components([.Year, .Month, .Day, .Hour, .Minute], fromDate: datDate!)

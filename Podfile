@@ -8,7 +8,6 @@ target 'SCI_Aid' do
     pod 'Firebase/Database'
     pod 'Firebase/Auth'
     pod 'SwiftyJSON', :git => 'https://github.com/SwiftyJSON/SwiftyJSON.git'
-    pod 'FoldingTabBar'
     pod 'FBAnnotationClusteringSwift'
     pod 'BFPaperTabBarController'
 
@@ -19,7 +18,6 @@ target 'SCI_AidTests' do
     pod 'Firebase/Database'
     pod 'Firebase/Auth'
     pod 'SwiftyJSON', :git => 'https://github.com/SwiftyJSON/SwiftyJSON.git'
-    pod 'FoldingTabBar'
     pod 'FBAnnotationClusteringSwift'
     pod 'BFPaperTabBarController'
 

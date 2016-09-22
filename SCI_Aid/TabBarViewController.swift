@@ -24,7 +24,6 @@ class TabBarViewController: BFPaperTabBarController {
 
         self.underlineColor = UIColor.whiteColor()
         self.underlineThickness = 4
-        //UITabBarItem.appearance().setTitleTextAttributes([NSFontAttributeName:UIFont(name: "Trebuchet MS", size: 13)!], forState:.Normal)
         UITabBarItem.appearance().titlePositionAdjustment = UIOffset(horizontal: 0, vertical: -4)
        
         // Do any additional setup after loading the view.

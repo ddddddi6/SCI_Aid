@@ -8,7 +8,6 @@
 
 import UIKit
 import CoreData
-import FoldingTabBar
 import Firebase
 import FirebaseAuth
 import FirebaseDatabase

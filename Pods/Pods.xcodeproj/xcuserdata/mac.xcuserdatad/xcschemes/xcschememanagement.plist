@@ -14,11 +14,6 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
-		<key>FoldingTabBar.xcscheme</key>
-		<dict>
-			<key>isShown</key>
-			<false/>
-		</dict>
 		<key>Pods-SCI_Aid.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -42,11 +37,6 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>3985CBAA1508355AE090A662E148F4D0</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
 		<key>423C10F04A172BB11C7A3702F8F09B90</key>
 		<dict>
 			<key>primary</key>
@@ -57,12 +47,12 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>885B5DF826A227306F4BE47179F15EA0</key>
+		<key>784CB1E31D86A0D71CC2474C37A586BD</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>9091229326D8C5C3D0072B04E6AD712A</key>
+		<key>8F1DA25DC1583BEC6AC9823043CF438E</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -72,7 +62,7 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>EE544EFC3FDF3F945987BBB7198614B5</key>
+		<key>CE1BC5ECB083EE0941E3744363BECFCF</key>
 		<dict>
 			<key>primary</key>
 			<true/>
