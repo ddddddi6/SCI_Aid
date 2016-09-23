@@ -333,7 +333,7 @@ class DiaryListController: UITableViewController, DiaryDelegate {
         dateFormatter.dateStyle = NSDateFormatterStyle.MediumStyle
         dateFormatter.timeStyle = NSDateFormatterStyle.NoStyle
         endDate = NSDate()
-        endField.text = dateFormatter.stringFromDate(startDate)
+        endField.text = dateFormatter.stringFromDate(endDate)
         
         let datePickerView:UIDatePicker = UIDatePicker()
         

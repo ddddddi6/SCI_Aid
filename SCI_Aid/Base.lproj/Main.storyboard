@@ -497,7 +497,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="hrY-jU-mgu" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1495.5" y="2538.5"/>
+            <point key="canvasLocation" x="1337.5" y="2670.5"/>
         </scene>
         <!--Reminder-->
         <scene sceneID="5IT-JR-EZ6">
@@ -645,6 +645,11 @@
                         <barButtonItem key="leftBarButtonItem" title="Delete Completed" style="plain" id="MZE-rg-zRk">
                             <connections>
                                 <action selector="deleteAllReminders:" destination="Hqo-LV-dwn" id="s0r-lb-cCX"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="PEA-ky-FN3">
+                            <connections>
+                                <action selector="addReminderEntry:" destination="Hqo-LV-dwn" id="dnN-NE-XoL"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -1214,11 +1219,11 @@
                     <navigationItem key="navigationItem" id="vaG-M8-c4s">
                         <nil key="title"/>
                         <segmentedControl key="titleView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" id="HFh-50-aTg">
-                            <rect key="frame" x="64" y="7" width="247" height="30"/>
+                            <rect key="frame" x="62" y="7" width="251" height="30"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <segments>
                                 <segment title="GPs"/>
-                                <segment title="Disability Service"/>
+                                <segment title="Disability Services"/>
                             </segments>
                             <connections>
                                 <action selector="indexChanged:" destination="YGn-4k-5d4" eventType="valueChanged" id="yu0-uG-FzQ"/>
@@ -1887,8 +1892,8 @@
         <image name="yellow" width="50" height="50"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="Rkb-2Y-p8b"/>
         <segue reference="mqs-3o-91a"/>
+        <segue reference="O5f-lY-A5B"/>
     </inferredMetricsTieBreakers>
     <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
 </document>

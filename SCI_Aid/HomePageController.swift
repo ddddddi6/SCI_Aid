@@ -126,6 +126,21 @@ class HomePageController: UIViewController, UITableViewDelegate, UITableViewData
         }
     }
     
+    @IBAction func addReminderEntry(sender: UIBarButtonItem) {
+        self.performSegueWithIdentifier("addReminderSegue", sender: self)
+    }
+    
+    func checkCompletionStatus() -> Bool {
+        for reminder in reminders {
+            if !reminder.complete! {
+                return true
+            } else {
+                continue
+            }
+        }
+        return false
+    }
+    
     // refresh reminder entries table view
     func refreshList() {
         reminders = Reminder.currentReminder.getAllReminders()
@@ -136,7 +151,12 @@ class HomePageController: UIViewController, UITableViewDelegate, UITableViewData
         }
         reminders = reminders.sort({ ($0.deadline)!.compare($1.deadline!) == .OrderedDescending })
         reminders = reminders.sort({ !$0.complete! && $1.complete! })
-
+        
+        if checkCompletionStatus() {
+            self.navigationItem.rightBarButtonItem?.enabled = false
+        } else {
+            self.navigationItem.rightBarButtonItem?.enabled = true
+        }
         tableView.reloadData()
     }
     

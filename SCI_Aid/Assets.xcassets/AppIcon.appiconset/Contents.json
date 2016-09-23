@@ -23,13 +23,13 @@
     {
       "size" : "60x60",
       "idiom" : "iphone",
-      "filename" : "sci_aid.png",
+      "filename" : "logo.png",
       "scale" : "2x"
     },
     {
       "size" : "60x60",
       "idiom" : "iphone",
-      "filename" : "sci_aid-1.png",
+      "filename" : "logo-1.png",
       "scale" : "3x"
     }
   ],
