@@ -16,6 +16,8 @@ import CoreLocation
 class TransportViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate {
     
     @IBOutlet var mapView: MKMapView!
+    @IBOutlet var legendButton: UIButton!
+    @IBOutlet var legendView: UIView!
     
     var locationManager: CLLocationManager!
     var latitude: String!
@@ -57,6 +59,9 @@ class TransportViewController: UIViewController, MKMapViewDelegate, CLLocationMa
         self.view.backgroundColor = UIColor(red: 63/255.0, green: 50/255.0, blue: 78/255.0, alpha: 1.0)
         
         self.navigationItem.hidesBackButton = true
+        
+        self.legendView.hidden = true
+        self.legendButton.setTitle("Show Legend", forState: .Normal)
     }
 
     override func didReceiveMemoryWarning() {
@@ -66,6 +71,16 @@ class TransportViewController: UIViewController, MKMapViewDelegate, CLLocationMa
     
     @IBAction func showAboutPage(sender: UIBarButtonItem) {
         self.performSegueWithIdentifier("showAboutSegue", sender: self)
+    }
+    
+    @IBAction func manageLegend(sender: UIButton) {
+        if (legendButton.titleLabel?.text == "Show Legend") {
+            legendView.hidden = false
+            self.legendButton.setTitle("Hide Legend", forState: .Normal)
+        } else {
+            legendView.hidden = true
+            self.legendButton.setTitle("Show Legend", forState: .Normal)
+        }
     }
     
     // get current location and then search nearby stops

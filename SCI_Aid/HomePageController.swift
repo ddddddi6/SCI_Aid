@@ -61,7 +61,7 @@ class HomePageController: UIViewController, UITableViewDelegate, UITableViewData
     @IBAction func setReminder(sender: UIButton) {
         self.performSegueWithIdentifier("addReminderSegue", sender: self)
     }
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         

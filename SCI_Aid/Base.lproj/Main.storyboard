@@ -33,8 +33,19 @@
                                     <action selector="backToCurrentLocation:" destination="MPa-Ra-vYG" eventType="touchUpInside" id="8Cd-F6-W7H"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" alpha="0.90000000000000002" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dXB-lA-0Ka">
+                                <rect key="frame" x="20" y="75" width="113" height="30"/>
+                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="15"/>
+                                <state key="normal" title="Button">
+                                    <color key="titleColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                </state>
+                                <connections>
+                                    <action selector="manageLegend:" destination="MPa-Ra-vYG" eventType="touchUpInside" id="ibS-cz-BjA"/>
+                                </connections>
+                            </button>
                             <view alpha="0.84999999999999998" contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="GkD-Zn-PCz">
-                                <rect key="frame" x="7" y="72" width="141" height="163"/>
+                                <rect key="frame" x="20" y="113" width="141" height="163"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="bus" translatesAutoresizingMaskIntoConstraints="NO" id="do1-M2-Grg">
                                         <rect key="frame" x="8" y="4" width="36" height="33"/>
@@ -94,10 +105,10 @@
                             <constraint firstItem="wDz-8y-b9w" firstAttribute="top" secondItem="WMC-by-ROZ" secondAttribute="bottom" constant="20" id="DdI-ZM-0ns"/>
                             <constraint firstAttribute="trailingMargin" secondItem="WMC-by-ROZ" secondAttribute="trailing" constant="4" id="LNo-Dk-5q9"/>
                             <constraint firstItem="Dka-vv-8Fd" firstAttribute="leading" secondItem="vqi-8O-48C" secondAttribute="leading" id="SdR-qk-nfk"/>
-                            <constraint firstItem="GkD-Zn-PCz" firstAttribute="top" secondItem="IBh-qS-XLs" secondAttribute="bottom" constant="8" id="Ues-ba-xs3"/>
+                            <constraint firstItem="GkD-Zn-PCz" firstAttribute="top" secondItem="IBh-qS-XLs" secondAttribute="bottom" constant="49" id="Ues-ba-xs3"/>
                             <constraint firstAttribute="trailing" secondItem="Dka-vv-8Fd" secondAttribute="trailing" id="X2s-Wb-Uic"/>
                             <constraint firstItem="Dka-vv-8Fd" firstAttribute="top" secondItem="IBh-qS-XLs" secondAttribute="bottom" id="ZTY-FJ-7gv"/>
-                            <constraint firstItem="GkD-Zn-PCz" firstAttribute="leading" secondItem="vqi-8O-48C" secondAttribute="leadingMargin" constant="-13" id="xHs-Fb-RHJ"/>
+                            <constraint firstItem="GkD-Zn-PCz" firstAttribute="leading" secondItem="vqi-8O-48C" secondAttribute="leadingMargin" id="xHs-Fb-RHJ"/>
                             <constraint firstItem="Dka-vv-8Fd" firstAttribute="bottom" secondItem="wDz-8y-b9w" secondAttribute="top" id="zuz-Ig-BGb"/>
                         </constraints>
                     </view>
@@ -111,13 +122,15 @@
                     </navigationItem>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
                     <connections>
+                        <outlet property="legendButton" destination="dXB-lA-0Ka" id="7Wg-Af-znk"/>
+                        <outlet property="legendView" destination="GkD-Zn-PCz" id="baB-sn-Mu2"/>
                         <outlet property="mapView" destination="Dka-vv-8Fd" id="b9z-6P-1bP"/>
                         <segue destination="15h-bG-ec0" kind="show" identifier="showStationDetails" id="t2X-Hs-GGz"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="lyW-7C-t2n" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1021" y="2476"/>
+            <point key="canvasLocation" x="-1021.5" y="2475.5"/>
         </scene>
         <!--About-->
         <scene sceneID="04r-uT-CMl">
@@ -149,7 +162,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="y3S-Go-n1b" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-276" y="2476"/>
+            <point key="canvasLocation" x="-516.5" y="2475.5"/>
         </scene>
         <!--Diary Detail-->
         <scene sceneID="beE-jQ-4Ls">
@@ -1892,8 +1905,8 @@
         <image name="yellow" width="50" height="50"/>
     </resources>
     <inferredMetricsTieBreakers>
+        <segue reference="tep-D3-L4x"/>
         <segue reference="mqs-3o-91a"/>
-        <segue reference="O5f-lY-A5B"/>
     </inferredMetricsTieBreakers>
     <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
 </document>

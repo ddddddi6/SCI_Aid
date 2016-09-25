@@ -211,7 +211,6 @@
 				04B3BA2E1D5AD12D0086C290 /* AppDelegate.swift */,
 				048FC3761D79B209003CEC28 /* TabBarViewController.swift */,
 				04B3BA321D5AD12D0086C290 /* Main.storyboard */,
-				048FC3661D770F51003CEC28 /* AboutViewController.swift */,
 				04B3BA381D5AD12D0086C290 /* Assets.xcassets */,
 				04B3BA3A1D5AD12D0086C290 /* LaunchScreen.storyboard */,
 				04B3BA3D1D5AD12D0086C290 /* Info.plist */,
@@ -293,6 +292,7 @@
 				04E379531D645954008EC849 /* Signature.m */,
 				04E379551D645976008EC849 /* Signature.h */,
 				04E379591D646468008EC849 /* TransportViewController.swift */,
+				048FC3661D770F51003CEC28 /* AboutViewController.swift */,
 			);
 			name = Transport;
 			sourceTree = "<group>";
