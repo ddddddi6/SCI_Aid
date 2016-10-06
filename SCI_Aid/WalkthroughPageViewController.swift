@@ -11,9 +11,9 @@ import UIKit
 class WalkthroughPageViewController: UIPageViewController, UIPageViewControllerDataSource {
     
     
-    var pageHeadings = ["Personalize", "Locate", "Discover"]
-    var pageImages = ["SCI-intro-1", "SCI-intro-2", "SCI-intro-3"]
-    var pageContent = ["Pin your favorite restaurants and create your own food guide","Search and locate your favourite restaurant on Maps", "Find restaurants pinned by your friends and other foodies around the world"]
+    var pageHeadings = ["Personalize", "Locate", "Discover", "step1", "step2", "step3", "step4"]
+    var pageImages = ["SCI-intro-1", "SCI-intro-2", "SCI-intro-3", "SCI-intro-4", "SCI-intro-5", "SCI-intro-6", "SCI-intro-7"]
+    var pageContent = ["Pin your favorite restaurants and create your own food guide","Search and locate your favourite restaurant on Maps", "Find restaurants pinned by your friends and other foodies around the world", "step1", "step2", "step3", "step4"]
     
     override func viewDidLoad() {
         super.viewDidLoad()

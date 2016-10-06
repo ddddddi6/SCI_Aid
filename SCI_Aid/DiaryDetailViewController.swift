@@ -19,7 +19,6 @@ class DiaryDetailViewController: UIViewController {
     
     @IBOutlet var statusView: UIView!
     @IBOutlet var problemView: UIView!
-
     @IBOutlet var statusButton: UIButton!
     @IBOutlet var cancelButton: UIButton!
     @IBOutlet var saveButton: UIButton!

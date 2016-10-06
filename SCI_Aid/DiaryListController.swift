@@ -32,6 +32,7 @@ class DiaryListController: UITableViewController, DiaryDelegate {
     var endDate: NSDate!
     var diaries: NSMutableArray
     let newDiaries = NSMutableArray()
+    var selectedStatus: String!
     
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: NSBundle?) {
         self.diaries = NSMutableArray()
@@ -45,6 +46,8 @@ class DiaryListController: UITableViewController, DiaryDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        selectedStatus = ""
         
         refreshTableView()
         tableView.delegate = self
@@ -114,7 +117,7 @@ class DiaryListController: UITableViewController, DiaryDelegate {
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
-        if (newDiaries.count != 0) {
+        if (newDiaries.count != 0 && startDate != nil && endDate != nil && selectedStatus == "") {
             let dateFormatter = NSDateFormatter()
             dateFormatter.dateStyle = NSDateFormatterStyle.MediumStyle
             dateFormatter.timeStyle = NSDateFormatterStyle.NoStyle
@@ -129,6 +132,10 @@ class DiaryListController: UITableViewController, DiaryDelegate {
             yellowCount!.text = ": \(self.yellowCounts!)"
             redCount!.text = ": \(self.redCounts!)"
             sortDiaryList()
+        } else if (selectedStatus != "") {
+            startField.text = "Start date"
+            endField.text = "End date"
+            filterEntriesByStatus(selectedStatus!)
         } else {
             startField.text = "Start date"
             endField.text = "End date"
@@ -142,52 +149,42 @@ class DiaryListController: UITableViewController, DiaryDelegate {
     }
     
     func showGreenRecords(gesture: UIGestureRecognizer) {
-        newDiaries.removeAllObjects()
-        if (newDiaries.count == 0) {
-            diaries = DataManager.dataManager.getDiaryEntries()
-            for diary in diaries {
-                let d = diary as! Diary
-                if (d.status == "Green") {
-                    newDiaries.addObject(diary)
-                }
-            }
-            diaries = newDiaries
-            countColors(diaries)
-            
-            greenCount!.text = ": \(self.greenCounts!)"
-            yellowCount!.text = ": \(self.yellowCounts!)"
-            redCount!.text = ": \(self.redCounts!)"
-            sortDiaryList()
-        }
+        greenIcon.image = UIImage(named: "h_green")
+        yellowIcon.image = UIImage(named: "yellow")
+        redIcon.image = UIImage(named: "red")
+        startField.text = "Start date"
+        endField.text = "End date"
+        filterEntriesByStatus("Green")
+        self.selectedStatus = "Green"
     }
     
     func showYellowRecords(gesture: UIGestureRecognizer) {
-        newDiaries.removeAllObjects()
-        if (newDiaries.count == 0) {
-            diaries = DataManager.dataManager.getDiaryEntries()
-            for diary in diaries {
-                let d = diary as! Diary
-                if (d.status == "Yellow") {
-                    newDiaries.addObject(diary)
-                }
-            }
-            diaries = newDiaries
-            countColors(diaries)
-            
-            greenCount!.text = ": \(self.greenCounts!)"
-            yellowCount!.text = ": \(self.yellowCounts!)"
-            redCount!.text = ": \(self.redCounts!)"
-            sortDiaryList()
-        }
+        yellowIcon.image = UIImage(named: "h_yellow")
+        greenIcon.image = UIImage(named: "green")
+        redIcon.image = UIImage(named: "red")
+        startField.text = "Start date"
+        endField.text = "End date"
+        filterEntriesByStatus("Yellow")
+        self.selectedStatus = "Yellow"
     }
     
     func showRedRecords(gesture: UIGestureRecognizer) {
+        redIcon.image = UIImage(named: "h_red")
+        greenIcon.image = UIImage(named: "green")
+        yellowIcon.image = UIImage(named: "yellow")
+        startField.text = "Start date"
+        endField.text = "End date"
+        filterEntriesByStatus("Red")
+        self.selectedStatus = "Red"
+    }
+    
+    func filterEntriesByStatus(status: String) {
         newDiaries.removeAllObjects()
         if (newDiaries.count == 0) {
             diaries = DataManager.dataManager.getDiaryEntries()
             for diary in diaries {
                 let d = diary as! Diary
-                if (d.status == "Red") {
+                if (d.status == status) {
                     newDiaries.addObject(diary)
                 }
             }
@@ -263,7 +260,8 @@ class DiaryListController: UITableViewController, DiaryDelegate {
             }
             
             self.diaries = DataManager.dataManager.getDiaryEntries()
-            self.tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
+            self.filterEntriesByStatus(self.selectedStatus!)
+            //self.tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
         }
         return [delete]
     }
@@ -365,6 +363,11 @@ class DiaryListController: UITableViewController, DiaryDelegate {
     @IBAction func filterDiaryEntry(sender: UIButton) {
         newDiaries.removeAllObjects()
         if (checkDateValidation() && newDiaries.count == 0) {
+            self.selectedStatus = ""
+            greenIcon.image = UIImage(named: "green")
+            yellowIcon.image = UIImage(named: "yellow")
+            redIcon.image = UIImage(named: "red")
+
             diaries = DataManager.dataManager.getDiaryEntries()
             for diary in diaries {
                 if (self.isBetweenDates(diary.diaryDate!!, beginDate: startDate, endDate: endDate)) {
@@ -460,6 +463,10 @@ class DiaryListController: UITableViewController, DiaryDelegate {
         startField.text = "Start date"
         endField.text = "End date"
         newDiaries.removeAllObjects()
+        self.selectedStatus = ""
+        greenIcon.image = UIImage(named: "green")
+        yellowIcon.image = UIImage(named: "yellow")
+        redIcon.image = UIImage(named: "red")
     }
     
     // sort the diary entry list

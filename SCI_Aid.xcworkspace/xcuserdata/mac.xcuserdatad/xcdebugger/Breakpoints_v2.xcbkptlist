@@ -41,14 +41,14 @@
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "SCI_Aid/HomePageController.swift"
-            timestampString = "496285706.742702"
+            filePath = "SCI_Aid/ToiletViewController.swift"
+            timestampString = "496204137.808396"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "187"
-            endingLineNumber = "187"
-            landmarkName = "HomePageController"
-            landmarkType = "3">
+            startingLineNumber = "240"
+            endingLineNumber = "240"
+            landmarkName = "displayLocation(_:)"
+            landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -57,13 +57,29 @@
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "SCI_Aid/ToiletViewController.swift"
-            timestampString = "496204137.808396"
+            filePath = "SCI_Aid/DiaryListController.swift"
+            timestampString = "497436205.855128"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "240"
-            endingLineNumber = "240"
-            landmarkName = "displayLocation(_:)"
+            startingLineNumber = "138"
+            endingLineNumber = "138"
+            landmarkName = "viewWillAppear(_:)"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "SCI_Aid/DiaryListController.swift"
+            timestampString = "497436205.855128"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "120"
+            endingLineNumber = "120"
+            landmarkName = "viewWillAppear(_:)"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

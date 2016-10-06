@@ -26,9 +26,19 @@ class WalkthroughContentViewController: UIViewController {
         super.viewDidLoad()
         pageControl.currentPage = index
         
+        let swipeLeft = UISwipeGestureRecognizer(target: self, action: #selector(WalkthroughContentViewController.respondToSwipeGesture(_:)))
+        swipeLeft.direction = .Left
+        
+        forwardButton.backgroundColor = UIColor.clearColor()
+        forwardButton.layer.cornerRadius = 10
+        forwardButton.layer.borderWidth = 3
+        forwardButton.layer.borderColor = UIColor(red: 247/255.0, green: 242/255.0, blue: 119/255.0, alpha: 1.0).CGColor
+        
         switch index {
-        case 0...1: forwardButton.setTitle("NEXT", forState: UIControlState.Normal)
-        case 2: forwardButton.setTitle("DONE", forState: UIControlState.Normal)
+        case 0...5: forwardButton.hidden = true
+        case 6:
+            forwardButton.setTitle(" OK, got it ", forState: UIControlState.Normal)
+            self.view.addGestureRecognizer(swipeLeft)
         default: break
         }
         
@@ -41,13 +51,17 @@ class WalkthroughContentViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
+    func respondToSwipeGesture(gesture: UIGestureRecognizer) {
+        dismissViewControllerAnimated(true, completion: nil)
+    }
+    
     @IBAction func nextButtonTapped(sender: UIButton) {
         
         switch index {
-        case 0...1:
-            let pageViewController = parentViewController as!WalkthroughPageViewController
-            pageViewController.forward(index)
-        case 2:
+        //case 0...5:
+            //let pageViewController = parentViewController as!WalkthroughPageViewController
+            //pageViewController.forward(index)
+        case 6:
             dismissViewControllerAnimated(true, completion: nil)
         default: break
         }
