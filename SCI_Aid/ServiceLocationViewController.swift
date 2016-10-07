@@ -153,10 +153,12 @@ class ServiceLocationViewController: UIViewController, MKMapViewDelegate, CLLoca
     
     // go back to current location
     @IBAction func backToCurrentLocation(sender: UIButton) {
+        if (self.latitude != nil && self.longitude != nil) {
         let center = CLLocationCoordinate2D(latitude:  (self.latitude as NSString).doubleValue, longitude: (self.longitude as NSString).doubleValue)
         let region = MKCoordinateRegion(center: center, span: MKCoordinateSpan(latitudeDelta: 0.1, longitudeDelta: 0.1))
         
         self.mapView.setRegion(region, animated: true)
+        }
     }
 
     /*

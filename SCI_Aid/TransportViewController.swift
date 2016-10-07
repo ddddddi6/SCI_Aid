@@ -116,10 +116,12 @@ class TransportViewController: UIViewController, MKMapViewDelegate, CLLocationMa
     
     // go back to current location
     @IBAction func backToCurrentLocation(sender: AnyObject) {
-        let center = CLLocationCoordinate2D(latitude:  (self.latitude as NSString).doubleValue, longitude: (self.longitude as NSString).doubleValue)
-        let region = MKCoordinateRegion(center: center, span: MKCoordinateSpan(latitudeDelta: 0.005, longitudeDelta: 0.005))
+        if (self.latitude != nil && self.longitude != nil) {
+            let center = CLLocationCoordinate2D(latitude:  (self.latitude as NSString).doubleValue, longitude: (self.longitude as NSString).doubleValue)
+            let region = MKCoordinateRegion(center: center, span: MKCoordinateSpan(latitudeDelta: 0.005, longitudeDelta: 0.005))
         
-        self.mapView.setRegion(region, animated: true)
+            self.mapView.setRegion(region, animated: true)
+        }
     }
     
     func mapView(mapView: MKMapView, viewForAnnotation annotation: MKAnnotation) -> MKAnnotationView? {
