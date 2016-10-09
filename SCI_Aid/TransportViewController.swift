@@ -121,6 +121,19 @@ class TransportViewController: UIViewController, MKMapViewDelegate, CLLocationMa
             let region = MKCoordinateRegion(center: center, span: MKCoordinateSpan(latitudeDelta: 0.005, longitudeDelta: 0.005))
         
             self.mapView.setRegion(region, animated: true)
+        } else {
+            let messageString: String = "Please turn on location service to allow \"SCI Aid\" determine your location."
+            // Setup an alert to warn user
+            // UIAlertController manages an alert instance
+            let alertController = UIAlertController(title: "Unable to get current location", message: messageString, preferredStyle:
+                UIAlertControllerStyle.Alert)
+            
+            alertController.addAction(UIAlertAction(title: "Settings", style: UIAlertActionStyle.Default,handler: { (action: UIAlertAction!) in
+                UIApplication.sharedApplication().openURL(NSURL(string:UIApplicationOpenSettingsURLString)!)
+            }))
+            alertController.addAction(UIAlertAction(title: "Cancel", style: .Default, handler: nil))
+            
+            self.presentViewController(alertController, animated: true, completion: nil)
         }
     }
     

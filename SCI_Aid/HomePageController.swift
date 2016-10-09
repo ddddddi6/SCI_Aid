@@ -169,7 +169,13 @@ class HomePageController: UIViewController, UITableViewDelegate, UITableViewData
         }
         
         if interval != nil {
-            self.infoLabel.text = " Next reminder will be in " + String(Int(self.interval!)) + " hours"
+            if checkCompletionStatus() {
+                self.infoLabel.text = " Next reminder will be in " + String(Int(self.interval!)) + " hours"
+            } else {
+                self.infoLabel.text = " There is no active reminder entry"
+            }
+        } else {
+            self.infoLabel.text = " There is no active reminder entry"
         }
     }
     
@@ -265,14 +271,14 @@ class HomePageController: UIViewController, UITableViewDelegate, UITableViewData
                             let alertController = UIAlertController(title: "Message", message: messageString, preferredStyle:
                                 UIAlertControllerStyle.Alert)
                             
-                            alertController.addAction(UIAlertAction(title: "Dismiss", style: .Cancel, handler: nil))
+                            alertController.addAction(UIAlertAction(title: "Dismiss", style: .Default, handler: nil))
                             
                             self.presentViewController(alertController, animated: true, completion: nil)
                         } else {
                             self.performSegueWithIdentifier("reminderToDiary", sender: self)
                         }
                     }))
-                    alertController.addAction(UIAlertAction(title: "No", style: .Cancel, handler: nil))
+                    alertController.addAction(UIAlertAction(title: "No", style: .Default, handler: nil))
                     
                     self.presentViewController(alertController, animated: true, completion: nil)
                 } else {

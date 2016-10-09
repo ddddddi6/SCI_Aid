@@ -16,7 +16,7 @@ import Firebase
 import Foundation
 
 class ActivityViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate, UITableViewDelegate, UITableViewDataSource {
-
+    
     @IBOutlet var locationButton: UIButton!
     @IBOutlet var segmentedController: UISegmentedControl!
     @IBOutlet var mapView: MKMapView!
@@ -30,7 +30,7 @@ class ActivityViewController: UIViewController, MKMapViewDelegate, CLLocationMan
     var coordinate: CLLocationCoordinate2D!
     
     var ref: FIRDatabaseReference!
-
+    
     var services : [String : [String]]!
     var serviceSection = [String]()
     var rev = [String]()
@@ -142,7 +142,7 @@ class ActivityViewController: UIViewController, MKMapViewDelegate, CLLocationMan
             print(error.description)
         }
     }
-
+    
     
     // get current location and then search nearby gps
     // solution from: https://www.youtube.com/watch?v=qrdIL44T6FQ
@@ -169,10 +169,23 @@ class ActivityViewController: UIViewController, MKMapViewDelegate, CLLocationMan
     // go back to current location
     @IBAction func backToCurrenLocation(sender: AnyObject) {
         if (self.latitude != nil && self.longitude != nil) {
-        let center = CLLocationCoordinate2D(latitude:  (self.latitude as NSString).doubleValue, longitude: (self.longitude as NSString).doubleValue)
-        let region = MKCoordinateRegion(center: center, span: MKCoordinateSpan(latitudeDelta: 0.1, longitudeDelta: 0.1))
-        
-        self.mapView.setRegion(region, animated: true)
+            let center = CLLocationCoordinate2D(latitude:  (self.latitude as NSString).doubleValue, longitude: (self.longitude as NSString).doubleValue)
+            let region = MKCoordinateRegion(center: center, span: MKCoordinateSpan(latitudeDelta: 0.1, longitudeDelta: 0.1))
+            
+            self.mapView.setRegion(region, animated: true)
+        } else {
+            let messageString: String = "Please turn on location service to allow \"SCI Aid\" determine your location."
+            // Setup an alert to warn user
+            // UIAlertController manages an alert instance
+            let alertController = UIAlertController(title: "Unable to get current location", message: messageString, preferredStyle:
+                UIAlertControllerStyle.Alert)
+            
+            alertController.addAction(UIAlertAction(title: "Settings", style: UIAlertActionStyle.Default,handler: { (action: UIAlertAction!) in
+                UIApplication.sharedApplication().openURL(NSURL(string:UIApplicationOpenSettingsURLString)!)
+            }))
+            alertController.addAction(UIAlertAction(title: "Cancel", style: .Default, handler: nil))
+            
+            self.presentViewController(alertController, animated: true, completion: nil)
         }
     }
     
@@ -323,7 +336,7 @@ class ActivityViewController: UIViewController, MKMapViewDelegate, CLLocationMan
         cell.textLabel?.numberOfLines = 0
         
         cell.backgroundColor = UIColor.clearColor()
-
+        
         return cell
     }
     
@@ -353,7 +366,7 @@ class ActivityViewController: UIViewController, MKMapViewDelegate, CLLocationMan
         let headerView = UIView(frame: CGRectMake(0, 0, tableView.bounds.size.width, 20))
         
         headerView.backgroundColor = UIColor(red: 106/255.0, green: 84/255.0, blue: 113/255.0, alpha: 1.0)
-
+        
         let label = UILabel(frame: CGRectMake(5, 2, tableView.bounds.size.width, 20))
         label.text = arrIndexSection.objectAtIndex(section) as? String
         label.textColor = UIColor.whiteColor()
@@ -374,15 +387,15 @@ class ActivityViewController: UIViewController, MKMapViewDelegate, CLLocationMan
             // Display movie details screen
         }
     }
-
+    
     /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
+     // MARK: - Navigation
+     
+     // In a storyboard-based application, you will often want to do a little preparation before navigation
+     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+     // Get the new view controller using segue.destinationViewController.
+     // Pass the selected object to the new view controller.
+     }
+     */
+    
 }

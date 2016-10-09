@@ -10,7 +10,7 @@ import UIKit
 import MapKit
 
 class ServiceLocationViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate {
-
+    
     @IBOutlet var mapView: MKMapView!
     
     var currentActivity: Activity!
@@ -27,8 +27,8 @@ class ServiceLocationViewController: UIViewController, MKMapViewDelegate, CLLoca
     var error:NSError!
     var pointAnnotation:MKPointAnnotation!
     var pinAnnotationView:MKPinAnnotationView!
-
-
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -49,11 +49,11 @@ class ServiceLocationViewController: UIViewController, MKMapViewDelegate, CLLoca
         self.mapView.delegate = self
         
         self.title = currentActivity.name
-
+        
         displayLocation()
         // Do any additional setup after loading the view.
     }
-
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -154,21 +154,34 @@ class ServiceLocationViewController: UIViewController, MKMapViewDelegate, CLLoca
     // go back to current location
     @IBAction func backToCurrentLocation(sender: UIButton) {
         if (self.latitude != nil && self.longitude != nil) {
-        let center = CLLocationCoordinate2D(latitude:  (self.latitude as NSString).doubleValue, longitude: (self.longitude as NSString).doubleValue)
-        let region = MKCoordinateRegion(center: center, span: MKCoordinateSpan(latitudeDelta: 0.1, longitudeDelta: 0.1))
-        
-        self.mapView.setRegion(region, animated: true)
+            let center = CLLocationCoordinate2D(latitude:  (self.latitude as NSString).doubleValue, longitude: (self.longitude as NSString).doubleValue)
+            let region = MKCoordinateRegion(center: center, span: MKCoordinateSpan(latitudeDelta: 0.1, longitudeDelta: 0.1))
+            
+            self.mapView.setRegion(region, animated: true)
+        } else {
+            let messageString: String = "Please turn on location service to allow \"SCI Aid\" determine your location."
+            // Setup an alert to warn user
+            // UIAlertController manages an alert instance
+            let alertController = UIAlertController(title: "Unable to get current location", message: messageString, preferredStyle:
+                UIAlertControllerStyle.Alert)
+            
+            alertController.addAction(UIAlertAction(title: "Settings", style: UIAlertActionStyle.Default,handler: { (action: UIAlertAction!) in
+                UIApplication.sharedApplication().openURL(NSURL(string:UIApplicationOpenSettingsURLString)!)
+            }))
+            alertController.addAction(UIAlertAction(title: "Cancel", style: .Default, handler: nil))
+            
+            self.presentViewController(alertController, animated: true, completion: nil)
         }
     }
-
+    
     /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
+     // MARK: - Navigation
+     
+     // In a storyboard-based application, you will often want to do a little preparation before navigation
+     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+     // Get the new view controller using segue.destinationViewController.
+     // Pass the selected object to the new view controller.
+     }
+     */
+    
 }
