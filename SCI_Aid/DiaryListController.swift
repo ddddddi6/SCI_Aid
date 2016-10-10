@@ -135,10 +135,12 @@ class DiaryListController: UITableViewController, DiaryDelegate {
         } else if (selectedStatus != "") {
             startField.text = "Start date"
             endField.text = "End date"
+            countColors(diaries)
             filterEntriesByStatus(selectedStatus!)
-        } else {
+        }  else {
             startField.text = "Start date"
             endField.text = "End date"
+            
             refreshTableView()
         }
     }
@@ -179,6 +181,7 @@ class DiaryListController: UITableViewController, DiaryDelegate {
     }
     
     func filterEntriesByStatus(status: String) {
+        refreshTableView()
         newDiaries.removeAllObjects()
         if (newDiaries.count == 0) {
             diaries = DataManager.dataManager.getDiaryEntries()
@@ -189,11 +192,7 @@ class DiaryListController: UITableViewController, DiaryDelegate {
                 }
             }
             diaries = newDiaries
-            countColors(diaries)
             
-            greenCount!.text = ": \(self.greenCounts!)"
-            yellowCount!.text = ": \(self.yellowCounts!)"
-            redCount!.text = ": \(self.redCounts!)"
             sortDiaryList()
         }
     }
@@ -261,6 +260,7 @@ class DiaryListController: UITableViewController, DiaryDelegate {
             
             self.diaries = DataManager.dataManager.getDiaryEntries()
             self.filterEntriesByStatus(self.selectedStatus!)
+            self.refreshTableView()
             //self.tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
         }
         return [delete]
@@ -381,6 +381,17 @@ class DiaryListController: UITableViewController, DiaryDelegate {
             yellowCount!.text = ": \(self.yellowCounts!)"
             redCount!.text = ": \(self.redCounts!)"
             sortDiaryList()
+        }
+        if (diaries.count == 0 && newDiaries.count == 0) {
+            let messageString: String = "Sorry, there is no result"
+            // Setup an alert to warn user
+            // UIAlertController manages an alert instance
+            let alertController = UIAlertController(title: "Alert", message: messageString, preferredStyle:
+                UIAlertControllerStyle.Alert)
+            
+            alertController.addAction(UIAlertAction(title: "Dismiss", style: UIAlertActionStyle.Default,handler: nil))
+            
+            self.presentViewController(alertController, animated: true, completion: nil)
         }
     }
     
