@@ -117,12 +117,18 @@ class DiaryListController: UITableViewController, DiaryDelegate {
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
+        self.displayFilterResult()
+    }
+    
+    func displayFilterResult() {
         if (newDiaries.count != 0 && startDate != nil && endDate != nil && selectedStatus == "") {
             let dateFormatter = NSDateFormatter()
             dateFormatter.dateStyle = NSDateFormatterStyle.MediumStyle
             dateFormatter.timeStyle = NSDateFormatterStyle.NoStyle
             let sDate = dateFormatter.stringFromDate(startDate)
             let eDate = dateFormatter.stringFromDate(endDate)
+            
+            filterEntriesByTime()
             
             startField.text = sDate
             endField.text = eDate
@@ -135,12 +141,14 @@ class DiaryListController: UITableViewController, DiaryDelegate {
         } else if (selectedStatus != "") {
             startField.text = "Start date"
             endField.text = "End date"
-            countColors(diaries)
+            startDate = nil
+            endDate = nil
             filterEntriesByStatus(selectedStatus!)
-        }  else {
+        } else {
             startField.text = "Start date"
             endField.text = "End date"
-            
+            startDate = nil
+            endDate = nil
             refreshTableView()
         }
     }
@@ -156,6 +164,8 @@ class DiaryListController: UITableViewController, DiaryDelegate {
         redIcon.image = UIImage(named: "red")
         startField.text = "Start date"
         endField.text = "End date"
+        startDate = nil
+        endDate = nil
         filterEntriesByStatus("Green")
         self.selectedStatus = "Green"
     }
@@ -166,6 +176,8 @@ class DiaryListController: UITableViewController, DiaryDelegate {
         redIcon.image = UIImage(named: "red")
         startField.text = "Start date"
         endField.text = "End date"
+        startDate = nil
+        endDate = nil
         filterEntriesByStatus("Yellow")
         self.selectedStatus = "Yellow"
     }
@@ -176,6 +188,8 @@ class DiaryListController: UITableViewController, DiaryDelegate {
         yellowIcon.image = UIImage(named: "yellow")
         startField.text = "Start date"
         endField.text = "End date"
+        startDate = nil
+        endDate = nil
         filterEntriesByStatus("Red")
         self.selectedStatus = "Red"
     }
@@ -259,8 +273,8 @@ class DiaryListController: UITableViewController, DiaryDelegate {
             }
             
             self.diaries = DataManager.dataManager.getDiaryEntries()
-            self.filterEntriesByStatus(self.selectedStatus!)
-            self.refreshTableView()
+            self.displayFilterResult()
+            //self.refreshTableView()
             //self.tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
         }
         return [delete]
@@ -337,6 +351,16 @@ class DiaryListController: UITableViewController, DiaryDelegate {
         
         datePickerView.datePickerMode = UIDatePickerMode.Date
         
+        if (startDate != nil){
+            datePickerView.minimumDate = NSCalendar.currentCalendar()
+                .dateByAddingUnit(
+                    .Day,
+                    value: 1,
+                    toDate: startDate,
+                    options: []
+            )
+        }
+        
         sender.inputView = datePickerView
         
         datePickerView.addTarget(self, action: #selector(DiaryListController.datePickerValueChanged), forControlEvents: UIControlEvents.ValueChanged)
@@ -361,13 +385,28 @@ class DiaryListController: UITableViewController, DiaryDelegate {
     
     // display the records between defined time period
     @IBAction func filterDiaryEntry(sender: UIButton) {
+        self.filterEntriesByTime()
+        if (diaries.count == 0 && newDiaries.count == 0) {
+            let messageString: String = "Sorry, there is no result"
+            // Setup an alert to warn user
+            // UIAlertController manages an alert instance
+            let alertController = UIAlertController(title: "Alert", message: messageString, preferredStyle:
+                UIAlertControllerStyle.Alert)
+            
+            alertController.addAction(UIAlertAction(title: "Dismiss", style: UIAlertActionStyle.Default,handler: nil))
+            
+            self.presentViewController(alertController, animated: true, completion: nil)
+        }
+    }
+    
+    func filterEntriesByTime() {
         newDiaries.removeAllObjects()
         if (checkDateValidation() && newDiaries.count == 0) {
             self.selectedStatus = ""
             greenIcon.image = UIImage(named: "green")
             yellowIcon.image = UIImage(named: "yellow")
             redIcon.image = UIImage(named: "red")
-
+            
             diaries = DataManager.dataManager.getDiaryEntries()
             for diary in diaries {
                 if (self.isBetweenDates(diary.diaryDate!!, beginDate: startDate, endDate: endDate)) {
@@ -381,17 +420,6 @@ class DiaryListController: UITableViewController, DiaryDelegate {
             yellowCount!.text = ": \(self.yellowCounts!)"
             redCount!.text = ": \(self.redCounts!)"
             sortDiaryList()
-        }
-        if (diaries.count == 0 && newDiaries.count == 0) {
-            let messageString: String = "Sorry, there is no result"
-            // Setup an alert to warn user
-            // UIAlertController manages an alert instance
-            let alertController = UIAlertController(title: "Alert", message: messageString, preferredStyle:
-                UIAlertControllerStyle.Alert)
-            
-            alertController.addAction(UIAlertAction(title: "Dismiss", style: UIAlertActionStyle.Default,handler: nil))
-            
-            self.presentViewController(alertController, animated: true, completion: nil)
         }
     }
     
@@ -473,8 +501,10 @@ class DiaryListController: UITableViewController, DiaryDelegate {
         refreshTableView()
         startField.text = "Start date"
         endField.text = "End date"
+        startDate = nil
+        endDate = nil
         newDiaries.removeAllObjects()
-        self.selectedStatus = ""
+        selectedStatus = ""
         greenIcon.image = UIImage(named: "green")
         yellowIcon.image = UIImage(named: "yellow")
         redIcon.image = UIImage(named: "red")

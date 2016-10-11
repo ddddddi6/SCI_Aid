@@ -35,8 +35,8 @@ class WalkthroughContentViewController: UIViewController {
         forwardButton.layer.borderColor = UIColor(red: 247/255.0, green: 242/255.0, blue: 119/255.0, alpha: 1.0).CGColor
         
         switch index {
-        case 0...5: forwardButton.hidden = true
-        case 6:
+        case 0...6: forwardButton.hidden = true
+        case 7:
             forwardButton.setTitle(" OK, got it ", forState: UIControlState.Normal)
             self.view.addGestureRecognizer(swipeLeft)
         default: break
@@ -58,10 +58,7 @@ class WalkthroughContentViewController: UIViewController {
     @IBAction func nextButtonTapped(sender: UIButton) {
         
         switch index {
-        //case 0...5:
-            //let pageViewController = parentViewController as!WalkthroughPageViewController
-            //pageViewController.forward(index)
-        case 6:
+        case 7:
             dismissViewControllerAnimated(true, completion: nil)
         default: break
         }

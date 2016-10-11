@@ -17,6 +17,7 @@ class DiaryDetailViewController: UIViewController {
     var littleVolume: Bool!
     var muchVolume: Bool!
     
+    @IBOutlet var problemScrollView: UIScrollView!
     @IBOutlet var statusView: UIView!
     @IBOutlet var problemView: UIView!
     @IBOutlet var statusButton: UIButton!
@@ -78,7 +79,7 @@ class DiaryDetailViewController: UIViewController {
     // When user choose that the bladder condition is not ok, display the questionnaire
     @IBAction func notOk(sender: UIButton) {
         statusView.hidden = true
-        problemView.hidden = false
+        problemScrollView.hidden = false
     }
     
     @IBAction func cacelAction(sender: UIButton) {
@@ -152,7 +153,7 @@ class DiaryDetailViewController: UIViewController {
             let date = dateFormatter.stringFromDate(currentDateofDiary)
             self.dateFiled.text = date
             statusView.hidden = false
-            problemView.hidden = true
+            problemScrollView.hidden = true
             goodLabel.hidden = true
             goodImage.hidden = true
             statusButton.hidden = true
@@ -167,12 +168,12 @@ class DiaryDetailViewController: UIViewController {
                 goodLabel.hidden = false
                 goodImage.hidden = false
                 statusButton.hidden = false
-                problemView.hidden = true
+                problemScrollView.hidden = true
             } else {
                 goodLabel.hidden = true
                 goodImage.hidden = true
                 statusButton.hidden = true
-                problemView.hidden = false
+                problemScrollView.hidden = false
                 showDiaryDetails()
             }
   
